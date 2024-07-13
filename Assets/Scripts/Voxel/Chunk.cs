@@ -29,6 +29,18 @@ namespace Aether
 
         }
 
+        
+        public void RegenerateMesh()
+        {
+            VertexBuffer vbuf = new();
+
+            ChunkMeshGenerator.GenerateMesh(vbuf, this);
+
+            Mesh mesh = vbuf.ToMesh();
+            GetComponent<MeshFilter>().mesh = mesh;
+            GetComponent<MeshCollider>().sharedMesh = mesh;
+        }
+
         // Directly Access.
         public ref Vox AtVoxel(int3 localpos)
         {
