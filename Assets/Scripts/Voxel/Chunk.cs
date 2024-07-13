@@ -1,4 +1,6 @@
 
+using NUnit.Framework;
+using Sirenix.OdinInspector;
 using System;
 using Unity.Mathematics;
 using UnityEngine;
@@ -8,28 +10,46 @@ namespace Aether
     public class Chunk : MonoBehaviour
     {
         // Should chunk size change dynamically?
-        const int LEN = 16;  // LEN_AXIS
-        const int LEN_VOXLES = LEN * LEN * LEN;  // LEN_VOXELS
+        public const int LEN = 16;  // LEN_AXIS
+        public const int LEN_VOXLES = LEN * LEN * LEN;  // LEN_VOXELS
 
         private Vox[] m_Voxels = new Vox[Chunk.LEN_VOXLES];
 
-        private int3 m_ChunkPos;
+        public int3 chunkpos;
 
+        [ShowInInspector]
         private bool IsPopulated = false;
 
-        private WeakReference<Chunk>[] m_NeighborChunks;
+        [ShowInInspector]
+        private ChunkSystem m_PtrChunkSystem;
+
+        [ShowInInspector]
+        private WeakReference<Chunk>[] m_NeighborChunks = new WeakReference<Chunk>[NEIGHBORS.Length];
+
+        public void InitChunk(int3 _chunkpos, ChunkSystem chunksystem)
+        {
+            chunkpos = _chunkpos;
+            Assert.IsTrue(transform.position == (Vector3)(float3)chunkpos);
+
+            m_PtrChunkSystem = chunksystem;
+        }
+
+        public ChunkSystem GetChunkSystem() { return m_PtrChunkSystem; }
+        public World GetWorld() { return GetChunkSystem().GetWorld(); }
 
 
         void Start()
         {
 
         }
+
         void Update()
         {
 
         }
 
-        
+
+        [Sirenix.OdinInspector.Button]
         public void RegenerateMesh()
         {
             VertexBuffer vbuf = new();

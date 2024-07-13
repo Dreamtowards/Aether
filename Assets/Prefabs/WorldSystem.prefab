@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 5145437144080330749}
   - component: {fileID: 4309765212984738900}
+  - component: {fileID: 8873625454390895110}
   m_Layer: 0
-  m_Name: MainChunkSystem
+  m_Name: ChunkSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -44,6 +45,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bfe93c3c69678945bf9e77d50d0fe3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_PtrWorld: {fileID: 4103076508276071122}
+  m_ChunkGenerator: {fileID: 8873625454390895110}
+  m_PrefabChunk: {fileID: 7648006864274354212, guid: db99c3e1167a5a64689210f60c1daefc, type: 3}
+  m_DebugDrawChunksOutlines: 0
+--- !u!114 &8873625454390895110
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 995408074412041108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa7f17dadacef694d82e04556bd125fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SamplingFactor: 0.1
 --- !u!1 &2755971228608663593
 GameObject:
   m_ObjectHideFlags: 0
@@ -221,7 +239,7 @@ GameObject:
   - component: {fileID: 4563782917104760227}
   - component: {fileID: 4103076508276071122}
   m_Layer: 0
-  m_Name: Systems
+  m_Name: WorldSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -264,6 +282,7 @@ MonoBehaviour:
     DayTimeLength: 0
     TimeCreated: 0
     TimeMidified: 0
+  m_Players: []
 --- !u!1 &7681126108297616500
 GameObject:
   m_ObjectHideFlags: 0

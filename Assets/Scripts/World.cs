@@ -21,6 +21,15 @@ namespace Aether
         {
             
         }
+
+        public UInt32 Seed()
+        {
+            return m_WorldInfo.Seed;
+        }
+        public float DayTime()
+        {
+            return m_WorldInfo.Seed;
+        }
     }
 
     [Serializable]
