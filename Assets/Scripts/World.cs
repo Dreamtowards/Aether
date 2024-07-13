@@ -1,11 +1,16 @@
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Aether
 {
     public class World : MonoBehaviour
     {
+        [SerializeField]
         private WorldInfo m_WorldInfo = new WorldInfo();
+
+        public List<EntityPlayer> m_Players = new();
 
         void Start()
         {
@@ -18,8 +23,8 @@ namespace Aether
         }
     }
 
-
-    public struct WorldInfo
+    [Serializable]
+    public class WorldInfo
     {
         public string Name;
         public UInt32 Seed;

@@ -1,3 +1,4 @@
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Aether
@@ -9,14 +10,14 @@ namespace Aether
 
     public class Utility
     {
-        public static float FrameIntervals(float interval)
+        public static int FrametimeIntervals(float interval, float time, float delta)
         {
-            return 0;
+            return (int)(math.floor(time / interval) - math.floor((time - delta) / interval));
         }
 
         public static bool AtInterval(float interval)
         {
-            return false;
+            return FrametimeIntervals(interval, Time.deltaTime, Time.realtimeSinceStartup) != 0;
         }
     }
 }
