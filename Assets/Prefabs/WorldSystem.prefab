@@ -45,9 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8bfe93c3c69678945bf9e77d50d0fe3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_PrefabChunk: {fileID: 7648006864274354212, guid: db99c3e1167a5a64689210f60c1daefc, type: 3}
   m_PtrWorld: {fileID: 4103076508276071122}
   m_ChunkGenerator: {fileID: 8873625454390895110}
-  m_PrefabChunk: {fileID: 7648006864274354212, guid: db99c3e1167a5a64689210f60c1daefc, type: 3}
+  m_LoadDistance:
+    x: 1
+    y: 1
+    z: 1
   m_DebugDrawChunksOutlines: 0
 --- !u!114 &8873625454390895110
 MonoBehaviour:
@@ -61,7 +65,57 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa7f17dadacef694d82e04556bd125fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SamplingFactor: 0.1
+--- !u!1 &1650656970664850544
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3395960094401280370}
+  - component: {fileID: 5688701222245031301}
+  m_Layer: 0
+  m_Name: VoxelView
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3395960094401280370
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650656970664850544}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.74, y: 5.46, z: 8.36}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 9093313470170223417}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5688701222245031301
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1650656970664850544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f7e9d0e077c498bacfd750553fb4ecb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ChunkSystem: {fileID: 4309765212984738900}
+  m_RepositionToCursor: 0
+  m_DrawChunkBound: 0
+  m_LastPosition:
+    x: 3
+    y: 5
+    z: 8
 --- !u!1 &2755971228608663593
 GameObject:
   m_ObjectHideFlags: 0
@@ -91,7 +145,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 3395960094401280370}
   m_Father: {fileID: 4563782917104760227}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1710751130676333515

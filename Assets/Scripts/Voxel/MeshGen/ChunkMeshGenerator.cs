@@ -13,6 +13,8 @@ public static class ChunkMeshGenerator
     {
         chunk.ForVoxels((int3 localpos, ref Vox vox) =>
         {
+            if (vox.IsNil())
+                return;
 
             PutCube(vbuf, localpos, vox, chunk);
 
@@ -60,8 +62,7 @@ public static class ChunkMeshGenerator
         {
             float3 faceDir = Maths.Vec3(CUBE_NORM, faceIdx * 18);   // 18: 3 scalar * 3 vertex * 2 triangle
 
-            if (!chunk.GetVoxel(localpos + (int3)faceDir, out Vox neibVox))
-                continue;
+            chunk.GetVoxel(localpos + (int3)faceDir, out Vox neibVox);
             if (neibVox.IsObaque())
                 continue;
 

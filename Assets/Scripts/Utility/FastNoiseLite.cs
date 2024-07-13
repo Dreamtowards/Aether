@@ -47,6 +47,7 @@
 // VERSION: 1.1.1
 // https://github.com/Auburn/FastNoiseLite
 
+using Sirenix.OdinInspector;
 using System;
 using System.Runtime.CompilerServices;
 
@@ -120,17 +121,27 @@ public class FastNoiseLite
         DefaultOpenSimplex2 
     };
 
+    [ShowInInspector]
     private int mSeed = 1337;
+    [ShowInInspector]
     private float mFrequency = 0.01f;
+    [ShowInInspector]
     private NoiseType mNoiseType = NoiseType.OpenSimplex2;
+    [ShowInInspector]
     private RotationType3D mRotationType3D = RotationType3D.None;
     private TransformType3D mTransformType3D = TransformType3D.DefaultOpenSimplex2;
 
+    [ShowInInspector]
     private FractalType mFractalType = FractalType.None;
+    [ShowInInspector]
     private int mOctaves = 3;
+    [ShowInInspector]
     private float mLacunarity = 2.0f;
+    [ShowInInspector]
     private float mGain = 0.5f;
+    [ShowInInspector]
     private float mWeightedStrength = 0.0f;
+    [ShowInInspector]
     private float mPingPongStrength = 2.0f;
 
     private float mFractalBounding = 1 / 1.75f;
@@ -158,6 +169,7 @@ public class FastNoiseLite
     /// Default: 1337
     /// </remarks>
     public void SetSeed(int seed) { mSeed = seed; }
+    public int GetSeed() { return mSeed; }
 
     /// <summary>
     /// Sets frequency for all noise types
@@ -166,6 +178,7 @@ public class FastNoiseLite
     /// Default: 0.01
     /// </remarks>
     public void SetFrequency(float frequency) { mFrequency = frequency; }
+    public float GetFrequency() { return mFrequency; }
 
     /// <summary>
     /// Sets noise algorithm used for GetNoise(...)
@@ -178,6 +191,7 @@ public class FastNoiseLite
         mNoiseType = noiseType;
         UpdateTransformType3D();
     }
+    public NoiseType GetNoiseType() { return mNoiseType; }
 
     /// <summary>
     /// Sets domain rotation type for 3D Noise and 3D DomainWarp.
@@ -192,6 +206,7 @@ public class FastNoiseLite
         UpdateTransformType3D();
         UpdateWarpTransformType3D();
     }
+    public RotationType3D GetRotationType3D() { return mRotationType3D; }
 
     /// <summary>
     /// Sets method for combining octaves in all fractal noise types
@@ -201,6 +216,7 @@ public class FastNoiseLite
     /// Note: FractalType.DomainWarp... only affects DomainWarp(...)
     /// </remarks>
     public void SetFractalType(FractalType fractalType) { mFractalType = fractalType; }
+    public FractalType GetFractalType() { return mFractalType; }
 
     /// <summary>
     /// Sets octave count for all fractal noise types 
@@ -213,6 +229,7 @@ public class FastNoiseLite
         mOctaves = octaves;
         CalculateFractalBounding();
     }
+    public int GetFractalOctaves() { return mOctaves; }
 
     /// <summary>
     /// Sets octave lacunarity for all fractal noise types
@@ -221,6 +238,7 @@ public class FastNoiseLite
     /// Default: 2.0
     /// </remarks>
     public void SetFractalLacunarity(float lacunarity) { mLacunarity = lacunarity; }
+    public float GetFractalLacunarity() { return mLacunarity; }
 
     /// <summary>
     /// Sets octave gain for all fractal noise types
@@ -233,6 +251,7 @@ public class FastNoiseLite
         mGain = gain;
         CalculateFractalBounding();
     }
+    public float GetFractalGain() { return mGain; }
 
     /// <summary>
     /// Sets octave weighting for all none DomainWarp fratal types
@@ -242,6 +261,7 @@ public class FastNoiseLite
     /// Note: Keep between 0...1 to maintain -1...1 output bounding
     /// </remarks>
     public void SetFractalWeightedStrength(float weightedStrength) { mWeightedStrength = weightedStrength; }
+    public float GetFractalWeightedStrength() { return mWeightedStrength; }
 
     /// <summary>
     /// Sets strength of the fractal ping pong effect
@@ -250,6 +270,7 @@ public class FastNoiseLite
     /// Default: 2.0
     /// </remarks>
     public void SetFractalPingPongStrength(float pingPongStrength) { mPingPongStrength = pingPongStrength; }
+    public float GetFractalPingPongStrength() { return mPingPongStrength; }
 
 
     /// <summary>
@@ -259,6 +280,7 @@ public class FastNoiseLite
     /// Default: Distance
     /// </remarks>
     public void SetCellularDistanceFunction(CellularDistanceFunction cellularDistanceFunction) { mCellularDistanceFunction = cellularDistanceFunction; }
+    public CellularDistanceFunction GetCellularDistanceFunction() { return mCellularDistanceFunction; }
 
     /// <summary>
     /// Sets return type from cellular noise calculations
@@ -267,6 +289,7 @@ public class FastNoiseLite
     /// Default: EuclideanSq
     /// </remarks>
     public void SetCellularReturnType(CellularReturnType cellularReturnType) { mCellularReturnType = cellularReturnType; }
+    public CellularReturnType GetCellularReturnType() { return mCellularReturnType; }
 
     /// <summary>
     /// Sets the maximum distance a cellular point can move from it's grid position
@@ -276,6 +299,7 @@ public class FastNoiseLite
     /// Note: Setting this higher than 1 will cause artifacts
     /// </remarks> 
     public void SetCellularJitter(float cellularJitter) { mCellularJitterModifier = cellularJitter; }
+    public float GetCellularJitter() { return mCellularJitterModifier; }
 
 
     /// <summary>
@@ -289,6 +313,7 @@ public class FastNoiseLite
         mDomainWarpType = domainWarpType;
         UpdateWarpTransformType3D();
     }
+    public DomainWarpType GetDomainWarpType() { return mDomainWarpType; }
 
 
     /// <summary>
@@ -298,6 +323,7 @@ public class FastNoiseLite
     /// Default: 1.0
     /// </remarks>
     public void SetDomainWarpAmp(float domainWarpAmp) { mDomainWarpAmp = domainWarpAmp; }
+    public float GetDomainWarpAmp() { return mDomainWarpAmp; }
 
 
     /// <summary>

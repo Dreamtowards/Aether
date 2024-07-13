@@ -13,7 +13,7 @@ namespace Aether
         public VoxLight light;
 
         // SDF value for Isosurface Extraction. 0=surface, +positive=solid, -negative=void
-        public byte density;
+        public float density;
 
         public static readonly Vox Nil = new();
 

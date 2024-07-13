@@ -17,8 +17,10 @@ namespace Aether
 
         public int3 chunkpos;
 
-        [ShowInInspector]
-        private bool IsPopulated = false;
+        public bool IsPopulated = false;
+
+        // Needs UpdateMesh
+        public bool IsDirty = true;
 
         [ShowInInspector]
         private ChunkSystem m_PtrChunkSystem;
@@ -49,7 +51,7 @@ namespace Aether
         }
 
 
-        [Sirenix.OdinInspector.Button]
+        [Button]
         public void RegenerateMesh()
         {
             VertexBuffer vbuf = new();
@@ -64,7 +66,7 @@ namespace Aether
         // Directly Access.
         public ref Vox AtVoxel(int3 localpos)
         {
-            return ref m_Voxels[0];
+            return ref m_Voxels[LocalIdx(localpos)];
         }
         public bool GetVoxel(int3 relpos, out Vox vox)
         {
@@ -73,7 +75,7 @@ namespace Aether
                 vox = AtVoxel(relpos);
                 return true;
             }
-            if (GetNeighborChunk(relpos, out Chunk chunk))
+            if (GetNeighborChunk(relpos, out var chunk))
             {
                 vox = chunk.AtVoxel(LocalPos(relpos));
                 return true;
@@ -90,7 +92,8 @@ namespace Aether
 
         public bool GetNeighborChunk(int idx, out Chunk chunk)
         {
-            return m_NeighborChunks[idx].TryGetTarget(out chunk);
+            chunk = null;
+            return m_NeighborChunks[idx]?.TryGetTarget(out chunk) == true;
         }
         public bool GetNeighborChunk(int3 relpos, out Chunk chunk)
         {
@@ -100,13 +103,16 @@ namespace Aether
 
         public static int LocalIdx(int3 localpos)
         {
+            Assert.IsTrue(IsLocalPos(localpos));
             return localpos.x << 8 | localpos.y << 4 | localpos.z;
         }
         public static int3 LocalIdxPos(int idx)
         {
+            Assert.IsTrue(idx >= 0 && idx < LEN_VOXLES);
             return new((idx >> 8) & 15, (idx >> 4) & 15, idx & 15);
         }
 
+        public static int3 ChunkPos(float3 p) { return ChunkPos((int3)p); }
         public static int3 ChunkPos(int3 p)
         {
             return new(Maths.Floor16(p.x), Maths.Floor16(p.y), Maths.Floor16(p.z));

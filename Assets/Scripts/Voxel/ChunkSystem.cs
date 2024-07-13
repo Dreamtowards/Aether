@@ -9,6 +9,8 @@ namespace Aether
 {
     public class ChunkSystem : MonoBehaviour
     {
+        public GameObject m_PrefabChunk;
+        
         [ShowInInspector]
         public Dictionary<int3, Chunk> m_Chunks = new();
 
@@ -16,34 +18,53 @@ namespace Aether
 
         public ChunkGenerator m_ChunkGenerator;
 
-        public GameObject m_PrefabChunk;
+        public HashSet<int3> m_ChunksMeshDirty = new();
+
+        public int3 m_LoadDistance = new(1, 1, 1);
 
         void Start()
         {
-            m_ChunkGenerator = GetComponent<ChunkGenerator>();
         }
 
+        [Button]
         void Update()
         {
+            ProvideChunks(int3.zero, m_LoadDistance);
 
+            foreach (var chunkpos in m_ChunksMeshDirty)
+            {
+                if (GetChunk(chunkpos, out var chunk))
+                {
+                    chunk.RegenerateMesh();
+                }
+            }
+            m_ChunksMeshDirty.Clear();
         }
 
         public World GetWorld() { return m_PtrWorld; }
 
         // return: maybe null if the chunk has not been loaded
-        public Chunk GetChunk(int3 chunkpos)
+        public bool GetChunk(int3 chunkpos, out Chunk chunk)
         {
             Assert.IsTrue(Chunk.IsChunkPos(chunkpos));
-            if (m_Chunks.TryGetValue(chunkpos, out Chunk chunk))
-                return chunk;
-            return null;
+            return m_Chunks.TryGetValue(chunkpos, out chunk);
+        }
+
+        public bool GetVoxel(int3 p, out Vox vox)
+        {
+            if (GetChunk(Chunk.ChunkPos(p), out Chunk chunk))
+            {
+                vox = chunk.AtVoxel(Chunk.LocalPos(p));
+                return true;
+            }
+            vox = Vox.Nil;
+            return false;
         }
 
         [Button]
         public Chunk ProvideChunk(int3 chunkpos)
         {
-            Chunk chunk = GetChunk(chunkpos);
-            if (chunk != null)
+            if (GetChunk(chunkpos, out Chunk chunk))
                 return chunk;
 
             GameObject objChunk = Instantiate(m_PrefabChunk, (float3)chunkpos, Quaternion.identity, transform);
@@ -58,6 +79,8 @@ namespace Aether
             // Generate Chunk
 
             m_ChunkGenerator.GenerateChunk(chunk);
+            
+            MarkChunkMeshDirty(chunkpos);
 
             return chunk;
         }
@@ -98,14 +121,24 @@ namespace Aether
 #endif
         }
 
+        public void MarkChunkMeshDirty(int3 chunkpos)
+        {
+            Assert.IsTrue(Chunk.IsChunkPos(chunkpos));
+            m_ChunksMeshDirty.Add(chunkpos);
+        }
+        
+
         public bool m_DebugDrawChunksOutlines = false;
 
         void OnDrawGizmos()
         {
-            Gizmos.color = Color.gray;
-            foreach (var chunk in m_Chunks.Values)
+            if (m_DebugDrawChunksOutlines)
             {
-                Gizmos.DrawWireCube((float3)chunk.chunkpos + 8, Vector3.one * 16);
+                Gizmos.color = Color.gray;
+                foreach (var chunk in m_Chunks.Values)
+                {
+                    Gizmos.DrawWireCube((float3)chunk.chunkpos + 8, Vector3.one * 16);
+                }
             }
         }
     }
