@@ -59,74 +59,13 @@ public struct FastNoiseLiteStruct
     private const short INLINE = 256; // MethodImplOptions.AggressiveInlining;
     private const short OPTIMISE = 512; // MethodImplOptions.AggressiveOptimization;
 
-    public enum NoiseType 
-    { 
-        OpenSimplex2,
-        OpenSimplex2S,
-        Cellular,
-        Perlin,
-        ValueCubic,
-        Value 
-    };
-
-    public enum RotationType3D 
-    {
-        None, 
-        ImproveXYPlanes, 
-        ImproveXZPlanes 
-    };
-    
-    public enum FractalType 
-    {
-        None, 
-        FBm, 
-        Ridged, 
-        PingPong, 
-        DomainWarpProgressive, 
-        DomainWarpIndependent 
-    };
-
-    public enum CellularDistanceFunction 
-    {
-        Euclidean, 
-        EuclideanSq, 
-        Manhattan, 
-        Hybrid 
-    };
-    
-    public enum CellularReturnType 
-    {
-        CellValue, 
-        Distance, 
-        Distance2, 
-        Distance2Add, 
-        Distance2Sub, 
-        Distance2Mul, 
-        Distance2Div 
-    };
-
-    public enum DomainWarpType 
-    { 
-        OpenSimplex2, 
-        OpenSimplex2Reduced, 
-        BasicGrid 
-    };
-
-    private enum TransformType3D 
-    {
-        None, 
-        ImproveXYPlanes, 
-        ImproveXZPlanes, 
-        DefaultOpenSimplex2 
-    };
-
     private int mSeed;
     private float mFrequency;
-    private NoiseType mNoiseType;
-    private RotationType3D mRotationType3D;
-    private TransformType3D mTransformType3D;
+    private FastNoiseLite.NoiseType mNoiseType;
+    private FastNoiseLite.RotationType3D mRotationType3D;
+    private FastNoiseLite.TransformType3D mTransformType3D;
 
-    private FractalType mFractalType;
+    private FastNoiseLite.FractalType mFractalType;
     private int mOctaves;
     private float mLacunarity;
     private float mGain;
@@ -135,12 +74,12 @@ public struct FastNoiseLiteStruct
 
     private float mFractalBounding;
 
-    private CellularDistanceFunction mCellularDistanceFunction;
-    private CellularReturnType mCellularReturnType;
+    private FastNoiseLite.CellularDistanceFunction mCellularDistanceFunction;
+    private FastNoiseLite.CellularReturnType mCellularReturnType;
     private float mCellularJitterModifier;
 
-    private DomainWarpType mDomainWarpType;
-    private TransformType3D mWarpTransformType3D;
+    private FastNoiseLite.DomainWarpType mDomainWarpType;
+    private FastNoiseLite.TransformType3D mWarpTransformType3D;
     private float mDomainWarpAmp;
 
     /// <summary>
@@ -150,11 +89,11 @@ public struct FastNoiseLiteStruct
     {
         mSeed = seed;
         mFrequency = 0.01f;
-        mNoiseType = NoiseType.OpenSimplex2;
-        mRotationType3D = RotationType3D.None;
-        mTransformType3D = TransformType3D.DefaultOpenSimplex2;
+        mNoiseType = FastNoiseLite.NoiseType.OpenSimplex2;
+        mRotationType3D = FastNoiseLite.RotationType3D.None;
+        mTransformType3D = FastNoiseLite.TransformType3D.DefaultOpenSimplex2;
 
-        mFractalType = FractalType.None;
+        mFractalType = FastNoiseLite.FractalType.None;
         mOctaves = 3;
         mLacunarity = 2.0f;
         mGain = 0.5f;
@@ -163,12 +102,12 @@ public struct FastNoiseLiteStruct
 
         mFractalBounding = 1 / 1.75f;
 
-        mCellularDistanceFunction = CellularDistanceFunction.EuclideanSq;
-        mCellularReturnType = CellularReturnType.Distance;
+        mCellularDistanceFunction = FastNoiseLite.CellularDistanceFunction.EuclideanSq;
+        mCellularReturnType = FastNoiseLite.CellularReturnType.Distance;
         mCellularJitterModifier = 1.0f;
 
-        mDomainWarpType = DomainWarpType.OpenSimplex2;
-        mWarpTransformType3D = TransformType3D.DefaultOpenSimplex2;
+        mDomainWarpType = FastNoiseLite.DomainWarpType.OpenSimplex2;
+        mWarpTransformType3D = FastNoiseLite.TransformType3D.DefaultOpenSimplex2;
         mDomainWarpAmp = 1.0f;
     }
 
@@ -196,12 +135,12 @@ public struct FastNoiseLiteStruct
     /// <remarks>
     /// Default: OpenSimplex2
     /// </remarks>
-    public void SetNoiseType(NoiseType noiseType)
+    public void SetNoiseType(FastNoiseLite.NoiseType noiseType)
     {
         mNoiseType = noiseType;
         UpdateTransformType3D();
     }
-    public NoiseType GetNoiseType() { return mNoiseType; }
+    public FastNoiseLite.NoiseType GetNoiseType() { return mNoiseType; }
 
     /// <summary>
     /// Sets domain rotation type for 3D Noise and 3D DomainWarp.
@@ -210,13 +149,13 @@ public struct FastNoiseLiteStruct
     /// <remarks>
     /// Default: None
     /// </remarks>
-    public void SetRotationType3D(RotationType3D rotationType3D)
+    public void SetRotationType3D(FastNoiseLite.RotationType3D rotationType3D)
     {
         mRotationType3D = rotationType3D;
         UpdateTransformType3D();
         UpdateWarpTransformType3D();
     }
-    public RotationType3D GetRotationType3D() { return mRotationType3D; }
+    public FastNoiseLite.RotationType3D GetRotationType3D() { return mRotationType3D; }
 
     /// <summary>
     /// Sets method for combining octaves in all fractal noise types
@@ -225,8 +164,8 @@ public struct FastNoiseLiteStruct
     /// Default: None
     /// Note: FractalType.DomainWarp... only affects DomainWarp(...)
     /// </remarks>
-    public void SetFractalType(FractalType fractalType) { mFractalType = fractalType; }
-    public FractalType GetFractalType() { return mFractalType; }
+    public void SetFractalType(FastNoiseLite.FractalType fractalType) { mFractalType = fractalType; }
+    public FastNoiseLite.FractalType GetFractalType() { return mFractalType; }
 
     /// <summary>
     /// Sets octave count for all fractal noise types 
@@ -289,8 +228,8 @@ public struct FastNoiseLiteStruct
     /// <remarks>
     /// Default: Distance
     /// </remarks>
-    public void SetCellularDistanceFunction(CellularDistanceFunction cellularDistanceFunction) { mCellularDistanceFunction = cellularDistanceFunction; }
-    public CellularDistanceFunction GetCellularDistanceFunction() { return mCellularDistanceFunction; }
+    public void SetCellularDistanceFunction(FastNoiseLite.CellularDistanceFunction cellularDistanceFunction) { mCellularDistanceFunction = cellularDistanceFunction; }
+    public FastNoiseLite.CellularDistanceFunction GetCellularDistanceFunction() { return mCellularDistanceFunction; }
 
     /// <summary>
     /// Sets return type from cellular noise calculations
@@ -298,8 +237,8 @@ public struct FastNoiseLiteStruct
     /// <remarks>
     /// Default: EuclideanSq
     /// </remarks>
-    public void SetCellularReturnType(CellularReturnType cellularReturnType) { mCellularReturnType = cellularReturnType; }
-    public CellularReturnType GetCellularReturnType() { return mCellularReturnType; }
+    public void SetCellularReturnType(FastNoiseLite.CellularReturnType cellularReturnType) { mCellularReturnType = cellularReturnType; }
+    public FastNoiseLite.CellularReturnType GetCellularReturnType() { return mCellularReturnType; }
 
     /// <summary>
     /// Sets the maximum distance a cellular point can move from it's grid position
@@ -318,12 +257,12 @@ public struct FastNoiseLiteStruct
     /// <remarks>
     /// Default: OpenSimplex2
     /// </remarks>
-    public void SetDomainWarpType(DomainWarpType domainWarpType)
+    public void SetDomainWarpType(FastNoiseLite.DomainWarpType domainWarpType)
     {
         mDomainWarpType = domainWarpType;
         UpdateWarpTransformType3D();
     }
-    public DomainWarpType GetDomainWarpType() { return mDomainWarpType; }
+    public FastNoiseLite.DomainWarpType GetDomainWarpType() { return mDomainWarpType; }
 
 
     /// <summary>
@@ -351,11 +290,11 @@ public struct FastNoiseLiteStruct
         {
             default:
                 return GenNoiseSingle(mSeed, x, y);
-            case FractalType.FBm:
+            case FastNoiseLite.FractalType.FBm:
                 return GenFractalFBm(x, y);
-            case FractalType.Ridged:
+            case FastNoiseLite.FractalType.Ridged:
                 return GenFractalRidged(x, y);
-            case FractalType.PingPong:
+            case FastNoiseLite.FractalType.PingPong:
                 return GenFractalPingPong(x, y);
         }
     }
@@ -375,11 +314,11 @@ public struct FastNoiseLiteStruct
         {
             default:
                 return GenNoiseSingle(mSeed, x, y, z);
-            case FractalType.FBm:
+            case FastNoiseLite.FractalType.FBm:
                 return GenFractalFBm(x, y, z);
-            case FractalType.Ridged:
+            case FastNoiseLite.FractalType.Ridged:
                 return GenFractalRidged(x, y, z);
-            case FractalType.PingPong:
+            case FastNoiseLite.FractalType.PingPong:
                 return GenFractalPingPong(x, y, z);
         }
     }
@@ -401,10 +340,10 @@ public struct FastNoiseLiteStruct
             default:
                 DomainWarpSingle(ref x, ref y);
                 break;
-            case FractalType.DomainWarpProgressive:
+            case FastNoiseLite.FractalType.DomainWarpProgressive:
                 DomainWarpFractalProgressive(ref x, ref y);
                 break;
-            case FractalType.DomainWarpIndependent:
+            case FastNoiseLite.FractalType.DomainWarpIndependent:
                 DomainWarpFractalIndependent(ref x, ref y);
                 break;
         }
@@ -426,10 +365,10 @@ public struct FastNoiseLiteStruct
             default:
                 DomainWarpSingle(ref x, ref y, ref z);
                 break;
-            case FractalType.DomainWarpProgressive:
+            case FastNoiseLite.FractalType.DomainWarpProgressive:
                 DomainWarpFractalProgressive(ref x, ref y, ref z);
                 break;
-            case FractalType.DomainWarpIndependent:
+            case FastNoiseLite.FractalType.DomainWarpIndependent:
                 DomainWarpFractalIndependent(ref x, ref y, ref z);
                 break;
         }
@@ -754,17 +693,17 @@ public struct FastNoiseLiteStruct
     {
         switch (mNoiseType)
         {
-            case NoiseType.OpenSimplex2:
+            case FastNoiseLite.NoiseType.OpenSimplex2:
                 return SingleSimplex(seed, x, y);
-            case NoiseType.OpenSimplex2S:
+            case FastNoiseLite.NoiseType.OpenSimplex2S:
                 return SingleOpenSimplex2S(seed, x, y);
-            case NoiseType.Cellular:
+            case FastNoiseLite.NoiseType.Cellular:
                 return SingleCellular(seed, x, y);
-            case NoiseType.Perlin:
+            case FastNoiseLite.NoiseType.Perlin:
                 return SinglePerlin(seed, x, y);
-            case NoiseType.ValueCubic:
+            case FastNoiseLite.NoiseType.ValueCubic:
                 return SingleValueCubic(seed, x, y);
-            case NoiseType.Value:
+            case FastNoiseLite.NoiseType.Value:
                 return SingleValue(seed, x, y);
             default:
                 return 0;
@@ -775,17 +714,17 @@ public struct FastNoiseLiteStruct
     {
         switch (mNoiseType)
         {
-            case NoiseType.OpenSimplex2:
+            case FastNoiseLite.NoiseType.OpenSimplex2:
                 return SingleOpenSimplex2(seed, x, y, z);
-            case NoiseType.OpenSimplex2S:
+            case FastNoiseLite.NoiseType.OpenSimplex2S:
                 return SingleOpenSimplex2S(seed, x, y, z);
-            case NoiseType.Cellular:
+            case FastNoiseLite.NoiseType.Cellular:
                 return SingleCellular(seed, x, y, z);
-            case NoiseType.Perlin:
+            case FastNoiseLite.NoiseType.Perlin:
                 return SinglePerlin(seed, x, y, z);
-            case NoiseType.ValueCubic:
+            case FastNoiseLite.NoiseType.ValueCubic:
                 return SingleValueCubic(seed, x, y, z);
-            case NoiseType.Value:
+            case FastNoiseLite.NoiseType.Value:
                 return SingleValue(seed, x, y, z);
             default:
                 return 0;
@@ -803,8 +742,8 @@ public struct FastNoiseLiteStruct
 
         switch (mNoiseType)
         {
-            case NoiseType.OpenSimplex2:
-            case NoiseType.OpenSimplex2S:
+            case FastNoiseLite.NoiseType.OpenSimplex2:
+            case FastNoiseLite.NoiseType.OpenSimplex2S:
                 {
                     const FNLfloat SQRT3 = (FNLfloat)1.7320508075688772935274463415059;
                     const FNLfloat F2 = 0.5f * (SQRT3 - 1);
@@ -827,7 +766,7 @@ public struct FastNoiseLiteStruct
 
         switch (mTransformType3D)
         {
-            case TransformType3D.ImproveXYPlanes:
+            case FastNoiseLite.TransformType3D.ImproveXYPlanes:
                 {
                     FNLfloat xy = x + y;
                     FNLfloat s2 = xy * -(FNLfloat)0.211324865405187;
@@ -837,7 +776,7 @@ public struct FastNoiseLiteStruct
                     z += xy * (FNLfloat)0.577350269189626;
                 }
                 break;
-            case TransformType3D.ImproveXZPlanes:
+            case FastNoiseLite.TransformType3D.ImproveXZPlanes:
                 {
                     FNLfloat xz = x + z;
                     FNLfloat s2 = xz * -(FNLfloat)0.211324865405187;
@@ -847,7 +786,7 @@ public struct FastNoiseLiteStruct
                     y += xz * (FNLfloat)0.577350269189626;
                 }
                 break;
-            case TransformType3D.DefaultOpenSimplex2:
+            case FastNoiseLite.TransformType3D.DefaultOpenSimplex2:
                 {
                     const FNLfloat R3 = (FNLfloat)(2.0 / 3.0);
                     FNLfloat r = (x + y + z) * R3; // Rotation, not skew
@@ -865,21 +804,21 @@ public struct FastNoiseLiteStruct
     {
         switch (mRotationType3D)
         {
-            case RotationType3D.ImproveXYPlanes:
-                mTransformType3D = TransformType3D.ImproveXYPlanes;
+            case FastNoiseLite.RotationType3D.ImproveXYPlanes:
+                mTransformType3D = FastNoiseLite.TransformType3D.ImproveXYPlanes;
                 break;
-            case RotationType3D.ImproveXZPlanes:
-                mTransformType3D = TransformType3D.ImproveXZPlanes;
+            case FastNoiseLite.RotationType3D.ImproveXZPlanes:
+                mTransformType3D = FastNoiseLite.TransformType3D.ImproveXZPlanes;
                 break;
             default:
                 switch (mNoiseType)
                 {
-                    case NoiseType.OpenSimplex2:
-                    case NoiseType.OpenSimplex2S:
-                        mTransformType3D = TransformType3D.DefaultOpenSimplex2;
+                    case FastNoiseLite.NoiseType.OpenSimplex2:
+                    case FastNoiseLite.NoiseType.OpenSimplex2S:
+                        mTransformType3D = FastNoiseLite.TransformType3D.DefaultOpenSimplex2;
                         break;
                     default:
-                        mTransformType3D = TransformType3D.None;
+                        mTransformType3D = FastNoiseLite.TransformType3D.None;
                         break;
                 }
                 break;
@@ -894,8 +833,8 @@ public struct FastNoiseLiteStruct
     {
         switch (mDomainWarpType)
         {
-            case DomainWarpType.OpenSimplex2:
-            case DomainWarpType.OpenSimplex2Reduced:
+            case FastNoiseLite.DomainWarpType.OpenSimplex2:
+            case FastNoiseLite.DomainWarpType.OpenSimplex2Reduced:
             {
                 const FNLfloat SQRT3 = (FNLfloat)1.7320508075688772935274463415059;
                 const FNLfloat F2 = 0.5f * (SQRT3 - 1);
@@ -913,7 +852,7 @@ public struct FastNoiseLiteStruct
     {
         switch (mWarpTransformType3D)
         {
-            case TransformType3D.ImproveXYPlanes:
+            case FastNoiseLite.TransformType3D.ImproveXYPlanes:
                 {
                     FNLfloat xy = x + y;
                     FNLfloat s2 = xy * -(FNLfloat)0.211324865405187;
@@ -923,7 +862,7 @@ public struct FastNoiseLiteStruct
                     z += xy * (FNLfloat)0.577350269189626;
                 }
                 break;
-            case TransformType3D.ImproveXZPlanes:
+            case FastNoiseLite.TransformType3D.ImproveXZPlanes:
                 {
                     FNLfloat xz = x + z;
                     FNLfloat s2 = xz * -(FNLfloat)0.211324865405187;
@@ -932,7 +871,7 @@ public struct FastNoiseLiteStruct
                     y += xz * (FNLfloat)0.577350269189626;
                 }
                 break;
-            case TransformType3D.DefaultOpenSimplex2:
+            case FastNoiseLite.TransformType3D.DefaultOpenSimplex2:
                 {
                     const FNLfloat R3 = (FNLfloat)(2.0 / 3.0);
                     FNLfloat r = (x + y + z) * R3; // Rotation, not skew
@@ -950,21 +889,21 @@ public struct FastNoiseLiteStruct
     {
         switch (mRotationType3D)
         {
-            case RotationType3D.ImproveXYPlanes:
-                mWarpTransformType3D = TransformType3D.ImproveXYPlanes;
+            case FastNoiseLite.RotationType3D.ImproveXYPlanes:
+                mWarpTransformType3D = FastNoiseLite.TransformType3D.ImproveXYPlanes;
                 break;
-            case RotationType3D.ImproveXZPlanes:
-                mWarpTransformType3D = TransformType3D.ImproveXZPlanes;
+            case FastNoiseLite.RotationType3D.ImproveXZPlanes:
+                mWarpTransformType3D = FastNoiseLite.TransformType3D.ImproveXZPlanes;
                 break;
             default:
                 switch (mDomainWarpType)
                 {
-                    case DomainWarpType.OpenSimplex2:
-                    case DomainWarpType.OpenSimplex2Reduced:
-                        mWarpTransformType3D = TransformType3D.DefaultOpenSimplex2;
+                    case FastNoiseLite.DomainWarpType.OpenSimplex2:
+                    case FastNoiseLite.DomainWarpType.OpenSimplex2Reduced:
+                        mWarpTransformType3D = FastNoiseLite.TransformType3D.DefaultOpenSimplex2;
                         break;
                     default:
-                        mWarpTransformType3D = TransformType3D.None;
+                        mWarpTransformType3D = FastNoiseLite.TransformType3D.None;
                         break;
                 }
                 break;
@@ -1614,8 +1553,8 @@ public struct FastNoiseLiteStruct
         switch (mCellularDistanceFunction)
         {
             default:
-            case CellularDistanceFunction.Euclidean:
-            case CellularDistanceFunction.EuclideanSq:
+            case FastNoiseLite.CellularDistanceFunction.Euclidean:
+            case FastNoiseLite.CellularDistanceFunction.EuclideanSq:
                 for (int xi = xr - 1; xi <= xr + 1; xi++)
                 {
                     int yPrimed = yPrimedBase;
@@ -1641,7 +1580,7 @@ public struct FastNoiseLiteStruct
                     xPrimed += PrimeX;
                 }
                 break;
-            case CellularDistanceFunction.Manhattan:
+            case FastNoiseLite.CellularDistanceFunction.Manhattan:
                 for (int xi = xr - 1; xi <= xr + 1; xi++)
                 {
                     int yPrimed = yPrimedBase;
@@ -1667,7 +1606,7 @@ public struct FastNoiseLiteStruct
                     xPrimed += PrimeX;
                 }
                 break;
-            case CellularDistanceFunction.Hybrid:
+            case FastNoiseLite.CellularDistanceFunction.Hybrid:
                 for (int xi = xr - 1; xi <= xr + 1; xi++)
                 {
                     int yPrimed = yPrimedBase;
@@ -1695,11 +1634,11 @@ public struct FastNoiseLiteStruct
                 break;
         }
 
-        if (mCellularDistanceFunction == CellularDistanceFunction.Euclidean && mCellularReturnType >= CellularReturnType.Distance)
+        if (mCellularDistanceFunction == FastNoiseLite.CellularDistanceFunction.Euclidean && mCellularReturnType >= FastNoiseLite.CellularReturnType.Distance)
         {
             distance0 = FastSqrt(distance0);
 
-            if (mCellularReturnType >= CellularReturnType.Distance2)
+            if (mCellularReturnType >= FastNoiseLite.CellularReturnType.Distance2)
             {
                 distance1 = FastSqrt(distance1);
             }
@@ -1707,19 +1646,19 @@ public struct FastNoiseLiteStruct
 
         switch (mCellularReturnType)
         {
-            case CellularReturnType.CellValue:
+            case FastNoiseLite.CellularReturnType.CellValue:
                 return closestHash * (1 / 2147483648.0f);
-            case CellularReturnType.Distance:
+            case FastNoiseLite.CellularReturnType.Distance:
                 return distance0 - 1;
-            case CellularReturnType.Distance2:
+            case FastNoiseLite.CellularReturnType.Distance2:
                 return distance1 - 1;
-            case CellularReturnType.Distance2Add:
+            case FastNoiseLite.CellularReturnType.Distance2Add:
                 return (distance1 + distance0) * 0.5f - 1;
-            case CellularReturnType.Distance2Sub:
+            case FastNoiseLite.CellularReturnType.Distance2Sub:
                 return distance1 - distance0 - 1;
-            case CellularReturnType.Distance2Mul:
+            case FastNoiseLite.CellularReturnType.Distance2Mul:
                 return distance1 * distance0 * 0.5f - 1;
-            case CellularReturnType.Distance2Div:
+            case FastNoiseLite.CellularReturnType.Distance2Div:
                 return distance0 / distance1 - 1;
             default:
                 return 0;
@@ -1744,8 +1683,8 @@ public struct FastNoiseLiteStruct
 
         switch (mCellularDistanceFunction)
         {
-            case CellularDistanceFunction.Euclidean:
-            case CellularDistanceFunction.EuclideanSq:
+            case FastNoiseLite.CellularDistanceFunction.Euclidean:
+            case FastNoiseLite.CellularDistanceFunction.EuclideanSq:
                 for (int xi = xr - 1; xi <= xr + 1; xi++)
                 {
                     int yPrimed = yPrimedBase;
@@ -1778,7 +1717,7 @@ public struct FastNoiseLiteStruct
                     xPrimed += PrimeX;
                 }
                 break;
-            case CellularDistanceFunction.Manhattan:
+            case FastNoiseLite.CellularDistanceFunction.Manhattan:
                 for (int xi = xr - 1; xi <= xr + 1; xi++)
                 {
                     int yPrimed = yPrimedBase;
@@ -1811,7 +1750,7 @@ public struct FastNoiseLiteStruct
                     xPrimed += PrimeX;
                 }
                 break;
-            case CellularDistanceFunction.Hybrid:
+            case FastNoiseLite.CellularDistanceFunction.Hybrid:
                 for (int xi = xr - 1; xi <= xr + 1; xi++)
                 {
                     int yPrimed = yPrimedBase;
@@ -1848,11 +1787,11 @@ public struct FastNoiseLiteStruct
                 break;
         }
 
-        if (mCellularDistanceFunction == CellularDistanceFunction.Euclidean && mCellularReturnType >= CellularReturnType.Distance)
+        if (mCellularDistanceFunction == FastNoiseLite.CellularDistanceFunction.Euclidean && mCellularReturnType >= FastNoiseLite.CellularReturnType.Distance)
         {
             distance0 = FastSqrt(distance0);
 
-            if (mCellularReturnType >= CellularReturnType.Distance2)
+            if (mCellularReturnType >= FastNoiseLite.CellularReturnType.Distance2)
             {
                 distance1 = FastSqrt(distance1);
             }
@@ -1860,19 +1799,19 @@ public struct FastNoiseLiteStruct
 
         switch (mCellularReturnType)
         {
-            case CellularReturnType.CellValue:
+            case FastNoiseLite.CellularReturnType.CellValue:
                 return closestHash * (1 / 2147483648.0f);
-            case CellularReturnType.Distance:
+            case FastNoiseLite.CellularReturnType.Distance:
                 return distance0 - 1;
-            case CellularReturnType.Distance2:
+            case FastNoiseLite.CellularReturnType.Distance2:
                 return distance1 - 1;
-            case CellularReturnType.Distance2Add:
+            case FastNoiseLite.CellularReturnType.Distance2Add:
                 return (distance1 + distance0) * 0.5f - 1;
-            case CellularReturnType.Distance2Sub:
+            case FastNoiseLite.CellularReturnType.Distance2Sub:
                 return distance1 - distance0 - 1;
-            case CellularReturnType.Distance2Mul:
+            case FastNoiseLite.CellularReturnType.Distance2Mul:
                 return distance1 * distance0 * 0.5f - 1;
-            case CellularReturnType.Distance2Div:
+            case FastNoiseLite.CellularReturnType.Distance2Div:
                 return distance0 / distance1 - 1;
             default:
                 return 0;
@@ -2083,13 +2022,13 @@ public struct FastNoiseLiteStruct
     {
         switch (mDomainWarpType)
         {
-            case DomainWarpType.OpenSimplex2:
+            case FastNoiseLite.DomainWarpType.OpenSimplex2:
                 SingleDomainWarpSimplexGradient(seed, amp * 38.283687591552734375f, freq, x, y, ref xr, ref yr, false);
                 break;
-            case DomainWarpType.OpenSimplex2Reduced:
+            case FastNoiseLite.DomainWarpType.OpenSimplex2Reduced:
                 SingleDomainWarpSimplexGradient(seed, amp * 16.0f, freq, x, y, ref xr, ref yr, true);
                 break;
-            case DomainWarpType.BasicGrid:
+            case FastNoiseLite.DomainWarpType.BasicGrid:
                 SingleDomainWarpBasicGrid(seed, amp, freq, x, y, ref xr, ref yr);
                 break;
         }
@@ -2099,13 +2038,13 @@ public struct FastNoiseLiteStruct
     {
         switch (mDomainWarpType)
         {
-            case DomainWarpType.OpenSimplex2:
+            case FastNoiseLite.DomainWarpType.OpenSimplex2:
                 SingleDomainWarpOpenSimplex2Gradient(seed, amp * 32.69428253173828125f, freq, x, y, z, ref xr, ref yr, ref zr, false);
                 break;
-            case DomainWarpType.OpenSimplex2Reduced:
+            case FastNoiseLite.DomainWarpType.OpenSimplex2Reduced:
                 SingleDomainWarpOpenSimplex2Gradient(seed, amp * 7.71604938271605f, freq, x, y, z, ref xr, ref yr, ref zr, true);
                 break;
-            case DomainWarpType.BasicGrid:
+            case FastNoiseLite.DomainWarpType.BasicGrid:
                 SingleDomainWarpBasicGrid(seed, amp, freq, x, y, z, ref xr, ref yr, ref zr);
                 break;
         }

@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using Sirenix.OdinInspector;
 using System;
+using Unity.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -13,7 +14,8 @@ namespace Aether
         public const int LEN = 16;  // LEN_AXIS
         public const int LEN_VOXLES = LEN * LEN * LEN;  // LEN_VOXELS
 
-        private Vox[] m_Voxels = new Vox[Chunk.LEN_VOXLES];
+        // private NativeArray<Vox> m_Voxels = new(Chunk.LEN_VOXLES, Allocator.Persistent);
+        public Vox[] m_Voxels = new Vox[LEN_VOXLES];
 
         public int3 chunkpos;
 

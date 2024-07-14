@@ -14,30 +14,18 @@ namespace Aether
         
         [ShowInInspector]
         [SerializeField]
-        public NoiseGenC m_Noise;
+        public NoiseGen m_Noise;
         
 
+        
         public void GenerateChunk(Chunk chunk)
         {
             BenchmarkTimer _t = new("Managed GenerateChunk at "+chunk.chunkpos+" in {0}");
             using var _p = s_Pm.Auto();
             m_Noise.Seed = (int)chunk.GetWorld().Seed();
-
-            if (chunk.chunkpos.y > 10)
-            {
-                _t.Stop();
-                return;
-            }
             
             chunk.ForVoxels((int3 localpos, ref Vox vox) =>
             {
-                // if (localpos.y < 10)
-                // {
-                //     vox.texId = 1;
-                //     vox.density = 1;
-                // }
-                // return;
-                
                 int3 p = chunk.chunkpos + localpos;
 
                 float f_terr2d = m_Noise.Sample(new float2(p.x, p.z) / 130f);
