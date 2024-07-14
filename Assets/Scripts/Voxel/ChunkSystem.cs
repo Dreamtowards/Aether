@@ -1,12 +1,14 @@
 using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Sirenix.Utilities;
 using Unity.Collections;
 using Unity.Mathematics;
 using UnityEngine;
 using Unity.Jobs;
 using UnityEngine.Assertions;
+using UnityEngine.Pool;
 
 namespace Aether
 {
@@ -30,8 +32,6 @@ namespace Aether
 
         void Start()
         {
-            var job = new JobChunkGen{};
-            JobHandle jobHandle = job.Schedule();
         }
 
         [Button]
@@ -44,24 +44,26 @@ namespace Aether
 
         #region Chunks Loading/Unload
 
-        private Dictionary<int3, JobHandle> m_ChunksLoading = new();
-        private int m_ChunksLoadingMaxConcurrency = 10;
+        [ShowInInspector]
+        private Dictionary<int3, Task<Chunk>> m_ChunksLoading = new();
+        public int m_ChunksLoadingMaxConcurrency = 10;
 
         private void UpdateChunksLoadAndUnload()
         {
             // Fetch Completed LoadingChunk Tasks
 
             HashSet<int3> chunksLoaded = new();
-            foreach (var (chunkpos, jobHandle) in m_ChunksLoading)
+            foreach (var (chunkpos, task) in m_ChunksLoading)
             {
-                if (!jobHandle.IsCompleted)
+                if (!task.IsCompleted)
                     continue;
-                
+                var chunk = task.Result;
+
+                m_Chunks.Add(chunkpos, chunk);
+                MarkChunkMeshDirty(chunkpos);
                 chunksLoaded.Add(chunkpos);
             }
             m_ChunksLoading.RemoveAll(chunksLoaded);
-            
-            
             
             
             // Loading Chunks :: Dispatch Task
@@ -73,7 +75,7 @@ namespace Aether
             {
                 int3 chunkpos = center + p * Chunk.LEN;
 
-                if (m_ChunksLoading.Count > m_ChunksLoadingMaxConcurrency)
+                if (m_ChunksLoading.Count >= m_ChunksLoadingMaxConcurrency)
                     return;
                 if (m_ChunksLoading.ContainsKey(chunkpos))
                     return;
@@ -82,31 +84,20 @@ namespace Aether
 
                 // Load Chunk
                 // Generate Chunk
-                
+
                 GameObject objChunk = Instantiate(m_PrefabChunk, (float3)chunkpos, Quaternion.identity, transform);
                 objChunk.name = $"Chunk ({chunkpos.x}, {chunkpos.y}, {chunkpos.z})";
                 Chunk chunk = objChunk.GetComponent<Chunk>();
                 chunk.InitChunk(chunkpos, this);
-
-                var voxels = new NativeArray<Vox>(Chunk.LEN_VOXLES, Allocator.TempJob);
-                var job = new JobChunkGen
-                {
-                    chunkpos = chunkpos,
-                    _noise = m_ChunkGenerator.m_Noise.ToStruct(),
-                    voxels = voxels
-                };
-                {
-                    using var _ben = new BenchmarkTimer("BurstCompiler Finished {0}");
-                    var jobHandle = job.Schedule();
-                    jobHandle.Complete();
-                }
-
-
-                m_ChunkGenerator.GenerateChunk(chunk);
                 
-                m_Chunks.Add(chunkpos, chunk);
-                MarkChunkMeshDirty(chunkpos);
-            
+                var task = new Task<Chunk>(() =>
+                {
+                    m_ChunkGenerator.GenerateChunk(chunk);
+
+                    return chunk;
+                });
+                task.Start();
+                m_ChunksLoading.Add(chunkpos, task);
             });
             
             // Unload chunks
@@ -119,17 +110,68 @@ namespace Aether
 
         #endregion
 
+
+
+        #region Chunks Meshing
+
+        [ShowInInspector]
+        public Dictionary<int3, Task<VertexBuffer>> m_ChunksMeshing = new();
+        public int m_ChunksMeshingMaxConcurrency = 10;
+
+        private static ObjectPool<VertexBuffer> s_VertexBufferPool = new(() => new VertexBuffer());
+
+        [ShowInInspector]
+        public static int VertexBufferPoolSize => s_VertexBufferPool.CountAll;
+        [ShowInInspector]
+        public static int VertexBufferPoolActived => s_VertexBufferPool.CountActive;
+        
         private void UpdateChunksDirtyMesh()
         {
-            foreach (var chunkpos in m_ChunksMeshDirty)
+            HashSet<int3> chunksMeshed = new();
+            foreach (var (chunkpos, task) in m_ChunksMeshing)
             {
+                if (!task.IsCompleted)
+                    continue;
+                var vbuf = task.Result;
+
                 if (GetChunk(chunkpos, out var chunk))
                 {
-                    chunk.RegenerateMesh();
+                    chunk.UploadMesh(vbuf.ToMesh());
                 }
+                s_VertexBufferPool.Release(vbuf);
+                chunksMeshed.Add(chunkpos);
             }
-            m_ChunksMeshDirty.Clear();
+            m_ChunksMeshing.RemoveAll(chunksMeshed);
+            
+            
+            HashSet<int3> chunksTasked = new();
+            foreach (var chunkpos in m_ChunksMeshDirty)
+            {
+                if (m_ChunksMeshing.Count >= m_ChunksMeshingMaxConcurrency)
+                    continue;
+                if (m_ChunksMeshing.ContainsKey(chunkpos))
+                    continue;
+                if (!GetChunk(chunkpos, out var chunk))
+                    continue;
+
+                VertexBuffer vbuf = s_VertexBufferPool.Get();
+
+                var task = new Task<VertexBuffer>(() =>
+                {
+                    vbuf.Clear();
+                    
+                    ChunkMeshGenerator.GenerateMesh(vbuf, chunk);
+                    
+                    return vbuf;
+                });
+                task.Start();
+                m_ChunksMeshing.Add(chunkpos, task);
+                chunksTasked.Add(chunkpos);
+            }
+            m_ChunksMeshDirty.RemoveAll(chunksTasked);
         }
+
+        #endregion
 
 
 
@@ -142,8 +184,6 @@ namespace Aether
         #region Voxel Accessor
 
         
-        
-
         public World GetWorld() { return m_PtrWorld; }
 
         public bool GetChunk(int3 chunkpos, out Chunk chunk) {

@@ -53,14 +53,8 @@ namespace Aether
         }
 
 
-        [Button]
-        public void RegenerateMesh()
+        public void UploadMesh(Mesh mesh)
         {
-            VertexBuffer vbuf = new();
-
-            ChunkMeshGenerator.GenerateMesh(vbuf, this);
-
-            Mesh mesh = vbuf.ToMesh();
             GetComponent<MeshFilter>().mesh = mesh;
             GetComponent<MeshCollider>().sharedMesh = mesh;
         }

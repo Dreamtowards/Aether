@@ -10,7 +10,7 @@ namespace Aether
 {
     public class ChunkGenerator : MonoBehaviour
     {
-        static readonly ProfilerMarker s_Pm = new("Aether.ManagedChunkGen");
+        static readonly ProfilerMarker _ProfilerMarker = new("Aether.ManagedChunkGen");
         
         [ShowInInspector]
         [SerializeField]
@@ -20,8 +20,8 @@ namespace Aether
         
         public void GenerateChunk(Chunk chunk)
         {
-            BenchmarkTimer _t = new("Managed GenerateChunk at "+chunk.chunkpos+" in {0}");
-            using var _p = s_Pm.Auto();
+            using var _t = new BenchmarkTimer("Managed GenerateChunk at "+chunk.chunkpos+" in {0}");
+            using var _p = _ProfilerMarker.Auto();
             m_Noise.Seed = (int)chunk.GetWorld().Seed();
             
             chunk.ForVoxels((int3 localpos, ref Vox vox) =>
@@ -40,7 +40,6 @@ namespace Aether
                 vox.shapeId = 1;
 
             });
-            _t.Stop();
         }
     }
 

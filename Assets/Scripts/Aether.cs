@@ -34,9 +34,18 @@ namespace Aether
         public static int RemoveAll<K,V>(this Dictionary<K, V> dict, IEnumerable<K> removes)
         {
             int numRemoved = 0;
-            foreach (var k in removes)
-            {
+            foreach (var k in removes) {
                 if (dict.Remove(k))
+                    numRemoved++;
+            }
+            return numRemoved;
+        }
+
+        public static int RemoveAll<K>(this HashSet<K> set, IEnumerable<K> removes)
+        {
+            int numRemoved = 0;
+            foreach (var k in removes) {
+                if (set.Remove(k))
                     numRemoved++;
             }
             return numRemoved;
