@@ -112,7 +112,7 @@ namespace Aether
             return new((idx >> 8) & 15, (idx >> 4) & 15, idx & 15);
         }
 
-        public static int3 ChunkPos(float3 p) { return ChunkPos((int3)p); }
+        public static int3 ChunkPos(float3 p) { return ChunkPos(Maths.Floor(p)); }
         public static int3 ChunkPos(int3 p)
         {
             return new(Maths.Floor16(p.x), Maths.Floor16(p.y), Maths.Floor16(p.z));

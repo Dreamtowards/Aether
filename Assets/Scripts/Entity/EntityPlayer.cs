@@ -14,10 +14,5 @@ namespace Aether
             return math.all(math.abs(center - chunkpos) <= m_ChunksLoadDistance * Chunk.LEN);
         }
 
-        [Button]
-        public int3 calc(float3 c)
-        {
-            return (int3)c;
-        }
     }
 }

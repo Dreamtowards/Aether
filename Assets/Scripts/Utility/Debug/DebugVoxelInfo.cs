@@ -17,15 +17,10 @@ namespace Aether.Debug
 
         [ShowInInspector]
         public Vox m_Vox;
-
-        public int3 GetVoxelPos()
-        {
-            return (int3)math.floor(transform.position);
-        }
         
         void OnDrawGizmos()
         {
-            var p = GetVoxelPos();
+            var p = Maths.Floor(transform.position);
             if (math.any(m_LastPosition != p))
             {
                 m_LastPosition = p;

@@ -1,16 +1,19 @@
-using NUnit.Framework;
-using System;
+using Unity.Burst;
+using Unity.Collections;
+using Unity.Jobs;
 using Unity.Mathematics;
-using Unity.VisualScripting;
-using UnityEngine;
+using Unity.Profiling;
 
 namespace Aether
 {
 public static class ChunkMeshGenerator
 {
+    static readonly ProfilerMarker s_Pm = new("Aether.JobChunkMeshGen");
 
     public static void GenerateMesh(VertexBuffer vbuf, Chunk chunk)
     {
+        using var _p = s_Pm.Auto();
+        
         chunk.ForVoxels((int3 localpos, ref Vox vox) =>
         {
             if (vox.IsNil())
@@ -47,7 +50,7 @@ public static class ChunkMeshGenerator
         1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0,
         1, 0, 1, 1, 0, 1, 1, 0, 0, 1, 0, 0,
     };
-    static float[] CUBE_NORM = {
+    static int[] CUBE_NORM = {
         -1, 0, 0,-1, 0, 0,-1, 0, 0,-1, 0, 0,-1, 0, 0,-1, 0, 0,
         1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 0, 0,
         0,-1, 0, 0,-1, 0, 0,-1, 0, 0,-1, 0, 0,-1, 0, 0,-1, 0,
@@ -60,9 +63,9 @@ public static class ChunkMeshGenerator
     {
         for (int faceIdx = 0; faceIdx < 6; ++faceIdx)
         {
-            float3 faceDir = Maths.Vec3(CUBE_NORM, faceIdx * 18);   // 18: 3 scalar * 3 vertex * 2 triangle
+            int3 faceDir = Maths.IVec3(CUBE_NORM, faceIdx * 18);   // 18: 3 scalar * 3 vertex * 2 triangle
 
-            chunk.GetVoxel(localpos + (int3)faceDir, out Vox neibVox);
+            chunk.GetVoxel(localpos + faceDir, out Vox neibVox);
             if (neibVox.IsObaque())
                 continue;
 
@@ -71,7 +74,7 @@ public static class ChunkMeshGenerator
                 vbuf.PushVertex(
                     Maths.Vec3(CUBE_POS, faceIdx * 18 + vertIdx * 3) + localpos,
                     new(vox.texId, 0), //Maths.vec2(CUBE_UV,  faceIdx * 12 + vertIdx * 2),
-                    Maths.Vec3(CUBE_NORM, faceIdx * 18 + vertIdx * 3)
+                    Maths.IVec3(CUBE_NORM, faceIdx * 18 + vertIdx * 3)
                 );
             }
         }

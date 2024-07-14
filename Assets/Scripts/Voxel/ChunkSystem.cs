@@ -1,9 +1,10 @@
-using NUnit.Framework;
 using Sirenix.OdinInspector;
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
+using Unity.Jobs;
+using UnityEngine.Assertions;
 
 namespace Aether
 {
@@ -20,17 +21,36 @@ namespace Aether
 
         public HashSet<int3> m_ChunksMeshDirty = new();
 
-        public int3 m_LoadDistance = new(1, 1, 1);
+        public EntityPlayer m_LoaderPlayer;
+        public bool m_NeedChunksLoadance = true;
 
         void Start()
         {
+            var job = new JobChunkGen{};
+            JobHandle jobHandle = job.Schedule();
         }
 
         [Button]
         void Update()
         {
-            ProvideChunks(int3.zero, m_LoadDistance);
+            UpdateChunksLoadance();
 
+            UpdateChunksDirtyMesh();
+        }
+
+        private void UpdateChunksLoadance()
+        {
+            ProvideChunks(m_LoaderPlayer.transform.position, m_LoaderPlayer.m_ChunksLoadDistance);
+
+            foreach (var chunkpos in new List<int3>(m_Chunks.Keys))
+            {
+                if (!m_LoaderPlayer.InLoadDistance(chunkpos))
+                    UnloadChunk(chunkpos);
+            }
+        }
+
+        private void UpdateChunksDirtyMesh()
+        {
             foreach (var chunkpos in m_ChunksMeshDirty)
             {
                 if (GetChunk(chunkpos, out var chunk))
@@ -41,9 +61,21 @@ namespace Aether
             m_ChunksMeshDirty.Clear();
         }
 
+
+
+
+
+
+
+
+
+        #region Accessor
+
+        
+        
+
         public World GetWorld() { return m_PtrWorld; }
 
-        // return: maybe null if the chunk has not been loaded
         public bool GetChunk(int3 chunkpos, out Chunk chunk)
         {
             Assert.IsTrue(Chunk.IsChunkPos(chunkpos));
@@ -86,9 +118,9 @@ namespace Aether
         }
 
         [Button]
-        public void ProvideChunks(int3 center, int3 range)
+        public void ProvideChunks(float3 _center, int3 range)
         {
-            Assert.IsTrue(Chunk.IsChunkPos(center));
+            int3 center = Chunk.ChunkPos(_center);
             // for (int dx = -range.x; dx <= range.x; dx++)
             // for (int dy = -range.y; dy <= range.y; dy++)
             // for (int dz = -range.z; dz <= range.z; dz++)
@@ -104,20 +136,27 @@ namespace Aether
             });
         }
 
+        public bool UnloadChunk(int3 chunkpos)
+        {
+            Assert.IsTrue(Chunk.IsChunkPos(chunkpos));
+            if (!m_Chunks.Remove(chunkpos, out Chunk chunk))
+                return false;
+
+            DestroyImmediate(chunk.gameObject);
+            return true;
+        }
+
         [Button]
         public void UnloadAllChunks()
         {
-            foreach (var (key, chunk) in m_Chunks)
+            while (m_Chunks.Count > 0)
             {
-                DestroyImmediate(chunk.gameObject);
+                UnloadChunk(m_Chunks.Last().Key);
             }
-            m_Chunks.Clear();
 
 #if UNITY_EDITOR
             foreach (var chunk in GetComponentsInChildren<Chunk>())
-            {
                 DestroyImmediate(chunk.gameObject);
-            }
 #endif
         }
 
@@ -127,6 +166,10 @@ namespace Aether
             m_ChunksMeshDirty.Add(chunkpos);
         }
         
+
+        #endregion
+
+        #region Debug Gizmos
 
         public bool m_DebugDrawChunksOutlines = false;
 
@@ -141,6 +184,8 @@ namespace Aether
                 }
             }
         }
+
+        #endregion
     }
 
 }

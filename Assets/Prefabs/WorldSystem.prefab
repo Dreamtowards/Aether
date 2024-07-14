@@ -48,11 +48,9 @@ MonoBehaviour:
   m_PrefabChunk: {fileID: 7648006864274354212, guid: db99c3e1167a5a64689210f60c1daefc, type: 3}
   m_PtrWorld: {fileID: 4103076508276071122}
   m_ChunkGenerator: {fileID: 8873625454390895110}
-  m_LoadDistance:
-    x: 1
-    y: 1
-    z: 1
-  m_DebugDrawChunksOutlines: 0
+  m_LoaderPlayer: {fileID: 0}
+  m_NeedChunksLoadance: 1
+  m_DebugDrawChunksOutlines: 1
 --- !u!114 &8873625454390895110
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,6 +114,55 @@ MonoBehaviour:
     x: 3
     y: 5
     z: 8
+--- !u!1 &1851869298301953883
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2527446889329408490}
+  - component: {fileID: 854672890931401192}
+  m_Layer: 0
+  m_Name: Global Volume
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2527446889329408490
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851869298301953883}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8450904317739514756}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &854672890931401192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1851869298301953883}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_IsGlobal: 1
+  priority: 0
+  blendDistance: 0
+  weight: 1
+  sharedProfile: {fileID: 11400000, guid: 10fc4df2da32a41aaa32d77bc913491c, type: 2}
 --- !u!1 &2755971228608663593
 GameObject:
   m_ObjectHideFlags: 0
@@ -348,7 +395,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8450904317739514756}
   m_Layer: 0
-  m_Name: Sky
+  m_Name: Atmosphere
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -368,5 +415,6 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 5075976875558578861}
+  - {fileID: 2527446889329408490}
   m_Father: {fileID: 4563782917104760227}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

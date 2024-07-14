@@ -1,6 +1,7 @@
 using Aether;
 using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEngine;
 using static UnityEditor.Searcher.SearcherWindow.Alignment;
 
@@ -43,7 +44,7 @@ public class VertexBuffer
         Indices = new List<int>(initialCapacity);
     }
 
-    public void PushVertex(Vector3 pos, Vector2 uv, Vector3 norm)
+    public void PushVertex(float3 pos, float2 uv, float3 norm)
     {
         Vertices.Add(new Vertex { pos=pos, uv=uv, norm=norm });
     }

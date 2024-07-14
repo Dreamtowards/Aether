@@ -31,6 +31,11 @@ namespace Aether
             //return v < 0 ? f - n : f;
         }
 
+        public static int3 Floor(float3 v)
+        {
+            return (int3)math.floor(v);
+        }
+
 
         // CollectionsUtility
 
@@ -47,6 +52,10 @@ namespace Aether
         // VectorUtility
 
         public static float3 Vec3(float[] arr, int idx)
+        {
+            return new(arr[idx], arr[idx + 1], arr[idx + 2]);
+        }
+        public static int3 IVec3(int[] arr, int idx)
         {
             return new(arr[idx], arr[idx + 1], arr[idx + 2]);
         }

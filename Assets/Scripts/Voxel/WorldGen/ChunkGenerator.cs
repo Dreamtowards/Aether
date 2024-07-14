@@ -2,20 +2,33 @@
 using Sirenix.OdinInspector;
 using System;
 using Unity.Mathematics;
+using Unity.Profiling;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace Aether
 {
     public class ChunkGenerator : MonoBehaviour
     {
+        static readonly ProfilerMarker s_Pm = new("Aether.ManagedChunkGen");
+        
         [ShowInInspector]
         [SerializeField]
-        public Noise m_Noise = new();
+        public NoiseGenC m_Noise;
+        
 
         public void GenerateChunk(Chunk chunk)
         {
+            BenchmarkTimer _t = new("Managed GenerateChunk at "+chunk.chunkpos+" in {0}");
+            using var _p = s_Pm.Auto();
             m_Noise.Seed = (int)chunk.GetWorld().Seed();
 
+            if (chunk.chunkpos.y > 10)
+            {
+                _t.Stop();
+                return;
+            }
+            
             chunk.ForVoxels((int3 localpos, ref Vox vox) =>
             {
                 // if (localpos.y < 10)
@@ -39,6 +52,7 @@ namespace Aether
                 vox.shapeId = 1;
 
             });
+            _t.Stop();
         }
     }
 
