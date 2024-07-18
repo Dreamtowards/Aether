@@ -28,19 +28,29 @@ namespace Aether
         public EntityPlayer m_LoaderPlayer;
         
         // commonly only need when Visitor/Player moved across chunk or Appear/Disappear.
-        public bool m_NeedUpdateChunksLoadance = true;
+        // public bool m_NeedUpdateChunksLoadance = true;
 
         void Start()
         {
         }
 
-        [Button]
         void Update()
         {
             UpdateChunksLoadAndUnload();
 
             UpdateChunksDirtyMesh();
         }
+        
+#if UNITY_EDITOR
+        [Button]
+        void EditorLoadChunks()
+        {
+            do
+            {
+                Update();
+            } while (m_ChunksLoading.Count == 0 && m_ChunksMeshing.Count == 0);
+        }
+#endif
 
         #region Chunks Loading/Unload
 
@@ -255,6 +265,6 @@ namespace Aether
         }
 
         #endregion
+        
     }
-
 }
