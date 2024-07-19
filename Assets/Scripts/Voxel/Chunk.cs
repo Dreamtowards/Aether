@@ -21,11 +21,8 @@ namespace Aether
 
         public bool IsPopulated = false;
 
-        // Needs UpdateMesh
-        public bool IsDirty = true;
-
         [ShowInInspector]
-        private ChunkSystem m_PtrChunkSystem;
+        private ChunkSystem m_InChunkSystem;
 
         [ShowInInspector]
         private WeakReference<Chunk>[] m_NeighborChunks = new WeakReference<Chunk>[NEIGHBORS.Length];
@@ -35,10 +32,10 @@ namespace Aether
             chunkpos = _chunkpos;
             Assert.IsTrue(transform.position == (Vector3)(float3)chunkpos);
 
-            m_PtrChunkSystem = chunksystem;
+            m_InChunkSystem = chunksystem;
         }
 
-        public ChunkSystem GetChunkSystem() { return m_PtrChunkSystem; }
+        public ChunkSystem GetChunkSystem() { return m_InChunkSystem; }
         public World GetWorld() { return GetChunkSystem().GetWorld(); }
 
 

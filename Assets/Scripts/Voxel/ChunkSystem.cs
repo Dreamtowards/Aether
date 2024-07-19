@@ -19,7 +19,7 @@ namespace Aether
         [ShowInInspector]
         public Dictionary<int3, Chunk> m_Chunks = new();
 
-        public World m_PtrWorld;
+        public World m_InWorld;
 
         public ChunkGenerator m_ChunkGenerator;
 
@@ -34,6 +34,7 @@ namespace Aether
         {
         }
 
+        [Button]
         void Update()
         {
             UpdateChunksLoadAndUnload();
@@ -48,7 +49,7 @@ namespace Aether
             do
             {
                 Update();
-            } while (m_ChunksLoading.Count == 0 && m_ChunksMeshing.Count == 0);
+            } while (m_ChunksLoading.Count > 0 && m_ChunksMeshing.Count > 0);
         }
 #endif
 
@@ -194,7 +195,7 @@ namespace Aether
         #region Voxel Accessor
 
         
-        public World GetWorld() { return m_PtrWorld; }
+        public World GetWorld() { return m_InWorld; }
 
         public bool GetChunk(int3 chunkpos, out Chunk chunk) {
             Assert.IsTrue(Chunk.IsChunkPos(chunkpos));

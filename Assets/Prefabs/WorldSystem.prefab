@@ -46,10 +46,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_PrefabChunk: {fileID: 7648006864274354212, guid: db99c3e1167a5a64689210f60c1daefc, type: 3}
-  m_PtrWorld: {fileID: 4103076508276071122}
+  m_InWorld: {fileID: 4103076508276071122}
   m_ChunkGenerator: {fileID: 8873625454390895110}
   m_LoaderPlayer: {fileID: 0}
-  m_NeedChunksLoadance: 1
+  m_ChunksLoadingMaxConcurrency: 10
+  m_ChunksMeshingMaxConcurrency: 10
   m_DebugDrawChunksOutlines: 1
 --- !u!114 &8873625454390895110
 MonoBehaviour:
