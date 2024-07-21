@@ -77,8 +77,6 @@ namespace Aether
             }
             else
             {
-                Texture2D src = new Texture2D(0, 0);
-                
                 int idx = 0;
                 foreach (var v in Voxels)
                 {
@@ -87,12 +85,12 @@ namespace Aether
                 }
             }
             
-            File.WriteAllBytes(filepath, atlas.EncodeToPNG());
+            File.WriteAllBytes($"{Application.dataPath}/Art/Baked/{filepath}", atlas.EncodeToPNG());
         }
         
         private static bool TexLoadResize(string id, string texType, Texture2D dstTex, int dstWidth, int dstHeight, int dstX = 0)
         {
-            string path = $"{Application.dataPath}/Art/textures/{id}/{texType}.png";
+            string path = $"{Application.dataPath}/Art/Textures/Voxel/{id}/{texType}.png";
             if (!File.Exists(path))
                 return false;
 

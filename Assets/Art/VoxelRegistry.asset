@@ -13,6 +13,72 @@ MonoBehaviour:
   m_Name: VoxelRegistry
   m_EditorClassIdentifier: 
   Voxels:
+  - Id: brick_roof
+    Hardness: 1
+    NumId: 1
+  - Id: concrete
+    Hardness: 1
+    NumId: 2
+  - Id: dirt
+    Hardness: 1
+    NumId: 3
+  - Id: dirt_black
+    Hardness: 1
+    NumId: 4
+  - Id: dirt_farmland
+    Hardness: 1
+    NumId: 5
+  - Id: grass
+    Hardness: 1
+    NumId: 6
+  - Id: grass_meadow
+    Hardness: 1
+    NumId: 7
+  - Id: grass_moss
+    Hardness: 1
+    NumId: 8
+  - Id: iron
+    Hardness: 1
+    NumId: 9
+  - Id: iron_treadplate
+    Hardness: 1
+    NumId: 10
+  - Id: log_oak
+    Hardness: 1
+    NumId: 11
+  - Id: plank
+    Hardness: 1
+    NumId: 12
+  - Id: rock
+    Hardness: 1
+    NumId: 13
+  - Id: rock_cliff
+    Hardness: 1
+    NumId: 14
+  - Id: rock_deepslate
+    Hardness: 1
+    NumId: 15
+  - Id: rock_jungle
+    Hardness: 1
+    NumId: 16
+  - Id: rock_mossy
+    Hardness: 1
+    NumId: 17
+  - Id: rock_smooth
+    Hardness: 1
+    NumId: 18
+  - Id: rock_volcanic
+    Hardness: 1
+    NumId: 19
+  - Id: sand
+    Hardness: 1
+    NumId: 20
   - Id: stone
     Hardness: 1
-    NumId: 0
+    NumId: 21
+  - Id: stone
+    Hardness: 1
+    NumId: 22
+  - Id: stone_brick
+    Hardness: 1
+    NumId: 23

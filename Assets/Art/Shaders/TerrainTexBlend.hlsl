@@ -14,19 +14,19 @@ float mod(float v, float n)
 	//return v-n*floor(v/n);
 }
 	
-float4 TexTrip(UnityTexture2D tex, float3 p, float MtlTexId, float3 weights, float MtlTexCap) 
+float4 TexTriplanar(UnityTexture2D tex, float3 p, float TexId, float3 blendWeights, float TexCap) 
 {
-	float E = 0.02 / MtlTexCap;  // intoduce Epsilon to fix Mipmap Error (and Float-point Error) on Tex Boundary
-	float MtlTexSizeX = 1.0 / MtlTexCap;
-	float MtlTexPosX  = MtlTexId / MtlTexCap;	
-	float2 uvX = float2(mod(p.z * MtlTexSizeX, MtlTexSizeX-E*2) + MtlTexPosX+E, p.y);
-	float2 uvY = float2(mod(p.x * MtlTexSizeX, MtlTexSizeX-E*2) + MtlTexPosX+E, p.z);
-	float2 uvZ = float2(mod(p.x * MtlTexSizeX, MtlTexSizeX-E*2) + MtlTexPosX+E, p.y);
+	float E = 0.02 / TexCap;  // intoduce Epsilon to fix Mipmap Error (and Float-point Error) on Tex Boundary
+	float TexSizeX = 1.0 / TexCap;
+	float TexPosX  = TexId / TexCap;	
+	float2 uvX = float2(mod(p.z * TexSizeX, TexSizeX-E*2) + TexPosX+E, p.y);
+	float2 uvY = float2(mod(p.x * TexSizeX, TexSizeX-E*2) + TexPosX+E, p.z);
+	float2 uvZ = float2(mod(p.x * TexSizeX, TexSizeX-E*2) + TexPosX+E, p.y);
 
 	//SAMPLE_TEXTURE2D(tex, TexSampleState, uvX) * weights.x +
-    return tex2D(tex, uvX) * weights.x +
-           tex2D(tex, uvY) * weights.y +
-           tex2D(tex, uvZ) * weights.z;
+    return tex2D(tex, uvX) * blendWeights.x +
+           tex2D(tex, uvY) * blendWeights.y +
+           tex2D(tex, uvZ) * blendWeights.z;
 }
 
 void TexBlend_float(
@@ -63,9 +63,9 @@ void TexBlend_float(
 	float3 PosTrip = WorldPos / TexScale;
 
 	float4 triDRAM[3] = { 
-		TexTrip(TexDRAM, PosTrip, TexIds[0], BlendTrip, TexCount),
-		TexTrip(TexDRAM, PosTrip, TexIds[1], BlendTrip, TexCount),
-		TexTrip(TexDRAM, PosTrip, TexIds[2], BlendTrip, TexCount),
+		TexTriplanar(TexDRAM, PosTrip, TexIds[0], BlendTrip, TexCount),
+		TexTriplanar(TexDRAM, PosTrip, TexIds[1], BlendTrip, TexCount),
+		TexTriplanar(TexDRAM, PosTrip, TexIds[2], BlendTrip, TexCount),
 	};
 	
 	float3 _bhm = pow(BaryCoord, TexHeightmapBlendPow);  // BlendHeightmap. Pow: littler=mix, greater=distinct, opt 0.3 - 0.6, 0.48 = nature
@@ -75,10 +75,10 @@ void TexBlend_float(
 	float4 DRAM = triDRAM[idxMaxHigh];
 
 	outAlbedo = 
-	TexTrip(TexDiff, PosTrip, TexIds[idxMaxHigh], BlendTrip, TexCount);
+	TexTriplanar(TexDiff, PosTrip, TexIds[idxMaxHigh], BlendTrip, TexCount);
 					 
 	outNormal =
-	TexTrip(TexNorm, PosTrip, TexIds[idxMaxHigh], BlendTrip, TexCount);
+	TexTriplanar(TexNorm, PosTrip, TexIds[idxMaxHigh], BlendTrip, TexCount);
 
 	
 	outEmission = 0;

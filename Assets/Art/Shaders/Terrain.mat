@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Terrain
-  m_Shader: {fileID: -6465566751694194690, guid: 439b4c60fafafa146be347e6bf402187, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: bf3e3f6b861e35e4d87e170428f43867, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -68,6 +68,18 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - _TexDRAM:
+        m_Texture: {fileID: 2800000, guid: b94ee42670aed6844a7a9a35035567e2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TexDiff:
+        m_Texture: {fileID: 2800000, guid: fcc2022f21514e14fb20985007df53b7, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _TexNorm:
+        m_Texture: {fileID: 2800000, guid: f9624076ccdcac547b21a360e0213e4c, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -112,6 +124,11 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
+    - _TexCount: 23
+    - _TexHeightmapBlendPow: 0.48
+    - _TexIdOffset: 1
+    - _TexScale: 2
+    - _TexTriplanarBlendPow: 4.5
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
