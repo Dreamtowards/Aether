@@ -17,7 +17,7 @@ namespace Aether
         // private NativeArray<Vox> m_Voxels = new(Chunk.LEN_VOXLES, Allocator.Persistent);
         public Vox[] m_Voxels = new Vox[LEN_VOXLES];
 
-        public int3 chunkpos;
+        public int3 chunkpos { get; private set; }
 
         public bool IsPopulated = false;
 
@@ -33,6 +33,31 @@ namespace Aether
             Assert.IsTrue(transform.position == (Vector3)(float3)chunkpos);
 
             m_InChunkSystem = chunksystem;
+        }
+
+        public void InitNeighborChunks()
+        {
+            for (int neibIdx = 0; neibIdx < NEIGHBORS.Length; neibIdx++)
+            {
+                var neibDir = NEIGHBORS[neibIdx];
+                var neibChunkpos = chunkpos + neibDir * Chunk.LEN;
+
+                if (!m_InChunkSystem.GetChunk(neibChunkpos, out var neibChunk))
+                    continue;
+                
+                neibChunk.m_NeighborChunks[Chunk.NeighborIdxOpposite(neibIdx)] = new WeakReference<Chunk>(this); 
+                m_NeighborChunks[neibIdx] = new WeakReference<Chunk>(neibChunk);
+
+                // Populate.
+                if (neibChunk.IsNeighborsAllLoaded() && !neibChunk.IsPopulated)
+                {
+                    neibChunk.IsPopulated = true;
+                    
+                    m_InChunkSystem.m_ChunkGenerator.PopulateChunk(neibChunk);
+                    
+                    m_InChunkSystem.MarkChunkMeshDirty(neibChunk.chunkpos);
+                }
+            }
         }
 
         public ChunkSystem GetChunkSystem() { return m_InChunkSystem; }
@@ -186,6 +211,22 @@ namespace Aether
         {
             idx = NeighborIdx(relpos);
             return idx != -1;
+        }
+
+        // assert!(Self::NEIGHBOR_DIR[idx] + Self::NEIGHBOR_DIR[opposite_idx] == IVec3::ZERO, "idx = {}, opposite = {}", idx, opposite_idx);
+        public static int NeighborIdxOpposite(int idx)
+        {
+            // idx MOD 2 + (idx+1) MOD 2
+            return idx / 2 * 2 + (idx + 1) % 2;
+        }
+
+        public bool IsNeighborsAllLoaded()
+        {
+            foreach (var neib in m_NeighborChunks)  {
+                if (neib == null)
+                    return false;
+            }
+            return true;
         }
     }
 }

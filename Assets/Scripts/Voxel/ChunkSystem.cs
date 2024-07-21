@@ -21,8 +21,6 @@ namespace Aether
 
         public World m_InWorld;
 
-        public ChunkGenerator m_ChunkGenerator;
-
         public HashSet<int3> m_ChunksMeshDirty = new();
 
         public EntityPlayer m_LoaderPlayer;
@@ -49,14 +47,18 @@ namespace Aether
             do
             {
                 Update();
-            } while (m_ChunksLoading.Count > 0 && m_ChunksMeshing.Count > 0);
+            } while (m_ChunksLoading.Count > 0 || m_ChunksMeshing.Count > 0);
         }
 #endif
 
         #region Chunks Loading/Unload
 
+        [BoxGroup("ChunkGen")]
+        public ChunkGenerator m_ChunkGenerator;
+        [BoxGroup("ChunkGen")]
         [ShowInInspector]
         private Dictionary<int3, Task<Chunk>> m_ChunksLoading = new();
+        [BoxGroup("ChunkGen")]
         public int m_ChunksLoadingMaxConcurrency = 10;
 
         private void UpdateChunksLoadAndUnload()
@@ -69,9 +71,10 @@ namespace Aether
                 if (!task.IsCompleted)
                     continue;
                 var chunk = task.Result;
-
-                m_Chunks.Add(chunkpos, chunk);
+                
+                chunk.InitNeighborChunks();
                 MarkChunkMeshDirty(chunkpos);
+                m_Chunks.Add(chunkpos, chunk);
                 chunksLoaded.Add(chunkpos);
             }
             m_ChunksLoading.RemoveAll(chunksLoaded);
@@ -125,16 +128,20 @@ namespace Aether
 
         #region Chunks Meshing
 
+        [BoxGroup("MeshGen")]
         [ShowInInspector]
         public Dictionary<int3, Task<VertexBuffer>> m_ChunksMeshing = new();
+        [BoxGroup("MeshGen")]
         public int m_ChunksMeshingMaxConcurrency = 10;
 
         private static ObjectPool<VertexBuffer> s_VertexBufferPool = new(() => new VertexBuffer());
 
+        [BoxGroup("MeshGen")]
         [ShowInInspector]
-        public static int VertexBufferPoolSize => s_VertexBufferPool.CountAll;
+        public static int MeshgenVbufPoolNumAll => s_VertexBufferPool.CountAll;
+        [BoxGroup("MeshGen")]
         [ShowInInspector]
-        public static int VertexBufferPoolActived => s_VertexBufferPool.CountActive;
+        public static int MeshgenVbufPoolNumActive => s_VertexBufferPool.CountActive;
         
         private void UpdateChunksDirtyMesh()
         {

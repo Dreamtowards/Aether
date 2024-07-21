@@ -13,6 +13,7 @@ public static class ChunkMeshGenerator
     public static void GenerateMesh(VertexBuffer vbuf, Chunk chunk)
     {
         using var _p = s_Pm.Auto();
+        using var _t = new BenchmarkTimer("Managed ChunkMeshGen at "+chunk.chunkpos+" in {0}");
         
         chunk.ForVoxels((int3 localpos, ref Vox vox) =>
         {
