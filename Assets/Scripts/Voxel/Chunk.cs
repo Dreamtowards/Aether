@@ -35,16 +35,21 @@ namespace Aether
             m_InChunkSystem = chunksystem;
         }
 
-        public void InitNeighborChunks()
+        public void ForNeighborChunks(Action<Chunk, int> visitor)
         {
             for (int neibIdx = 0; neibIdx < NEIGHBORS.Length; neibIdx++)
             {
-                var neibDir = NEIGHBORS[neibIdx];
-                var neibChunkpos = chunkpos + neibDir * Chunk.LEN;
-
-                if (!m_InChunkSystem.GetChunk(neibChunkpos, out var neibChunk))
-                    continue;
-                
+                var neibChunkpos = chunkpos + NEIGHBORS[neibIdx] * Chunk.LEN;
+                if (m_InChunkSystem.GetChunk(neibChunkpos, out var neibChunk))
+                {
+                    visitor(neibChunk, neibIdx);
+                }
+            }
+        }
+        public void InitNeighborChunks()
+        {
+            ForNeighborChunks((neibChunk, neibIdx) =>
+            {
                 neibChunk.m_NeighborChunks[Chunk.NeighborIdxOpposite(neibIdx)] = new WeakReference<Chunk>(this); 
                 m_NeighborChunks[neibIdx] = new WeakReference<Chunk>(neibChunk);
 
@@ -57,7 +62,14 @@ namespace Aether
                     
                     m_InChunkSystem.MarkChunkMeshDirty(neibChunk.chunkpos);
                 }
-            }
+            });
+        }
+        public void UnlinkNeighborChunks()
+        {
+            ForNeighborChunks((neibChunk, neibIdx) =>
+            {
+                neibChunk.m_NeighborChunks[Chunk.NeighborIdxOpposite(neibIdx)] = null;
+            });
         }
 
         public ChunkSystem GetChunkSystem() { return m_InChunkSystem; }

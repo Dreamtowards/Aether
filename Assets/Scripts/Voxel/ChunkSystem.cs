@@ -21,8 +21,6 @@ namespace Aether
 
         public World m_InWorld;
 
-        public HashSet<int3> m_ChunksMeshDirty = new();
-
         public EntityPlayer m_LoaderPlayer;
         
         // commonly only need when Visitor/Player moved across chunk or Appear/Disappear.
@@ -55,9 +53,11 @@ namespace Aether
 
         [BoxGroup("ChunkGen")]
         public ChunkGenerator m_ChunkGenerator;
+        
         [BoxGroup("ChunkGen")]
         [ShowInInspector]
         private Dictionary<int3, Task<Chunk>> m_ChunksLoading = new();
+        
         [BoxGroup("ChunkGen")]
         public int m_ChunksLoadingMaxConcurrency = 10;
 
@@ -130,7 +130,12 @@ namespace Aether
 
         [BoxGroup("MeshGen")]
         [ShowInInspector]
+        public HashSet<int3> m_ChunksMeshDirty = new();
+        
+        [BoxGroup("MeshGen")]
+        [ShowInInspector]
         public Dictionary<int3, Task<VertexBuffer>> m_ChunksMeshing = new();
+        
         [BoxGroup("MeshGen")]
         public int m_ChunksMeshingMaxConcurrency = 10;
 
@@ -228,7 +233,8 @@ namespace Aether
             Assert.IsTrue(Chunk.IsChunkPos(chunkpos));
             if (!m_Chunks.Remove(chunkpos, out Chunk chunk))
                 return false;
-
+            chunk.UnlinkNeighborChunks();
+            
             DestroyImmediate(chunk.gameObject);
             return true;
         }
