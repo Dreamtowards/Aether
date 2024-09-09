@@ -65,7 +65,7 @@ public static class ChunkMeshGenerator
             int3 faceDir = Maths.IVec3(CUBE_NORM, faceIdx * 18);   // 18: 3 scalar * 3 vertex * 2 triangle
 
             chunk.GetVoxel(localpos + faceDir, out Vox neibVox);
-            if (neibVox.IsObaque())
+            if (neibVox.IsOpaque())
                 continue;
 
             for (int vertIdx = 0; vertIdx < 6; ++vertIdx)

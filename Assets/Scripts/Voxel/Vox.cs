@@ -21,7 +21,7 @@ namespace Aether
         {
             return texId == 0;
         }
-        public bool IsObaque()
+        public bool IsOpaque()
         {
             return !IsNil();
         }
