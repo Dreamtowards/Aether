@@ -1,5 +1,4 @@
 
-using Sirenix.OdinInspector;
 using Unity.Mathematics;
 
 namespace Aether

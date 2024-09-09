@@ -1,6 +1,5 @@
 ﻿using Sirenix.OdinInspector;
 using Unity.Mathematics;
-using UnityEditor;
 using UnityEngine;
 
 namespace Aether.Debug

@@ -131,6 +131,7 @@ GameObject:
   - component: {fileID: 176808301}
   - component: {fileID: 176808300}
   - component: {fileID: 176808299}
+  - component: {fileID: 176808303}
   m_Layer: 0
   m_Name: Camera
   m_TagString: MainCamera
@@ -385,6 +386,23 @@ Camera:
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
   m_StereoSeparation: 0.022
+--- !u!114 &176808303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 176808297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f9fe505be54ec144b491c22bade9bcc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Name: Prim
+  m_ChunksLoadDistance:
+    x: 2
+    y: 1
+    z: 2
 --- !u!1 &213788182
 GameObject:
   m_ObjectHideFlags: 3
@@ -553,7 +571,7 @@ PrefabInstance:
     - target: {fileID: 4309765212984738900, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
       propertyPath: m_LoaderPlayer
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 176808303}
     - target: {fileID: 4563782917104760227, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

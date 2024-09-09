@@ -68,17 +68,17 @@ void TexBlend_float(
 		TexTriplanar(TexDRAM, PosTrip, TexIds[2], BlendTrip, TexCount),
 	};
 	
-	float3 _bhm = pow(BaryCoord, TexHeightmapBlendPow);  // BlendHeightmap. Pow: littler=mix, greater=distinct, opt 0.3 - 0.6, 0.48 = nature
+	float3 _bhm = pow(abs(BaryCoord), TexHeightmapBlendPow);  // BlendHeightmap. Pow: littler=mix, greater=distinct, opt 0.3 - 0.6, 0.48 = nature
 	int idxMaxHigh = MaxIdx(float3(triDRAM[0].x * _bhm.x, triDRAM[1].x * _bhm.y, triDRAM[2].x * _bhm.z));
 	// int idxVertTex = idxMaxHigh;  // triangle vertex idx of Current Frag Mtl. usually = i_MaxBary, or i_MaxHigh
 
 	float4 DRAM = triDRAM[idxMaxHigh];
 
 	outAlbedo = 
-	TexTriplanar(TexDiff, PosTrip, TexIds[idxMaxHigh], BlendTrip, TexCount);
+	TexTriplanar(TexDiff, PosTrip, TexIds[idxMaxHigh], BlendTrip, TexCount).xyz;
 					 
 	outNormal =
-	TexTriplanar(TexNorm, PosTrip, TexIds[idxMaxHigh], BlendTrip, TexCount);
+	TexTriplanar(TexNorm, PosTrip, TexIds[idxMaxHigh], BlendTrip, TexCount).xyz;
 
 	
 	outEmission = 0;

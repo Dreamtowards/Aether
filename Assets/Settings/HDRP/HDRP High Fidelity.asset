@@ -168,6 +168,9 @@ MonoBehaviour:
       advancedUpscalersByPriority: 
       DLSSPerfQualitySetting: 0
       DLSSInjectionPoint: 0
+      TAAUInjectionPoint: 0
+      STPInjectionPoint: 0
+      defaultInjectionPoint: 2
       DLSSUseOptimalSettings: 0
       DLSSSharpness: 0
       FSR2EnableSharpness: 0

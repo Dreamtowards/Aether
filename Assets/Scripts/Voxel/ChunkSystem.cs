@@ -1,12 +1,9 @@
-using Sirenix.OdinInspector;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Sirenix.Utilities;
-using Unity.Collections;
+using Sirenix.OdinInspector;
 using Unity.Mathematics;
 using UnityEngine;
-using Unity.Jobs;
 using UnityEngine.Assertions;
 using UnityEngine.Pool;
 

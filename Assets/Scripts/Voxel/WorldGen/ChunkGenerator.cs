@@ -1,10 +1,9 @@
 
-using Sirenix.OdinInspector;
 using System;
+using Sirenix.OdinInspector;
 using Unity.Mathematics;
 using Unity.Profiling;
 using UnityEngine;
-using UnityEngine.Serialization;
 
 namespace Aether
 {

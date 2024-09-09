@@ -3,7 +3,6 @@ using System;
 using Sirenix.OdinInspector;
 using Unity.Mathematics;
 using UnityEngine;
-using UnityEngine.Internal;
 
 // BUG: why Inspector doesn't save these Properties?
 
