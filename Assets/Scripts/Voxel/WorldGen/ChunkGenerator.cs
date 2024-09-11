@@ -21,7 +21,7 @@ namespace Aether
         {
             using var _t = new BenchmarkTimer("Managed GenerateChunk at "+chunk.chunkpos+" in {0}");
             using var _p = _ProfilerMarker.Auto();
-            m_Noise.Seed = (int)chunk.GetWorld().Seed();
+            m_Noise.Seed = (int)chunk.GetWorld().Seed;
             
             chunk.ForVoxels((int3 localpos, ref Vox vox) =>
             {
