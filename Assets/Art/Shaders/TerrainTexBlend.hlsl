@@ -77,7 +77,7 @@ void TexBlend_float(
 	outAlbedo = 
 	TexTriplanar(TexDiff, PosTrip, TexIds[idxMaxHigh], BlendTrip, TexCount).xyz;
 					 
-	outNormal =
+	outNormal = //float3(0,0,1);
 	TexTriplanar(TexNorm, PosTrip, TexIds[idxMaxHigh], BlendTrip, TexCount).xyz;
 
 	

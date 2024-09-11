@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using Sirenix.OdinInspector;
 using Sirenix.Utilities;
-using Sirenix.Utilities.Editor;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -73,12 +72,12 @@ namespace Aether
         }
         
         [Button]
-        public void GenerateAtlases()
+        public void GenerateAtlases(int resolution = 512)
         {
             
-            GenerateAtlas("diff", "atlas_diff.png");
-            GenerateAtlas("norm", "atlas_norm.png");
-            GenerateAtlas("dram", "atlas_dram.png", isDRAM: true);
+            GenerateAtlas("diff", "atlas_diff.png", resolution);
+            GenerateAtlas("norm", "atlas_norm.png", resolution);
+            GenerateAtlas("dram", "atlas_dram.png", resolution, isDRAM: true);
         }
 
         public void GenerateAtlas(string texType, string filepath, int resolution = 512, bool isDRAM = false)

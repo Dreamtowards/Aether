@@ -168,9 +168,9 @@ Material:
     - _Surface: 0
     - _SurfaceType: 0
     - _TexCount: 23
-    - _TexHeightmapBlendPow: 0.48
-    - _TexIdOffset: 11
-    - _TexScale: 2
+    - _TexHeightmapBlendPow: 0.47
+    - _TexIdOffset: 0
+    - _TexScale: 1
     - _TexTriplanarBlendPow: 4.5
     - _TransmissionEnable: 1
     - _TransparentBackfaceEnable: 0
