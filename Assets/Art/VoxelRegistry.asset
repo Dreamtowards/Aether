@@ -76,9 +76,6 @@ MonoBehaviour:
   - Id: stone
     Hardness: 1
     NumId: 21
-  - Id: stone
-    Hardness: 1
-    NumId: 22
   - Id: stone_brick
     Hardness: 1
     NumId: 23

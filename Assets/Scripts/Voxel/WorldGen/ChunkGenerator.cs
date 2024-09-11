@@ -33,7 +33,7 @@ namespace Aether
                 float val = f_terr2d - p.y / 18f + f_3d * 4.5f;
 
                 if (val > 0)
-                    vox.texId = 1;
+                    vox.texId = VoxTex.grass.NumId;
 
                 vox.density = val;
                 vox.shapeId = 1;
