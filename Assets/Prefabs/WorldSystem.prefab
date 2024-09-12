@@ -188,6 +188,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8441155222535933844}
   - component: {fileID: 7720152851723873420}
+  - component: {fileID: 2685878538568276833}
   - component: {fileID: 5751041413205079923}
   m_Layer: 0
   m_Name: ImGui
@@ -228,7 +229,7 @@ MonoBehaviour:
   priority: 0
   customPasses:
   - rid: 5211833821804101816
-  injectionPoint: 2
+  injectionPoint: 3
   m_TargetCamera: {fileID: 0}
   useTargetCamera: 0
   references:
@@ -244,6 +245,49 @@ MonoBehaviour:
         clearFlags: 0
         passFoldout: 0
         m_Version: 0
+--- !u!114 &2685878538568276833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2476276207076388120}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3823c58ff231244a92c4f9877f7911e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _camera: {fileID: 0}
+  _renderFeature: {fileID: 0}
+  _rendererType: 0
+  _platformType: 1
+  _iniSettings: {fileID: 0}
+  _initialConfiguration:
+    ImGuiConfig: 1
+    DoubleClickTime: 0.3
+    DoubleClickMaxDist: 6
+    DragThreshold: 6
+    KeyRepeatDelay: 0.25
+    KeyRepeatRate: 0.05
+    FontGlobalScale: 1
+    FontAllowUserScaling: 0
+    DisplayFramebufferScale: {x: 1, y: 1}
+    MouseDrawCursor: 0
+    TextCursorBlink: 0
+    ResizeFromEdges: 1
+    MoveFromTitleOnly: 1
+    ConfigMemoryCompactTimer: 1
+    ConfigDockingNoSplit: 0
+    ConfigDockingAlwaysTabBar: 0
+    ConfigDockingTransparentPayload: 0
+  _fontCustomInitializer:
+    m_PersistentCalls:
+      m_Calls: []
+  _fontAtlasConfiguration: {fileID: 0}
+  _shaders: {fileID: 11400000, guid: 68f2e550e81076948ba9757c73f74336, type: 2}
+  _style: {fileID: 11400000, guid: 90718c4e7d6fa04438adef1ad7a432cc, type: 2}
+  _cursorShapes: {fileID: 0}
+  _doGlobalEvents: 1
 --- !u!114 &5751041413205079923
 MonoBehaviour:
   m_ObjectHideFlags: 0

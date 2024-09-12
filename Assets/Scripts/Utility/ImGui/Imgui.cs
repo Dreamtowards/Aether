@@ -30,8 +30,11 @@ namespace Aether
 
         private void OnInitialize(UImGui.UImGui obj)
         {
-            Debug.LogWarning("ImGui Initialize");
-            
+            // Debug.LogWarning("ImGui Initialize");
+            if (1+1 > 0)
+            {
+                
+            }
             // runs after UImGui.OnEnable();
         }
 

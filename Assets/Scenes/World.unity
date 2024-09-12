@@ -568,6 +568,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2685878538568276833, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: _camera
+      value: 
+      objectReference: {fileID: 176808302}
+    - target: {fileID: 2685878538568276833, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: _rendererType
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4309765212984738900, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
       propertyPath: m_LoaderPlayer
       value: 
@@ -618,15 +626,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7720152851723873420, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
       propertyPath: injectionPoint
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 2476276207076388120, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
-      insertIndex: 2
-      addedObject: {fileID: 1923022823}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
 --- !u!4 &1441380301 stripped
 Transform:
@@ -741,54 +746,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1923022819 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2476276207076388120, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
-  m_PrefabInstance: {fileID: 1169391342}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1923022823
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1923022819}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3823c58ff231244a92c4f9877f7911e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _camera: {fileID: 176808302}
-  _renderFeature: {fileID: 0}
-  _rendererType: 0
-  _platformType: 0
-  _iniSettings: {fileID: 0}
-  _initialConfiguration:
-    ImGuiConfig: 65
-    DoubleClickTime: 0.3
-    DoubleClickMaxDist: 6
-    DragThreshold: 6
-    KeyRepeatDelay: 0.25
-    KeyRepeatRate: 0.05
-    FontGlobalScale: 1
-    FontAllowUserScaling: 0
-    DisplayFramebufferScale: {x: 1, y: 1}
-    MouseDrawCursor: 0
-    TextCursorBlink: 0
-    ResizeFromEdges: 1
-    MoveFromTitleOnly: 1
-    ConfigMemoryCompactTimer: 1
-    ConfigDockingNoSplit: 0
-    ConfigDockingAlwaysTabBar: 0
-    ConfigDockingTransparentPayload: 0
-  _fontCustomInitializer:
-    m_PersistentCalls:
-      m_Calls: []
-  _fontAtlasConfiguration: {fileID: 0}
-  _shaders: {fileID: 11400000, guid: 68f2e550e81076948ba9757c73f74336, type: 2}
-  _style: {fileID: 11400000, guid: 90718c4e7d6fa04438adef1ad7a432cc, type: 2}
-  _cursorShapes: {fileID: 11400000, guid: 71deade41763c6e4eaeb5df973b321f1, type: 2}
-  _doGlobalEvents: 1
 --- !u!1 &1951789788
 GameObject:
   m_ObjectHideFlags: 0
