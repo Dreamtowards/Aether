@@ -8,10 +8,10 @@ namespace Aether
     {
         
         [SerializeField]
-        private float _sliderFloatValue = 1;
+        public float _sliderFloatValue = 1;
 
         [SerializeField]
-        private string _inputText;
+        public string _inputText;
 
         private void OnLayout(UImGui.UImGui obj)
         {
@@ -30,11 +30,6 @@ namespace Aether
 
         private void OnInitialize(UImGui.UImGui obj)
         {
-            // Debug.LogWarning("ImGui Initialize");
-            if (1+1 > 0)
-            {
-                
-            }
             // runs after UImGui.OnEnable();
         }
 
@@ -43,7 +38,7 @@ namespace Aether
             // runs after UImGui.OnDisable();
         }
 
-        private void Awake()
+        private void OnEnable()
         {
             UImGuiUtility.Layout += OnLayout;
             UImGuiUtility.OnInitialize += OnInitialize;
