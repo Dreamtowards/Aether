@@ -1,7 +1,7 @@
 ﻿
 using UnityEngine;
 
-namespace Aether.Debug
+namespace Aether
 {
     public class DebugTextInfo : MonoBehaviour
     {

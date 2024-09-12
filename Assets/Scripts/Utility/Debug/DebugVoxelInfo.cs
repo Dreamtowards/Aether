@@ -2,7 +2,7 @@
 using Unity.Mathematics;
 using UnityEngine;
 
-namespace Aether.Debug
+namespace Aether
 {
     public class DebugVoxelInfo : MonoBehaviour
     {
