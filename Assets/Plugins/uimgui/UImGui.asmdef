@@ -22,11 +22,6 @@
             "define": "HAS_HDRP"
         },
         {
-            "name": "com.unity.render-pipelines.universal",
-            "expression": "7.0.0",
-            "define": "HAS_URP"
-        },
-        {
             "name": "com.unity.inputsystem",
             "expression": "1.0.0",
             "define": "HAS_INPUTSYSTEM"

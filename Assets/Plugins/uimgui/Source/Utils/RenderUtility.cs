@@ -3,8 +3,11 @@ using UImGui.Renderer;
 using UImGui.Texture;
 using UnityEngine.Assertions;
 using UnityEngine.Rendering;
-using UnityEngine.Rendering.HighDefinition;
+#if HAS_URP
 using UnityEngine.Rendering.Universal;
+#elif HAS_HDRP
+using UnityEngine.Rendering.HighDefinition;
+#endif
 
 namespace UImGui
 {
