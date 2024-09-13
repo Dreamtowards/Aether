@@ -15,7 +15,7 @@ MonoBehaviour:
   Alpha: 1
   WindowPadding: {x: 8, y: 6}
   WindowRounding: 2
-  WindowBorderSize: 1
+  WindowBorderSize: 0
   WindowMinSize: {x: 32, y: 32}
   WindowTitleAlign: {x: 0, y: 0.5}
   WindowMenuButtonPosition: 1
@@ -26,16 +26,16 @@ MonoBehaviour:
   FramePadding: {x: 8, y: 2}
   FrameRounding: 2
   FrameBorderSize: 0
-  ItemSpacing: {x: 8, y: 8}
-  ItemInnerSpacing: {x: 4, y: 4}
-  CellPadding: {x: 0, y: 0}
+  ItemSpacing: {x: 8, y: 6}
+  ItemInnerSpacing: {x: 4, y: 2}
+  CellPadding: {x: 2, y: 2}
   TouchExtraPadding: {x: 0, y: 0}
   IndentSpacing: 21
   ColumnsMinSpacing: 6
-  ScrollbarSize: 14
-  ScrollbarRounding: 9
+  ScrollbarSize: 10
+  ScrollbarRounding: 2
   GrabMinSize: 8
-  GrabRounding: 0
+  GrabRounding: 2
   LogSliderDeadzone: 0
   TabRounding: 2
   TabBorderSize: 0
@@ -43,7 +43,7 @@ MonoBehaviour:
   ButtonTextAlign: {x: 0.5, y: 0.5}
   SelectableTextAlign: {x: 0, y: 0}
   DisplayWindowPadding: {x: 19, y: 19}
-  DisplaySafeAreaPadding: {x: 3, y: 3}
+  DisplaySafeAreaPadding: {x: 0, y: 0}
   MouseCursorScale: 1
   AntiAliasedLines: 1
   AntiAliasedLinesUseTex: 1
@@ -51,20 +51,20 @@ MonoBehaviour:
   CurveTessellationTol: 2
   CircleTessellationMaxError: 2
   Colors:
-  - {r: 1, g: 1, b: 1, a: 0.31764707}
+  - {r: 1, g: 1, b: 1, a: 0.62352943}
   - {r: 0.5019608, g: 0.5019608, b: 0.5019608, a: 1}
-  - {r: 0, g: 0, b: 0, a: 0.6039216}
+  - {r: 0, g: 0, b: 0, a: 0.6509804}
   - {r: 0, g: 0, b: 0, a: 0.5254902}
-  - {r: 0.078431375, g: 0.078431375, b: 0.078431375, a: 1}
+  - {r: 0.078431375, g: 0.078431375, b: 0.078431375, a: 0.90588236}
   - {r: 0, g: 0, b: 0, a: 0.54509807}
   - {r: 0, g: 0, b: 0, a: 0.59607846}
   - {r: 1, g: 1, b: 1, a: 0.08627451}
   - {r: 1, g: 1, b: 1, a: 0.20392157}
-  - {r: 0.25882354, g: 0.5882353, b: 0.9803922, a: 0.65882355}
+  - {r: 0.1541919, g: 0.364428, b: 0.990566, a: 0.84313726}
   - {r: 0.039215688, g: 0.039215688, b: 0.039215688, a: 0.72156864}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 0, b: 0, a: 0.53333336}
-  - {r: 0.14117648, g: 0.14117648, b: 0.14117648, a: 1}
+  - {r: 0.11320752, g: 0.11320752, b: 0.11320752, a: 0.79607844}
   - {r: 0.019607844, g: 0.019607844, b: 0.019607844, a: 0.5176471}
   - {r: 0.30980393, g: 0.30980393, b: 0.30980393, a: 1}
   - {r: 0.41176474, g: 0.41176474, b: 0.41176474, a: 1}
@@ -74,10 +74,10 @@ MonoBehaviour:
   - {r: 1, g: 1, b: 1, a: 1}
   - {r: 1, g: 1, b: 1, a: 0.08627451}
   - {r: 0.4245283, g: 0.4245283, b: 0.4245283, a: 1}
-  - {r: 0.058823533, g: 0.5294118, b: 0.9803922, a: 1}
+  - {r: 0.10980393, g: 0.3803922, b: 1, a: 1}
   - {r: 0.109803915, g: 0.38078362, b: 1, a: 1}
-  - {r: 0.25882354, g: 0.5882353, b: 0.9803922, a: 0.87058824}
-  - {r: 0.25882354, g: 0.5882353, b: 0.9803922, a: 0.7294118}
+  - {r: 0.039649326, g: 0.31052294, b: 0.9339623, a: 1}
+  - {r: 0, g: 0.26548287, b: 0.8679245, a: 1}
   - {r: 0.43137258, g: 0.43137258, b: 0.5019608, a: 0.4117647}
   - {r: 0.5943396, g: 0.5943396, b: 0.5943396, a: 0.59607846}
   - {r: 0.10196079, g: 0.40000004, b: 0.7490196, a: 1}
@@ -102,7 +102,7 @@ MonoBehaviour:
   - {r: 0.8000001, g: 0.8000001, b: 0.8000001, a: 1}
   - {r: 0, g: 0, b: 0, a: 1}
   - {r: 0, g: 1, b: 0, a: 1}
-  - {r: 1, g: 0, b: 0.9449339, a: 1}
-  - {r: 1, g: 0, b: 0.69310665, a: 1}
+  - {r: 0.039215688, g: 0.30980393, b: 0.9333334, a: 1}
+  - {r: 0.1462264, g: 0.40892574, b: 1, a: 1}
   - {r: 0.11671257, g: 0, b: 1, a: 1}
   - {r: 0, g: 0, b: 1, a: 1}
