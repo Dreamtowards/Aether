@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5d229fe961e90a478d5b37aad1d4bdf, type: 3}
+  m_Name: ImGuiFont
+  m_EditorClassIdentifier: 
+  RasterizerFlags: 248
+  Fonts:
+  - _fontAsset: {fileID: 102900000, guid: 67a4d457a3376824ab28bd120b1e2bf2, type: 3}
+    Path: Fonts/menlo.ttf
+    Config:
+      FontDataOwnedByAtlas: 1
+      FontNo: 0
+      SizeInPixels: 16
+      OversampleH: 2
+      OversampleV: 2
+      PixelSnapH: 1
+      GlyphExtraSpacing: {x: 14, y: 14}
+      GlyphOffset: {x: 0, y: 0}
+      GlyphRanges: 3
+      GlyphMinAdvanceX: 0
+      GlyphMaxAdvanceX: 999999
+      MergeMode: 0
+      FontBuilderFlags: 1
+      RasterizerMultiply: 1
+      EllipsisChar: 65535
+      CustomGlyphRanges: []
