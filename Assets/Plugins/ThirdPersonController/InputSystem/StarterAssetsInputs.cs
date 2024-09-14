@@ -1,3 +1,4 @@
+using Sirenix.OdinInspector;
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
@@ -7,6 +8,16 @@ namespace StarterAssets
 {
 	public class StarterAssetsInputs : MonoBehaviour
 	{
+		// public static bool s_EnabledInputs = false;
+		[ShowInInspector] public static bool enabledGameInputs;
+		// { 
+		// 	get => s_EnabledInputs;
+		// 	set {
+		// 		s_EnabledInputs = value;
+		// 		LockCursor(s_EnabledInputs);
+		// 	}
+		// }
+		
 		[Header("Character Input Values")]
 		public Vector2 move;
 		public Vector2 look;
@@ -68,10 +79,11 @@ namespace StarterAssets
 
 		private void OnApplicationFocus(bool hasFocus)
 		{
-			SetCursorState(cursorLocked);
+			if (enabledGameInputs)
+				LockCursor(cursorLocked && hasFocus);
 		}
 
-		private void SetCursorState(bool newState)
+		public static void LockCursor(bool newState)
 		{
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
 		}

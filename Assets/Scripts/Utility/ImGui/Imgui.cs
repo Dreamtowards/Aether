@@ -1,4 +1,5 @@
 ﻿using ImGuiNET;
+using StarterAssets;
 using UImGui;
 using UnityEngine;
 
@@ -125,6 +126,7 @@ namespace Aether
                     ImGui.SeparatorText("Debug");
                     ImGui.MenuItem("Debug Text Info", null, ref m_ShowDebugTextInfo);
                     ImGui.MenuItem("ImGui Demo Window", null, ref m_ShowDemoWindow);
+                    ImGui.MenuItem("Game Controls", null, ref StarterAssetsInputs.enabledGameInputs);
                     ImGui.EndMenu();
                 }
                 

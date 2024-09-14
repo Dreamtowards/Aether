@@ -156,14 +156,28 @@ namespace StarterAssets
         {
             _hasAnimator = TryGetComponent(out _animator);
 
-            JumpAndGravity();
+
+            if (StarterAssetsInputs.enabledGameInputs)
+            {
+                JumpAndGravity();
+            
+                Move();
+            }
+            
             GroundedCheck();
-            Move();
+            
+            // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
+            if (_verticalVelocity < _terminalVelocity) {
+                _verticalVelocity += Gravity * Time.deltaTime;
+            }
         }
 
         private void LateUpdate()
         {
-            CameraRotation();
+            StarterAssetsInputs.LockCursor(StarterAssetsInputs.enabledGameInputs);
+            
+            if (StarterAssetsInputs.enabledGameInputs)
+                CameraRotation();
         }
 
         private void AssignAnimationIDs()
@@ -341,11 +355,6 @@ namespace StarterAssets
                 _input.jump = false;
             }
 
-            // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
-            if (_verticalVelocity < _terminalVelocity)
-            {
-                _verticalVelocity += Gravity * Time.deltaTime;
-            }
         }
 
         private static float ClampAngle(float lfAngle, float lfMin, float lfMax)
