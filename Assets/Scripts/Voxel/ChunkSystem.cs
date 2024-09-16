@@ -70,7 +70,8 @@ namespace Aether
                 var chunk = task.Result;
                 
                 chunk.InitNeighborChunks();
-                MarkChunkMeshDirty(chunkpos);
+                // MarkChunkMeshDirty(chunkpos);
+                
                 m_Chunks.Add(chunkpos, chunk);
                 chunksLoaded.Add(chunkpos);
             }
