@@ -12,7 +12,14 @@ namespace Aether
 
         void Start()
         {
+            Refresh();
+        }
+
+        [Button]
+        void Refresh()
+        {
             Refresh(m_VoxReg);
+            Debug.Log("VoxTex Registry initialized. ");
         }
 
         public static VoxelRegistry.VoxelProto 
