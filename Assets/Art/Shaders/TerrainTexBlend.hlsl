@@ -80,6 +80,7 @@ void TexBlend_float(
 	outNormal = //float3(0,0,1);
 	TexTriplanar(TexNorm, PosTrip, TexIds[idxMaxHigh], BlendTrip, TexCount).xyz;
 
+	// outAlbedo = outNormal;//(outNormal + 1) / 2.0; outNormal = float3(0,0,1);
 	
 	outEmission = 0;
 	outSmoothness = 1.0 - DRAM.y;

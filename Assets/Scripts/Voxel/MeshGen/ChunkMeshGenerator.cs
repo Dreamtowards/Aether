@@ -1,6 +1,7 @@
 
 using Unity.Mathematics;
 using Unity.Profiling;
+using UnityEngine.Assertions;
 
 namespace Aether
 {
@@ -13,6 +14,9 @@ public static class ChunkMeshGenerator
         using var _p = s_Pm.Auto();
         using var _t = new BenchmarkTimer("Managed ChunkMeshGen at "+chunk.chunkpos+" in {0}");
         
+        SN_GenerateMesh(vbuf, chunk);
+        
+        return;
         chunk.ForVoxels((int3 localpos, ref Vox vox) =>
         {
             if (vox.IsNil())
@@ -65,7 +69,7 @@ public static class ChunkMeshGenerator
             int3 faceDir = Maths.IVec3(CUBE_NORM, faceIdx * 18);   // 18: 3 scalar * 3 vertex * 2 triangle
 
             chunk.GetVoxel(localpos + faceDir, out Vox neibVox);
-            if (neibVox.IsOpaque())
+            if (!neibVox.IsTexNil())
                 continue;
 
             for (int vertIdx = 0; vertIdx < 6; ++vertIdx)
@@ -133,116 +137,113 @@ public static class ChunkMeshGenerator
         {new(0,0,0), new(0,-1,0), new(0,-1,-1), new(0,-1,-1), new(0,0,-1), new(0,0,0)},
         {new(0,0,0), new(0,0,-1), new(-1,0,-1), new(-1,0,-1), new(-1,0,0), new(0,0,0)},
         {new(0,0,0), new(-1,0,0), new(-1,-1,0), new(-1,-1,0), new(0,-1,0), new(0,0,0)}
-    };/*
+    };
 
-    static void SN_GenerateMesh(Chunk chunk, VertexData vts)
+    static void SN_GenerateMesh(VertexBuffer vbuf, Chunk chunk)
     {
 
-        for (int rx = 0; rx < 16; ++rx)
+        for (int lx = 0; lx < 16; ++lx)
+        for (int ly = 0; ly < 16; ++ly)
+        for (int lz = 0; lz < 16; ++lz) 
         {
-            for (int ry = 0; ry < 16; ++ry)
+            int3 lp = new(lx, ly, lz);
+            var c0 = chunk.AtVoxel(lp);
+
+            // for 3 axes edges, if sign-changed, connect adjacent 4 cells' vertices
+            for (int axis_i = 0; axis_i < 3; ++axis_i) 
             {
-                for (int rz = 0; rz < 16; ++rz)
+                if (!chunk.GetVoxel(lp + AXES[axis_i], out var c1))
+                    continue;
+
+                // Skip the face constructing with a Nil Cell. since the FeaturePoint and Normal(SDF Grad) cannot be evaluated.
+                // ?but Outside should be Enclosed? or the Shadow Casting will be a problem. if a Ceil in TopNil
+                // if (c1.IsNil())
+                //     continue;
+
+                if (!SN_SignChanged(c0, c1))
+                    continue;
+                
+                for (int quadv_i = 0; quadv_i < 6; ++quadv_i)
                 {
-                    float3 rp = new(rx, ry, rz);
-                    Cell c0 = chunk.LocalCell(rx, ry, rz);
+                    int winded_vi = c0.IsDensitySolid() ? quadv_i : 5 - quadv_i;
+                    int3 quadp = lp + ADJACENT[axis_i, winded_vi];
+                    
+                    var c = chunk.GetVoxelOr(quadp);
 
-                    // for 3 axes edges, if sign-changed, connect adjacent 4 cells' vertices
-                    for (int axis_i = 0; axis_i < 3; ++axis_i)
+                    bool badQuad = c.IsNil();
+                    //if (badQuad)
+                    //{
+                    //    vts.RemoveVertex((int)Maths.Floor(vts.VertexCount(), 6), quadv_i);
+                    //    break;
+                    //}
+
+                    //if (c.FeaturePoint.x == Mathf.Infinity)
                     {
-                        Cell c1 = chunk.LocalCell(rp + AXES[axis_i], true);
+                        c.CachedFp = SN_FeaturePoint(quadp, chunk);
+                        c.CachedNorm = -SN_Grad(quadp, chunk);  // Need Neg. since its not SDF but DensityField.
 
-                        // Skip the face constructing with a Nil Cell. since the FeaturePoint and Normal(SDF Grad) cannot be evaluated.
-                        // ?but Outside should be Enclosed? or the Shadow Casting will be a problem. if a Ceil in TopNil
-                        if (c1.IsNil())
+                        if (!math.all(math.isfinite(c.CachedFp))) {
+                            c.CachedFp = new(0, -99, 0); ;
+                            badQuad = true;
+                        }
+                        // if (!math.all(math.isfinite(c.CachedNorm)) || math.lengthsq(c.CachedNorm) < 0.1f) {
+                        //     c.CachedNorm = new(0, 1, 0);
+                        // }
+                        //
+                        // chunk.SetVoxel(quadp, c);
+                    }
+                    // if (badQuad)
+                    // {
+                    //     vts.RemoveVertex((int)Maths.Floor(vts.VertexCount(), 6), quadv_i);
+                    //     break;
+                    // }
+
+                    float3 p = quadp + c.CachedFp;
+
+
+                    // Select Material of 8 Corners. (Max Density Value)
+                    int texId = 0;
+                    float min_dist = float.PositiveInfinity;
+                    foreach (var vp in SN_VERT) {
+                        if (!chunk.GetVoxel(quadp + vp, out var vc))
                             continue;
-
-                        if (SN_SignChanged(c0, c1))
+                        if (!vc.IsTexNil() && vc.IsDensitySolid() && vc.density < min_dist)
                         {
-                            for (int quadv_i = 0; quadv_i < 6; ++quadv_i)
-                            {
-                                int winded_vi = c0.IsSolid() ? quadv_i : 5 - quadv_i;
-                                float3 quadp = rp + ADJACENT[axis_i, winded_vi];
-
-                                ref Cell c = ref chunk.LocalCell(quadp, true);
-
-                                bool badQuad = c.IsNil();
-                                //if (badQuad)
-                                //{
-                                //    vts.RemoveVertex((int)Maths.Floor(vts.VertexCount(), 6), quadv_i);
-                                //    break;
-                                //}
-
-                                //if (c.FeaturePoint.x == Mathf.Infinity)
-                                {
-                                    c.FeaturePoint = SN_FeaturePoint(quadp, chunk);
-                                    c.Normal = -SN_Grad(quadp, chunk);  // Need Neg. since its not SDF but DensityField.
-
-                                    if (!Maths.IsFinite(c.FeaturePoint))
-                                    {
-                                        c.FeaturePoint = new(0, -99, 0); ;
-                                        badQuad = true;
-                                    }
-                                    if (!Maths.IsFinite(c.Normal) || math.lengthsq(c.Normal) < 0.1f)
-                                    {
-                                        c.Normal = new(0, 1, 0);
-                                    }
-                                }
-                                if (badQuad)
-                                {
-                                    vts.RemoveVertex((int)Maths.Floor(vts.VertexCount(), 6), quadv_i);
-                                    break;
-                                }
-
-                                float3 p = quadp + c.FeaturePoint;
-
-
-                                // Select Material of 8 Corners. (Max Density Value)
-                                Material mtl = null;
-                                float min_dist = float.PositiveInfinity;
-                                foreach (float3 vp in SN_VERT)
-                                {
-                                    ref Cell vc = ref chunk.LocalCell(quadp + vp, true);
-                                    if (vc.Mtl != null && vc.Value > 0 && vc.Value < min_dist)
-                                    {
-                                        min_dist = vc.Value;
-                                        mtl = vc.Mtl;
-                                    }
-                                }
-#if DEBUG
-                                Log.assert(mtl != null, "MeshGen Error: Vertex MtlId == 0.");
-                                Log.assert(Maths.IsFinite(p), () => $"MeshGen Error: Non-Finite Vertex Position Value. {p}");
-
-                                float3 n = c.Normal;
-                                Log.assert(Maths.IsFinite(n), () => $"MeshGen Error: Non-Finite Vertex Normal Value. {n}");
-                                Log.assert(Mathf.Abs(math.lengthsq(n) - 1.0f) < 0.2f, () => $"MeshGen Error: Vertex Normal LengthSq != 1.0. {n}");
-#endif
-
-                                vts.AddVertex(p, new(mtl == null ? 0 : mtl.Id, -1), c.Normal);
-                            }
+                            min_dist = vc.density;
+                            texId = vc.texId;
                         }
                     }
+#if DEBUG
+                    Assert.IsTrue(texId != 0, "MeshGen Error: Vertex MtlId == 0.");
+                    // Assert.IsTrue(math.all(math.isfinite(p)), () => $"MeshGen Error: Non-Finite Vertex Position Value. {p}");
+
+                    // float3 n = c.Normal;
+                    // Log.assert(Maths.IsFinite(n), () => $"MeshGen Error: Non-Finite Vertex Normal Value. {n}");
+                    // Log.assert(Mathf.Abs(math.lengthsq(n) - 1.0f) < 0.2f, () => $"MeshGen Error: Vertex Normal LengthSq != 1.0. {n}");
+#endif
+
+                    vbuf.PushVertex(p, new(texId, -1), c.CachedNorm);
                 }
             }
         }
     }
 
-    static bool SN_SignChanged(in Cell c0, in Cell c1)
+    static bool SN_SignChanged(in Vox c0, in Vox c1)
     {
-        return (c0.Value > 0) != (c1.Value > 0);
+        return (c0.density > 0) != (c1.density > 0);
     }
 
     // Evaluate Normal of a Cell FeaturePoint
     // via Approxiate Differental Gradient  
     // WARN: may produce NaN Normal Value if the Cell's value is NaN (Nil Cell in the Context)
-    static float3 SN_Grad(float3 rp, Chunk chunk)
+    static float3 SN_Grad(int3 rp, Chunk chunk)
     {
-        float E = 1.0f;  // epsilon
+        var E = 1;  // epsilon
         float denom = 1.0f / (2.0f * E);
-        return Vector3.Normalize(denom * new float3(
-            chunk.LocalCell(rp + new float3(E, 0, 0), true).Value - chunk.LocalCell(rp - new float3(E, 0, 0), true).Value,
-            chunk.LocalCell(rp + new float3(0, E, 0), true).Value - chunk.LocalCell(rp - new float3(0, E, 0), true).Value,
-            chunk.LocalCell(rp + new float3(0, 0, E), true).Value - chunk.LocalCell(rp - new float3(0, 0, E), true).Value));
+        return math.normalize(denom * new float3(
+            chunk.GetVoxelOr(rp + new int3(E, 0, 0)).density - chunk.GetVoxelOr(rp - new int3(E, 0, 0)).density,
+            chunk.GetVoxelOr(rp + new int3(0, E, 0)).density - chunk.GetVoxelOr(rp - new int3(0, E, 0)).density,
+            chunk.GetVoxelOr(rp + new int3(0, 0, E)).density - chunk.GetVoxelOr(rp - new int3(0, 0, E)).density));
     }
 
     // Evaluate FeaturePoint
@@ -261,7 +262,7 @@ public static class ChunkMeshGenerator
 
             if (SN_SignChanged(v0, v1))
             {
-                float t = Mathf.InverseLerp(v0.density, v1.density, 0);
+                float t = math.unlerp(v0.density, v1.density, 0);
                 if (!float.IsFinite(t)) t = 0;  // t maybe NaN if accessing a Nil Cell.
 
                 float3 p = math.lerp(p0, p1, t);
@@ -271,11 +272,11 @@ public static class ChunkMeshGenerator
             }
         }
 
-        Assert.NotZero(signchanges, "FpEval Error: No SignChange.");
+        Assert.AreNotEqual(signchanges, 0, "FpEval Error: No SignChange.");
         Assert.IsTrue(float.IsFinite(sumFp.x), "FpEval Error: Non-Finite Fp Value.");
 
         return sumFp / signchanges;
-    }*/
+    }
 
     #endregion
 

@@ -125,7 +125,7 @@ public class VertexBuffer
         }
 
         mesh.RecalculateBounds();
-        mesh.RecalculateTangents(); // Optional
+        // mesh.RecalculateTangents(); // Optional
 
         return mesh;
     }

@@ -99,13 +99,11 @@ namespace Aether
         }
         public bool GetVoxel(int3 relpos, out Vox vox)
         {
-            if (IsLocalPos(relpos))
-            {
+            if (IsLocalPos(relpos)) {
                 vox = AtVoxel(relpos);
                 return true;
             }
-            if (GetNeighborChunk(relpos, out var chunk))
-            {
+            if (GetNeighborChunk(relpos, out var chunk)) {
                 vox = chunk.AtVoxel(LocalPos(relpos));
                 return true;
             }
@@ -117,6 +115,24 @@ namespace Aether
             if (GetVoxel(relpos, out Vox vox))
                 return vox;
             return def;
+        }
+        
+        public delegate void ModifyVoxelAction(ref Vox vox);
+        public bool SetVoxel(int3 relpos, ModifyVoxelAction func)
+        {
+            if (IsLocalPos(relpos)) {
+                func(ref AtVoxel(relpos));
+                return true;
+            }
+            if (GetNeighborChunk(relpos, out var chunk)) {
+                func(ref chunk.AtVoxel(LocalPos(relpos)));
+                return true;
+            }
+            return false;
+        }
+
+        public bool SetVoxel(int3 relpos, Vox vox) {
+            return SetVoxel(relpos, (ref Vox v) => v = vox);
         }
 
         public bool GetNeighborChunk(int idx, out Chunk chunk)

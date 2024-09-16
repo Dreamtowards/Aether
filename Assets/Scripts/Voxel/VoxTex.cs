@@ -5,6 +5,7 @@ using UnityEngine;
 namespace Aether
 {
     // just for Convenient Access. 
+    [ExecuteInEditMode]
     public class VoxTex : MonoBehaviour
     {
         [ShowInInspector]

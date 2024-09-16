@@ -1,4 +1,5 @@
 ﻿using Sirenix.OdinInspector;
+using Sirenix.Utilities;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -16,6 +17,17 @@ namespace Aether
 
         [ShowInInspector]
         public Vox m_Vox;
+
+        [Button]
+        public void Remesh() {
+            m_ChunkSystem.MarkChunkMeshDirty(Chunk.ChunkPos(transform.position));
+        }
+        [Button]
+        public void RemeshAll() {
+            m_ChunkSystem.m_Chunks.Keys.ForEach(e => {
+                m_ChunkSystem.MarkChunkMeshDirty(e);
+            });
+        }
         
         void OnDrawGizmos()
         {

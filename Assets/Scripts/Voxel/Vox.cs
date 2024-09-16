@@ -1,5 +1,6 @@
 
 using System;
+using Unity.Mathematics;
 
 namespace Aether
 {
@@ -14,8 +15,14 @@ namespace Aether
         // SDF value for Isosurface Extraction. 0=surface, +positive=solid, -negative=void
         public float density;
 
+        public float3 CachedFp;
+        public float3 CachedNorm;
+
         public static readonly Vox Nil = new();
 
+
+        public bool IsTexNil() => texId == 0;
+        
 
         public bool IsNil()
         {
@@ -25,6 +32,8 @@ namespace Aether
         {
             return !IsNil();
         }
+
+        public bool IsDensitySolid() => density > 0;
     }
 
     public struct VoxLight

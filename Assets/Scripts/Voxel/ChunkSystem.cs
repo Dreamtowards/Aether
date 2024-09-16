@@ -186,6 +186,7 @@ namespace Aether
                     return vbuf;
                 });
                 task.Start();
+                
                 m_ChunksMeshing.Add(chunkpos, task);
                 chunksTasked.Add(chunkpos);
             }
