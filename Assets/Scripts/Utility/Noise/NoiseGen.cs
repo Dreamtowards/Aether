@@ -9,15 +9,14 @@ using UnityEngine;
 [Serializable]
 public class NoiseGen
 {
-    
     [HideInInspector]
     public FastNoiseLite noise = new();
 
     [ShowInInspector]
     public int Seed
     {
-        get { return noise.GetSeed(); }
-        set { noise.SetSeed(value); }
+        get => noise.Seed;
+        set => noise.Seed = value;
     }
 
     [ShowInInspector]

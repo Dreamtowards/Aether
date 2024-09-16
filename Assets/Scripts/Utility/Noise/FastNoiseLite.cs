@@ -50,15 +50,28 @@
 using Sirenix.OdinInspector;
 using System;
 using System.Runtime.CompilerServices;
+using Unity.Mathematics;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 // Switch between using floats or doubles for input position
 using FNLfloat = System.Single;
 //using FNLfloat = System.Double;
 
+[Serializable]
 public class FastNoiseLite
 {
     private const short INLINE = 256; // MethodImplOptions.AggressiveInlining;
     private const short OPTIMISE = 512; // MethodImplOptions.AggressiveOptimization;
+
+   
+    [Button]
+    public float Sample(float3 p) => GetNoise(p.x, p.y, p.z);
+
+    [Button]
+    public float Sample(float2 p) => GetNoise(p.x, p.y);
+    [Button]
+    public float Sample(float x, float y) => GetNoise(x, y);
 
     public enum NoiseType 
     { 
@@ -121,47 +134,58 @@ public class FastNoiseLite
         DefaultOpenSimplex2 
     };
 
+    /// Sets seed used for all noise types
     [ShowInInspector]
-    private int mSeed = 1337;
+    [SerializeField]
+    public int Seed = 1337;
     [ShowInInspector]
+    [SerializeField]
     private float mFrequency = 0.01f;
     [ShowInInspector]
+    [SerializeField]
     private NoiseType mNoiseType = NoiseType.OpenSimplex2;
     [ShowInInspector]
+    [SerializeField]
     private RotationType3D mRotationType3D = RotationType3D.None;
+    [SerializeField]
     private TransformType3D mTransformType3D = TransformType3D.DefaultOpenSimplex2;
 
     [ShowInInspector]
+    [SerializeField]
     private FractalType mFractalType = FractalType.None;
     [ShowInInspector]
+    [SerializeField]
     private int mOctaves = 3;
     [ShowInInspector]
+    [SerializeField]
     private float mLacunarity = 2.0f;
     [ShowInInspector]
+    [SerializeField]
     private float mGain = 0.5f;
     [ShowInInspector]
+    [SerializeField]
     private float mWeightedStrength = 0.0f;
     [ShowInInspector]
+    [SerializeField]
     private float mPingPongStrength = 2.0f;
 
+    [SerializeField]
     private float mFractalBounding = 1 / 1.75f;
 
+    [SerializeField]
     private CellularDistanceFunction mCellularDistanceFunction = CellularDistanceFunction.EuclideanSq;
+    [SerializeField]
     private CellularReturnType mCellularReturnType = CellularReturnType.Distance;
+    [SerializeField]
     private float mCellularJitterModifier = 1.0f;
 
+    [SerializeField]
     private DomainWarpType mDomainWarpType = DomainWarpType.OpenSimplex2;
+    [SerializeField]
     private TransformType3D mWarpTransformType3D = TransformType3D.DefaultOpenSimplex2;
+    [SerializeField]
     private float mDomainWarpAmp = 1.0f;
 
-    /// <summary>
-    /// Sets seed used for all noise types
-    /// </summary>
-    /// <remarks>
-    /// Default: 1337
-    /// </remarks>
-    public void SetSeed(int seed) { mSeed = seed; }
-    public int GetSeed() { return mSeed; }
 
     /// <summary>
     /// Sets frequency for all noise types
@@ -332,7 +356,7 @@ public class FastNoiseLite
         switch (mFractalType)
         {
             default:
-                return GenNoiseSingle(mSeed, x, y);
+                return GenNoiseSingle(Seed, x, y);
             case FractalType.FBm:
                 return GenFractalFBm(x, y);
             case FractalType.Ridged:
@@ -356,7 +380,7 @@ public class FastNoiseLite
         switch (mFractalType)
         {
             default:
-                return GenNoiseSingle(mSeed, x, y, z);
+                return GenNoiseSingle(Seed, x, y, z);
             case FractalType.FBm:
                 return GenFractalFBm(x, y, z);
             case FractalType.Ridged:
@@ -958,7 +982,7 @@ public class FastNoiseLite
 
     private float GenFractalFBm(FNLfloat x, FNLfloat y)
     {
-        int seed = mSeed;
+        int seed = Seed;
         float sum = 0;
         float amp = mFractalBounding;
 
@@ -978,7 +1002,7 @@ public class FastNoiseLite
 
     private float GenFractalFBm(FNLfloat x, FNLfloat y, FNLfloat z)
     {
-        int seed = mSeed;
+        int seed = Seed;
         float sum = 0;
         float amp = mFractalBounding;
 
@@ -1002,7 +1026,7 @@ public class FastNoiseLite
 
     private float GenFractalRidged(FNLfloat x, FNLfloat y)
     {
-        int seed = mSeed;
+        int seed = Seed;
         float sum = 0;
         float amp = mFractalBounding;
 
@@ -1022,7 +1046,7 @@ public class FastNoiseLite
 
     private float GenFractalRidged(FNLfloat x, FNLfloat y, FNLfloat z)
     {
-        int seed = mSeed;
+        int seed = Seed;
         float sum = 0;
         float amp = mFractalBounding;
 
@@ -1046,7 +1070,7 @@ public class FastNoiseLite
 
     private float GenFractalPingPong(FNLfloat x, FNLfloat y)
     {
-        int seed = mSeed;
+        int seed = Seed;
         float sum = 0;
         float amp = mFractalBounding;
 
@@ -1066,7 +1090,7 @@ public class FastNoiseLite
 
     private float GenFractalPingPong(FNLfloat x, FNLfloat y, FNLfloat z)
     {
-        int seed = mSeed;
+        int seed = Seed;
         float sum = 0;
         float amp = mFractalBounding;
 
@@ -2098,7 +2122,7 @@ public class FastNoiseLite
 
     private void DomainWarpSingle(ref FNLfloat x, ref FNLfloat y)
     {
-        int seed = mSeed;
+        int seed = Seed;
         float amp = mDomainWarpAmp * mFractalBounding;
         float freq = mFrequency;
 
@@ -2111,7 +2135,7 @@ public class FastNoiseLite
 
     private void DomainWarpSingle(ref FNLfloat x, ref FNLfloat y, ref FNLfloat z)
     {
-        int seed = mSeed;
+        int seed = Seed;
         float amp = mDomainWarpAmp * mFractalBounding;
         float freq = mFrequency;
 
@@ -2128,7 +2152,7 @@ public class FastNoiseLite
 
     private void DomainWarpFractalProgressive(ref FNLfloat x, ref FNLfloat y)
     {
-        int seed = mSeed;
+        int seed = Seed;
         float amp = mDomainWarpAmp * mFractalBounding;
         float freq = mFrequency;
 
@@ -2148,7 +2172,7 @@ public class FastNoiseLite
 
     private void DomainWarpFractalProgressive(ref FNLfloat x, ref FNLfloat y, ref FNLfloat z)
     {
-        int seed = mSeed;
+        int seed = Seed;
         float amp = mDomainWarpAmp * mFractalBounding;
         float freq = mFrequency;
 
@@ -2175,7 +2199,7 @@ public class FastNoiseLite
         FNLfloat ys = y;
         TransformDomainWarpCoordinate(ref xs, ref ys);
 
-        int seed = mSeed;
+        int seed = Seed;
         float amp = mDomainWarpAmp * mFractalBounding;
         float freq = mFrequency;
 
@@ -2196,7 +2220,7 @@ public class FastNoiseLite
         FNLfloat zs = z;
         TransformDomainWarpCoordinate(ref xs, ref ys, ref zs);
 
-        int seed = mSeed;
+        int seed = Seed;
         float amp = mDomainWarpAmp * mFractalBounding;
         float freq = mFrequency;
 
