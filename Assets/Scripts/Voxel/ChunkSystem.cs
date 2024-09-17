@@ -23,8 +23,12 @@ namespace Aether
         // commonly only need when Visitor/Player moved across chunk or Appear/Disappear.
         // public bool m_NeedUpdateChunksLoadance = true;
 
+        public static ChunkSystem instance;
+
         void Start()
         {
+            Assert.IsNull(instance);
+            instance = this;
         }
 
         [Button]

@@ -15,8 +15,11 @@ namespace Aether
 
         private void OnLayout(UImGui.UImGui obj)
         {
+            if (Input.GetKeyDown(KeyCode.F12)) m_ShowDockspace = !m_ShowDockspace;
             if (m_ShowDockspace)
                 ShowDockspaceAndMainMenubar();
+
+            if (Input.GetKeyDown(KeyCode.F3)) m_ShowDebugTextInfo = !m_ShowDebugTextInfo;
             if (m_ShowDebugTextInfo)
                 ShowDebugTextInfoOverlay();
             
@@ -108,6 +111,10 @@ namespace Aether
                 }
                 if (ImGui.BeginMenu("World"))
                 {
+                    ImGui.SeparatorText("Voxel");
+
+                    var cs = ChunkSystem.instance;
+                    ImGui.SliderInt3("Chunks Load Range", ref cs.m_ChunkLoadMarker.m_ChunksLoadDistance.x, -1, 20);
                     
                     ImGui.EndMenu();
                 }
