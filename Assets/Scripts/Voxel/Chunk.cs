@@ -34,7 +34,7 @@ namespace Aether
             m_InChunkSystem = chunksystem;
         }
 
-        public void ForNeighborChunks(Action<Chunk, int> visitor)
+        public void ForLoadedNeighborChunks(Action<Chunk, int> visitor)
         {
             for (int neibIdx = 0; neibIdx < NEIGHBORS.Length; neibIdx++)
             {
@@ -47,7 +47,7 @@ namespace Aether
         }
         public void InitNeighborChunks()
         {
-            ForNeighborChunks((neibChunk, neibIdx) =>
+            ForLoadedNeighborChunks((neibChunk, neibIdx) =>
             {
                 neibChunk.m_NeighborChunks[Chunk.NeighborIdxOpposite(neibIdx)] = new WeakReference<Chunk>(this); 
                 m_NeighborChunks[neibIdx] = new WeakReference<Chunk>(neibChunk);
@@ -59,13 +59,21 @@ namespace Aether
                     
                     m_InChunkSystem.m_ChunkGenerator.PopulateChunk(neibChunk);
                     
-                    m_InChunkSystem.MarkChunkMeshDirty(neibChunk.chunkpos);
+                    neibChunk.ForLoadedNeighborChunks((nnChunk, nnIdx) =>
+                    {
+                        if (nnChunk.IsNeighborsAllPopulated())
+                        {
+                            m_InChunkSystem.MarkChunkMeshDirty(nnChunk.chunkpos);
+                        }
+                    });
                 }
             });
+            
+            // m_InChunkSystem.MarkChunkMeshDirty(chunkpos);
         }
         public void UnlinkNeighborChunks()
         {
-            ForNeighborChunks((neibChunk, neibIdx) =>
+            ForLoadedNeighborChunks((neibChunk, neibIdx) =>
             {
                 neibChunk.m_NeighborChunks[Chunk.NeighborIdxOpposite(neibIdx)] = null;
             });
@@ -93,12 +101,21 @@ namespace Aether
         }
 
         // Directly Access.
-        public ref Vox AtVoxel(int3 localpos)
-        {
+        public ref Vox AtVoxel(int3 localpos) {
             return ref m_Voxels[LocalIdx(localpos)];
         }
-        public bool GetVoxel(int3 relpos, out Vox vox)
-        {
+        public bool GetVoxelRef(int3 relpos, ref Vox vox) {
+            if (IsLocalPos(relpos)) {
+                vox = ref AtVoxel(relpos);
+                return true;
+            } 
+            if (GetNeighborChunk(relpos, out var chunk)) {
+                vox = ref chunk.AtVoxel(LocalPos(relpos));
+                return true;
+            }
+            return false;
+        }
+        public bool GetVoxel(int3 relpos, out Vox vox) {
             if (IsLocalPos(relpos)) {
                 vox = AtVoxel(relpos);
                 return true;
@@ -108,18 +125,16 @@ namespace Aether
                 return true;
             }
             vox = Vox.Nil;
-            return false;
+            return false;//GetVoxelRef(relpos, ref vox);
         }
-        public Vox GetVoxelOr(int3 relpos, Vox def = new())
-        {
+        public Vox GetVoxelOr(int3 relpos, Vox def = new()) {
             if (GetVoxel(relpos, out Vox vox))
                 return vox;
             return def;
         }
         
         public delegate void ModifyVoxelAction(ref Vox vox);
-        public bool SetVoxel(int3 relpos, ModifyVoxelAction func)
-        {
+        public bool SetVoxel(int3 relpos, ModifyVoxelAction func) {
             if (IsLocalPos(relpos)) {
                 func(ref AtVoxel(relpos));
                 return true;
@@ -135,44 +150,36 @@ namespace Aether
             return SetVoxel(relpos, (ref Vox v) => v = vox);
         }
 
-        public bool GetNeighborChunk(int idx, out Chunk chunk)
-        {
+        public bool GetNeighborChunk(int idx, out Chunk chunk) {
             chunk = null;
             return m_NeighborChunks[idx]?.TryGetTarget(out chunk) == true;
         }
-        public bool GetNeighborChunk(int3 relpos, out Chunk chunk)
-        {
+        public bool GetNeighborChunk(int3 relpos, out Chunk chunk) {
             chunk = null;
             return TryNeighborIdx(relpos, out int idx) && GetNeighborChunk(idx, out chunk);
         }
 
-        public static int LocalIdx(int3 localpos)
-        {
+        public static int LocalIdx(int3 localpos) {
             Assert.IsTrue(IsLocalPos(localpos));
             return localpos.x << 8 | localpos.y << 4 | localpos.z;
         }
-        public static int3 LocalIdxPos(int idx)
-        {
+        public static int3 LocalIdxPos(int idx) {
             Assert.IsTrue(idx >= 0 && idx < LEN_VOXLES);
             return new((idx >> 8) & 15, (idx >> 4) & 15, idx & 15);
         }
 
         public static int3 ChunkPos(float3 p) { return ChunkPos(Maths.Floor(p)); }
-        public static int3 ChunkPos(int3 p)
-        {
+        public static int3 ChunkPos(int3 p) {
             return new(Maths.Floor16(p.x), Maths.Floor16(p.y), Maths.Floor16(p.z));
         }
-        public static int3 LocalPos(int3 p)
-        {
+        public static int3 LocalPos(int3 p) {
             return new(Maths.Mod16(p.x), Maths.Mod16(p.y), Maths.Mod16(p.z));
         }
 
-        public static bool IsChunkPos(int3 p)
-        {
+        public static bool IsChunkPos(int3 p) {
             return math.all(p % 16 == int3.zero);
         }
-        public static bool IsLocalPos(int3 p)
-        {
+        public static bool IsLocalPos(int3 p) {
             return p.x >= 0 && p.x < 16 &&
                    p.y >= 0 && p.y < 16 &&
                    p.z >= 0 && p.z < 16;
@@ -181,10 +188,8 @@ namespace Aether
 
 
         public delegate void ForVoxelsAction(int3 localpos, ref Vox vox);
-        public void ForVoxels(ForVoxelsAction visitor)
-        {
-            for (int i = 0; i < Chunk.LEN_VOXLES; i++)
-            {
+        public void ForVoxels(ForVoxelsAction visitor) {
+            for (int i = 0; i < Chunk.LEN_VOXLES; i++) {
                 int3 localpos = LocalIdxPos(i);
                 visitor(localpos, ref m_Voxels[i]);
             }
@@ -247,10 +252,17 @@ namespace Aether
             return idx / 2 * 2 + (idx + 1) % 2;
         }
 
-        public bool IsNeighborsAllLoaded()
-        {
-            foreach (var neib in m_NeighborChunks)  {
+        public bool IsNeighborsAllLoaded() {
+            foreach (var neib in m_NeighborChunks) {
                 if (neib == null)
+                    return false;
+            }
+            return true;
+        }
+
+        public bool IsNeighborsAllPopulated() {
+            foreach (var neib in m_NeighborChunks) {
+                if (neib == null || !neib.TryGetTarget(out Chunk chunk) || !chunk.IsPopulated)
                     return false;
             }
             return true;
