@@ -32,6 +32,7 @@ namespace Aether
             
         }
 
+        public WorldInfo Info => m_WorldInfo;
         public UInt32 Seed => m_WorldInfo.Seed;
         public float DayTime => m_WorldInfo.DayTime;
     }
