@@ -17,6 +17,7 @@ namespace StarterAssets
 		// 		LockCursor(s_EnabledInputs);
 		// 	}
 		// }
+		public bool escape;
 		
 		[Header("Character Input Values")]
 		public Vector2 move;
@@ -54,8 +55,14 @@ namespace StarterAssets
 		{
 			SprintInput(value.isPressed);
 		}
-#endif
 
+		void OnEscape(InputValue val)
+		{
+			escape = val.isPressed;
+			enabledGameInputs = !enabledGameInputs;
+		}
+#endif
+		
 
 		public void MoveInput(Vector2 newMoveDirection)
 		{
