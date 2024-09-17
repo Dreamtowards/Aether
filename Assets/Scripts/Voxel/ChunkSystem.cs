@@ -18,7 +18,7 @@ namespace Aether
 
         public World m_InWorld;
 
-        public EntityPlayer m_LoaderPlayer;
+        public ChunkLoadMarker m_ChunkLoadMarker;
         
         // commonly only need when Visitor/Player moved across chunk or Appear/Disappear.
         // public bool m_NeedUpdateChunksLoadance = true;
@@ -53,7 +53,7 @@ namespace Aether
         
         [BoxGroup("ChunkGen")]
         [ShowInInspector]
-        private Dictionary<int3, Task<Chunk>> m_ChunksLoading = new();
+        public Dictionary<int3, Task<Chunk>> m_ChunksLoading = new();
         
         [BoxGroup("ChunkGen")]
         public int m_ChunksLoadingMaxConcurrency = 10;
@@ -80,8 +80,8 @@ namespace Aether
             
             // Loading Chunks :: Dispatch Task
             
-            int3 center = Chunk.ChunkPos(m_LoaderPlayer.transform.position);
-            int3 range = m_LoaderPlayer.m_ChunksLoadDistance;
+            int3 center = Chunk.ChunkPos(m_ChunkLoadMarker.transform.position);
+            int3 range = m_ChunkLoadMarker.m_ChunksLoadDistance;
 
             Utility.ForVolumeSpread(range.x, range.y, p =>
             {
@@ -115,7 +115,7 @@ namespace Aether
             // Unload chunks
             foreach (var chunkpos in new List<int3>(m_Chunks.Keys))
             {
-                if (!m_LoaderPlayer.InLoadDistance(chunkpos))
+                if (!m_ChunkLoadMarker.InLoadDistance(chunkpos))
                     UnloadChunk(chunkpos);
             }
         }
@@ -218,6 +218,8 @@ namespace Aether
             return m_Chunks.ContainsKey(chunkpos);
         }
 
+        public int NumChunks => m_Chunks.Count;
+
         public bool GetVoxel(int3 p, out Vox vox) {
             if (GetChunk(Chunk.ChunkPos(p), out Chunk chunk)) {
                 vox = chunk.AtVoxel(Chunk.LocalPos(p));
@@ -280,4 +282,5 @@ namespace Aether
         #endregion
         
     }
+
 }
