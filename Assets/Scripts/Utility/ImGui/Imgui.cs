@@ -1,6 +1,6 @@
 ﻿using ImGuiNET;
-using StarterAssets;
 using UImGui;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Aether
@@ -126,7 +126,7 @@ namespace Aether
                     ImGui.SeparatorText("Debug");
                     ImGui.MenuItem("Debug Text Info", null, ref m_ShowDebugTextInfo);
                     ImGui.MenuItem("ImGui Demo Window", null, ref m_ShowDemoWindow);
-                    ImGui.MenuItem("Game Controls", null, ref StarterAssetsInputs.enabledGameInputs);
+                    ImGui.MenuItem("Game Controls", null, ref InputManager.enabledGameInputs);
                     ImGui.EndMenu();
                 }
                 
@@ -142,16 +142,27 @@ namespace Aether
             
             ImGui.Text($"fps: {1.0f / Time.deltaTime:0.00}, {1.0f / Time.smoothDeltaTime:0.00}; dt: {Time.deltaTime*1000.0:0.00}ms; time: {Time.realtimeSinceStartup:0.00}; t-scale: {Time.timeScale:0.00}");
 
+            ImGui.NewLine();
+            
             var world = World.instance;
             var wi = world.Info;
-            ImGui.Text($"world: '{wi.Name}', seed: {wi.Seed}; daytime: {wi.DayTime:0.00}, len {wi.DayTimeLength}; inhabited: {wi.TimeInhabited}");
+            ImGui.Text($"World: '{wi.Name}', seed: {wi.Seed}; daytime: {wi.DayTime:0.00} {StrDayTime(wi.DayTime)}, len {wi.DayTimeLength}s ({(wi.DayTimeLength/60):0.00}min); inhabited: {wi.TimeInhabited}");
 
             var cs = FindFirstObjectByType<ChunkSystem>();
-            ImGui.Text($"chunk: loaded: {cs.NumChunks}, loading: {cs.m_ChunksLoading.Count}, mesh_dirty: {cs.m_ChunksMeshDirty.Count}, meshing: {cs.m_ChunksMeshing.Count} ");
+            ImGui.Text($"Chunk: loaded: {cs.NumChunks}, loading: {cs.m_ChunksLoading.Count}, mesh_dirty: {cs.m_ChunksMeshDirty.Count}, meshing: {cs.m_ChunksMeshing.Count} ");
             
             ImGui.End();
         }
-        
+
+        public string StrDayTime(float daytime)
+        {
+            // 0=6am, 0.25=12am, 0.5=6pm
+            float hr = daytime * 24 + 6;
+            float mn = math.frac(hr) * 60;
+            float s = math.frac(mn) * 60;
+            
+            return $"{math.floor(hr):00}:{math.floor(mn):00}:{math.floor(s):00}";
+        }
         
         public void AddCustomFont(ImGuiIOPtr io)
         {
