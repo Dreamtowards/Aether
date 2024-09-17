@@ -13,8 +13,9 @@ namespace Aether
         {
             var daytime = World.instance.DayTime;
 
-            m_Sun.gameObject.SetActive(daytime < 0.55f);
-            m_Moon.gameObject.SetActive(daytime > 0.5f);
+            bool sun = daytime < 0.55f;
+            m_Sun.gameObject.SetActive(sun);
+            m_Moon.gameObject.SetActive(!sun);
             
             m_Sun.transform.rotation  = Quaternion.Euler(daytime * 360.0f, m_Yaw, 0);
             m_Moon.transform.rotation = Quaternion.Euler(daytime * 360.0f + 180.0f, m_Yaw, 0);

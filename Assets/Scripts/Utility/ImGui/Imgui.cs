@@ -144,7 +144,7 @@ namespace Aether
 
             var world = World.instance;
             var wi = world.Info;
-            ImGui.Text($"world: '{wi.Name}', seed: {wi.Seed}; daytime: {wi.DayTime}, len {wi.DayTimeLength}; inhabited: {wi.TimeInhabited}");
+            ImGui.Text($"world: '{wi.Name}', seed: {wi.Seed}; daytime: {wi.DayTime:0.00}, len {wi.DayTimeLength}; inhabited: {wi.TimeInhabited}");
 
             var cs = FindFirstObjectByType<ChunkSystem>();
             ImGui.Text($"chunk: loaded: {cs.NumChunks}, loading: {cs.m_ChunksLoading.Count}, mesh_dirty: {cs.m_ChunksMeshDirty.Count}, meshing: {cs.m_ChunksMeshing.Count} ");
