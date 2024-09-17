@@ -10,7 +10,7 @@ namespace Aether
 {
 	public class InputManager : MonoBehaviour
 	{
-		[ShowInInspector] public static bool enabledGameInputs;
+		public bool enabledGameInputs;
 		
 		[Header("Character Input Values")]
 		public Vector2 move;
@@ -24,10 +24,12 @@ namespace Aether
 		[Header("Mouse Cursor Settings")]
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
-		
-		public static bool IsCurrentDeviceMouse => FindFirstObjectByType<PlayerInput>().currentControlScheme == "KeyboardMouse";
 
-		public InputManager instance;
+		public PlayerInput m_PlayerInput;
+		
+		public static bool IsCurrentDeviceMouse => instance.m_PlayerInput.currentControlScheme == "KeyboardMouse";
+
+		public static InputManager instance;
 
 		private void Start() {
 			Assert.IsNull(instance);

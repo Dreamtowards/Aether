@@ -6,7 +6,7 @@
 namespace Aether
 {
     [RequireComponent(typeof(CharacterController))]
-    public class ThirdPersonController : MonoBehaviour
+    public class PlayerController : MonoBehaviour
     {
         [Header("Player")]
         [Tooltip("Move speed of the character in m/s")]
@@ -131,7 +131,7 @@ namespace Aether
             _hasAnimator = TryGetComponent(out _animator);
 
 
-            if (InputManager.enabledGameInputs)
+            if (InputManager.instance.enabledGameInputs)
             {
                 JumpAndGravity();
             
@@ -148,9 +148,9 @@ namespace Aether
 
         private void LateUpdate()
         {
-            InputManager.LockCursor(InputManager.enabledGameInputs);
+            InputManager.LockCursor(InputManager.instance.enabledGameInputs);
             
-            if (InputManager.enabledGameInputs)
+            if (InputManager.instance.enabledGameInputs)
                 CameraRotation();
         }
 
