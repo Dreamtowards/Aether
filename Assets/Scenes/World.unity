@@ -658,6 +658,10 @@ PrefabInstance:
       propertyPath: _camera
       value: 
       objectReference: {fileID: 176808302}
+    - target: {fileID: 4103076508276071122, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: m_WorldInfo.DayTimeLength
+      value: 720
+      objectReference: {fileID: 0}
     - target: {fileID: 4309765212984738900, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
       propertyPath: m_Enabled
       value: 1

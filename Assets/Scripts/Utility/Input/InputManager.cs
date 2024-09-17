@@ -1,23 +1,16 @@
+using System;
 using Sirenix.OdinInspector;
 using UnityEngine;
+using UnityEngine.Assertions;
 #if ENABLE_INPUT_SYSTEM
 using UnityEngine.InputSystem;
 #endif
 
-namespace StarterAssets
+namespace Aether
 {
-	public class StarterAssetsInputs : MonoBehaviour
+	public class InputManager : MonoBehaviour
 	{
-		// public static bool s_EnabledInputs = false;
 		[ShowInInspector] public static bool enabledGameInputs;
-		// { 
-		// 	get => s_EnabledInputs;
-		// 	set {
-		// 		s_EnabledInputs = value;
-		// 		LockCursor(s_EnabledInputs);
-		// 	}
-		// }
-		public bool escape;
 		
 		[Header("Character Input Values")]
 		public Vector2 move;
@@ -31,6 +24,17 @@ namespace StarterAssets
 		[Header("Mouse Cursor Settings")]
 		public bool cursorLocked = true;
 		public bool cursorInputForLook = true;
+		
+		public static bool IsCurrentDeviceMouse => FindFirstObjectByType<PlayerInput>().currentControlScheme == "KeyboardMouse";
+
+		public InputManager instance;
+
+		private void Start() {
+			Assert.IsNull(instance);
+			instance = this;
+			
+			
+		}
 
 #if ENABLE_INPUT_SYSTEM
 		public void OnMove(InputValue value)
@@ -46,8 +50,16 @@ namespace StarterAssets
 			}
 		}
 
+		private float m_TimeLastJump;
+
 		public void OnJump(InputValue value)
 		{
+			var time = Time.time;
+			if (time - m_TimeLastJump < 0.3f) {
+				// Double Click Jump
+			}
+			m_TimeLastJump = time;
+			
 			JumpInput(value.isPressed);
 		}
 
@@ -58,7 +70,6 @@ namespace StarterAssets
 
 		void OnEscape(InputValue val)
 		{
-			escape = val.isPressed;
 			enabledGameInputs = !enabledGameInputs;
 		}
 #endif
