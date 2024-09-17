@@ -1,6 +1,9 @@
-﻿ using UnityEngine;
+﻿ using Cinemachine;
+ using Unity.Mathematics;
+ using UnityEngine;
+ using Random = UnityEngine.Random;
 
-/* Note: animations are called via the controller for both the character and capsule using animator null checks
+ /* Note: animations are called via the controller for both the character and capsule using animator null checks
  */
 
 namespace Aether
@@ -69,9 +72,12 @@ namespace Aether
         [Tooltip("For locking the camera position on all axis")]
         public bool LockCameraPosition = false;
 
+
         // cinemachine
         private float _cinemachineTargetYaw;
         private float _cinemachineTargetPitch;
+        public float m_CameraDistance = 4;
+        public CinemachineVirtualCamera m_VirtualCamera;
 
         // player
         private float _speed;
@@ -130,28 +136,35 @@ namespace Aether
         {
             _hasAnimator = TryGetComponent(out _animator);
 
+            GroundedCheck();
 
-            if (InputManager.instance.enabledGameInputs)
+            if (!InputManager.instance.enabledGameInputs)
+                return;
+            
+            if (Grounded)
+                InputManager.instance.isFlying = false;
+            
+            if (!IsFlying)
             {
                 JumpAndGravity();
-            
-                Move();
+                
+                // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
+                if (_verticalVelocity < _terminalVelocity) {
+                    _verticalVelocity += Gravity * Time.deltaTime;
+                }
             }
-            
-            GroundedCheck();
-            
-            // apply gravity over time if under terminal (multiply by delta time twice to linearly speed up over time)
-            if (_verticalVelocity < _terminalVelocity) {
-                _verticalVelocity += Gravity * Time.deltaTime;
-            }
-        }
 
-        private void LateUpdate()
-        {
-            InputManager.LockCursor(InputManager.instance.enabledGameInputs);
+            Move();
             
             if (InputManager.instance.enabledGameInputs)
                 CameraRotation();
+        }
+
+        public float FlyingSpeed = 10;
+        public bool IsFlying => InputManager.instance.isFlying;
+
+        private void LateUpdate()
+        {
         }
 
         private void AssignAnimationIDs()
@@ -197,6 +210,14 @@ namespace Aether
             // Cinemachine will follow this target
             CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
                 _cinemachineTargetYaw, 0.0f);
+
+            m_CameraDistance += Input.mouseScrollDelta.y;
+            // m_CameraDistance = Mathf.Clamp(0, 10);
+            
+            if (m_VirtualCamera.GetCinemachineComponent(CinemachineCore.Stage.Body) is Cinemachine3rdPersonFollow comp) 
+            {
+                comp.CameraDistance = m_CameraDistance;
+            }
         }
 
         private void Move()
@@ -255,8 +276,18 @@ namespace Aether
 
             Vector3 targetDirection = Quaternion.Euler(0.0f, _targetRotation, 0.0f) * Vector3.forward;
 
+            var horizSpeed = _speed;
+            if (IsFlying) {
+                int sig = 0;
+                if (Input.GetKey(KeyCode.Space)) sig += 1;
+                if (Input.GetKey(KeyCode.LeftControl)) sig -= 1;
+                
+                _verticalVelocity = sig * FlyingSpeed;
+                horizSpeed = _input.move == Vector2.zero ? 0 : FlyingSpeed;
+            }
+            
             // move the player
-            _controller.Move(targetDirection.normalized * (_speed * Time.deltaTime) +
+            _controller.Move(targetDirection.normalized * (horizSpeed * Time.deltaTime) +
                              new Vector3(0.0f, _verticalVelocity, 0.0f) * Time.deltaTime);
 
             // update animator if using character

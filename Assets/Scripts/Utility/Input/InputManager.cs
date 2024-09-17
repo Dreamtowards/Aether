@@ -35,7 +35,7 @@ namespace Aether
 			Assert.IsNull(instance);
 			instance = this;
 			
-			
+			LockCursor(enabledGameInputs);
 		}
 
 #if ENABLE_INPUT_SYSTEM
@@ -54,13 +54,19 @@ namespace Aether
 
 		private float m_TimeLastJump;
 
+		public bool isFlying;
+
 		public void OnJump(InputValue value)
 		{
 			var time = Time.time;
 			if (time - m_TimeLastJump < 0.3f) {
 				// Double Click Jump
+				isFlying = !isFlying;
 			}
 			m_TimeLastJump = time;
+
+			if (isFlying)
+				return;  // No Jump when DoubleJump Fly
 			
 			JumpInput(value.isPressed);
 		}
@@ -73,6 +79,8 @@ namespace Aether
 		void OnEscape(InputValue val)
 		{
 			enabledGameInputs = !enabledGameInputs;
+			
+			InputManager.LockCursor(enabledGameInputs);
 		}
 #endif
 		
