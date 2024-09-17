@@ -83,7 +83,7 @@ namespace Aether
             int3 center = Chunk.ChunkPos(m_LoaderPlayer.transform.position);
             int3 range = m_LoaderPlayer.m_ChunksLoadDistance;
 
-            Utility.ForVolume(-range, range + 1, p =>
+            Utility.ForVolumeSpread(range.x, range.y, p =>
             {
                 int3 chunkpos = center + p * Chunk.LEN;
 

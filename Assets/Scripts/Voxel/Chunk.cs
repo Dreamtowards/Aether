@@ -104,17 +104,15 @@ namespace Aether
         public ref Vox AtVoxel(int3 localpos) {
             return ref m_Voxels[LocalIdx(localpos)];
         }
-        public bool GetVoxelRef(int3 relpos, ref Vox vox) {
-            if (IsLocalPos(relpos)) {
-                vox = ref AtVoxel(relpos);
-                return true;
-            } 
-            if (GetNeighborChunk(relpos, out var chunk)) {
-                vox = ref chunk.AtVoxel(LocalPos(relpos));
-                return true;
-            }
-            return false;
-        }
+        // public ref Vox GetVoxelRef(int3 relpos) {
+        //     if (IsLocalPos(relpos)) {
+        //         return ref AtVoxel(relpos);
+        //     } 
+        //     if (GetNeighborChunk(relpos, out var chunk)) {
+        //         return ref chunk.AtVoxel(LocalPos(relpos));
+        //     }
+        //     throw new Exception();
+        // }
         public bool GetVoxel(int3 relpos, out Vox vox) {
             if (IsLocalPos(relpos)) {
                 vox = AtVoxel(relpos);
@@ -125,7 +123,7 @@ namespace Aether
                 return true;
             }
             vox = Vox.Nil;
-            return false;//GetVoxelRef(relpos, ref vox);
+            return false;
         }
         public Vox GetVoxelOr(int3 relpos, Vox def = new()) {
             if (GetVoxel(relpos, out Vox vox))

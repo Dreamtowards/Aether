@@ -26,6 +26,26 @@ namespace Aether
                 visitor(new int3(x, y, z));
         }
 
+        public static void ForVolumeSpread(int nXZ, int nY, Action<int3> visitor)
+        {
+            var nMax = math.max(nXZ, nY);
+            for (int n = 0; n < nMax; ++n) {
+                for (int y = -n; y <= n; ++y) {
+                    for (int z = -n; z <= n; ++z) {
+                        for (int x = -n; x <= n; ++x) {
+                            if (math.abs(x) < n && math.abs(y) < n && math.abs(z) < n) {
+                                continue;
+                            }
+                            if (math.abs(x) > nXZ || math.abs(y) > nY || math.abs(z) > nXZ) {
+                                continue;
+                            }
+                            visitor(new int3(x, y, z));
+                        }
+                    }
+                }
+            }
+        }
+
         public static int RemoveAll<K,V>(this Dictionary<K, V> dict, IEnumerable<K> removes)
         {
             int numRemoved = 0;
