@@ -29,7 +29,8 @@ namespace Aether
                 wi.DayTime += Time.deltaTime / wi.DayTimeLength;
             wi.DayTime = math.frac(wi.DayTime);
 
-            
+            wi.TimeInhabited += Time.deltaTime;
+
         }
 
         public WorldInfo Info => m_WorldInfo;

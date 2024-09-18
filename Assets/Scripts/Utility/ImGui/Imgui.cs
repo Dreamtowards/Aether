@@ -111,9 +111,13 @@ namespace Aether
                 }
                 if (ImGui.BeginMenu("World"))
                 {
-                    ImGui.SeparatorText("Voxel");
-
+                    var wi = World.instance.Info;
+                    ImGui.SeparatorText("World Info");
+                    ImGui.SliderFloat("Day Time", ref wi.DayTime, 0, 1.0f, Utility.StrDayTime(wi.DayTime));
+                    ImGui.SliderFloat("Day Time Length", ref wi.DayTimeLength, 0, 24*60.0f, Utility.StrDuration((int)wi.DayTimeLength));
+                    
                     var cs = ChunkSystem.instance;
+                    ImGui.SeparatorText("Voxel");
                     ImGui.SliderInt3("Chunks Load Range", ref cs.m_ChunkLoadMarker.m_ChunksLoadDistance.x, -1, 20);
                     
                     ImGui.EndMenu();
@@ -153,22 +157,12 @@ namespace Aether
             
             var world = World.instance;
             var wi = world.Info;
-            ImGui.Text($"World: '{wi.Name}', seed: {wi.Seed}; daytime: {wi.DayTime:0.00} {StrDayTime(wi.DayTime)}, len {wi.DayTimeLength}s ({(wi.DayTimeLength/60):0.00}min); inhabited: {wi.TimeInhabited}");
+            ImGui.Text($"World: '{wi.Name}', seed: {wi.Seed}; daytime: {wi.DayTime:0.00} {Utility.StrDayTime(wi.DayTime)}, daylen: {Utility.StrDuration((int)wi.DayTimeLength)}; inhabited: {Utility.StrDuration((int)wi.TimeInhabited)}");
 
             var cs = FindFirstObjectByType<ChunkSystem>();
             ImGui.Text($"Chunk: loaded: {cs.NumChunks}, loading: {cs.m_ChunksLoading.Count}, mesh_dirty: {cs.m_ChunksMeshDirty.Count}, meshing: {cs.m_ChunksMeshing.Count} ");
             
             ImGui.End();
-        }
-
-        public string StrDayTime(float daytime)
-        {
-            // 0=6am, 0.25=12am, 0.5=6pm
-            float hr = daytime * 24 + 6;
-            float mn = math.frac(hr) * 60;
-            float s = math.frac(mn) * 60;
-            
-            return $"{math.floor(hr):00}:{math.floor(mn):00}:{math.floor(s):00}";
         }
         
         public void AddCustomFont(ImGuiIOPtr io)

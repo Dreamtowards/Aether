@@ -65,5 +65,20 @@ namespace Aether
             }
             return numRemoved;
         }
+
+        public static string StrDuration(int sec)
+        {
+            return $"{sec/60/60:00}:{sec/60:00}:{sec % 60:00}";
+        }
+
+        public static string StrDayTime(float daytime, bool hr12 = true)
+        {
+            // 0=6am, 0.25=12am, 0.5=6pm
+            float hr = (daytime * 24 + 6) % 24;
+            float mn = math.frac(hr) * 60;
+            float s = math.frac(mn) * 60;
+            
+            return $"{math.floor(hr12 ? hr % 13 : hr):00}:{math.floor(mn):00}:{math.floor(s):00}{(hr12? (hr < 13 ? " AM" : " PM") :"")}";
+        }
     }
 }
