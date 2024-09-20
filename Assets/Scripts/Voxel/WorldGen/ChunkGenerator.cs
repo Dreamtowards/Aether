@@ -14,7 +14,9 @@ namespace Aether
         [ShowInInspector]
         [SerializeField]
         public NoiseGen m_Noise;
-        
+
+
+        public float m_TerrainAvgHeight = 14;
 
         
         public void GenerateChunk(Chunk chunk)
@@ -30,7 +32,7 @@ namespace Aether
                 float f_terr2d = m_Noise.Sample(new float2(p.x, p.z) / 130f);
                 float f_3d = m_Noise.Sample((float3)p / 90f);
 
-                float val = f_terr2d - p.y / 18f + f_3d * 4.5f;
+                float val = f_terr2d - p.y / m_TerrainAvgHeight + f_3d * 3.5f;
 
                 if (val > 0)
                     vox.texId = VoxTex.stone.NumId;
@@ -79,6 +81,8 @@ namespace Aether
                                 replace = VoxTex.grass.NumId;
                             } else if (distToAir < 3) {
                                 replace = VoxTex.dirt.NumId;
+                            } else if (distToAir > 5) {
+                                replace = VoxTex.rock.NumId;
                             }
                             c.texId = replace;
                         }

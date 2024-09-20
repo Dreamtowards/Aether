@@ -31,7 +31,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 7458853310939914868}
   m_Father: {fileID: 4563782917104760227}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4309765212984738900
@@ -41,14 +42,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 995408074412041108}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8bfe93c3c69678945bf9e77d50d0fe3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_PrefabChunk: {fileID: 7648006864274354212, guid: db99c3e1167a5a64689210f60c1daefc, type: 3}
   m_InWorld: {fileID: 4103076508276071122}
-  m_LoaderPlayer: {fileID: 0}
+  m_ChunkLoadMarker: {fileID: 6013843180634468799}
   m_ChunkGenerator: {fileID: 8873625454390895110}
   m_ChunksLoadingMaxConcurrency: 10
   m_ChunksMeshingMaxConcurrency: 10
@@ -65,6 +66,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa7f17dadacef694d82e04556bd125fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Noise:
+    noise:
+      Seed: 123
+      mFrequency: 1
+      mNoiseType: 0
+      mRotationType3D: 0
+      mTransformType3D: 3
+      mFractalType: 1
+      mOctaves: 3
+      mLacunarity: 2
+      mGain: 0.5
+      mWeightedStrength: 0
+      mPingPongStrength: 2
+      mFractalBounding: 0.5714286
+      mCellularDistanceFunction: 1
+      mCellularReturnType: 1
+      mCellularJitterModifier: 1
+      mDomainWarpType: 0
+      mWarpTransformType3D: 3
+      mDomainWarpAmp: 1
+  m_TerrainAvgHeight: 14
 --- !u!114 &2612486761673052499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -390,13 +412,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4141579836300331036}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.28133556, y: -0.64872974, z: 0.28133556, w: 0.64872974}
+  m_LocalRotation: {x: 0.3302358, y: -0.5116991, z: 0.22190925, w: 0.7614885}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1477165353846590712}
-  m_LocalEulerAnglesHint: {x: 46.89, y: -90, z: 0}
+  m_LocalEulerAnglesHint: {x: 46.89, y: -67.8, z: 0}
 --- !u!108 &7821934233621903579
 Light:
   m_ObjectHideFlags: 0
@@ -873,6 +895,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Sun: {fileID: 5075976875558578861}
   m_Moon: {fileID: 2282280850028695539}
+  m_Yaw: -90
 --- !u!1 &5102337969657747227
 GameObject:
   m_ObjectHideFlags: 0
@@ -917,6 +940,54 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d09b12ec4784c0eb183e6654b9233b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &5952039174594537699
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7458853310939914868}
+  - component: {fileID: 6013843180634468799}
+  m_Layer: 0
+  m_Name: ChunkLoadMarker
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7458853310939914868
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5952039174594537699}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5145437144080330749}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6013843180634468799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5952039174594537699}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd5796e4d9034a4ebe731fb84c0e9280, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ChunksLoadDistance:
+    x: 5
+    y: 3
+    z: 5
 --- !u!1 &7177825691346658701
 GameObject:
   m_ObjectHideFlags: 0
@@ -1190,6 +1261,7 @@ Transform:
   - {fileID: 5145437144080330749}
   - {fileID: 9093313470170223417}
   - {fileID: 8450904317739514756}
+  - {fileID: 6018112009436471738}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4103076508276071122
@@ -1208,7 +1280,7 @@ MonoBehaviour:
     Name: Aethertum
     Seed: 0
     DayTime: 0
-    DayTimeLength: 200
+    DayTimeLength: 720
     TimeCreated: 0
     TimeMidified: 0
     TimeInhabited: 0
@@ -1292,3 +1364,156 @@ Transform:
   - {fileID: 6454720091108407405}
   m_Father: {fileID: 4563782917104760227}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &7691619430177772159
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6018112009436471738}
+  - component: {fileID: 2748778882169102213}
+  - component: {fileID: 1422311203123496892}
+  m_Layer: 0
+  m_Name: InputManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6018112009436471738
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691619430177772159}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4563782917104760227}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2748778882169102213
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691619430177772159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e087ecce43ebbff45a1b360637807d93, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enabledGameInputs: 1
+  move: {x: 0, y: 0}
+  look: {x: 0, y: 0}
+  jump: 0
+  sprint: 0
+  analogMovement: 0
+  cursorLocked: 0
+  cursorInputForLook: 1
+  m_PlayerInput: {fileID: 1422311203123496892}
+  isFlying: 0
+--- !u!114 &1422311203123496892
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7691619430177772159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: InputMove
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 6bc1aaf4-b110-4ff7-891e-5b9fe6f32c4d
+    m_ActionName: 'Player/Move[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d,/Keyboard/upArrow,/Keyboard/downArrow,/Keyboard/leftArrow,/Keyboard/rightArrow,/XInputControllerWindows/leftStick]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: InputLook
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 2690c379-f54d-45be-a724-414123833eb4
+    m_ActionName: 'Player/Look[/Mouse/delta,/XInputControllerWindows/rightStick]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: InputJump
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 8c4abdf8-4099-493a-aa1a-129acec7c3df
+    m_ActionName: 'Player/Jump[/Keyboard/space,/XInputControllerWindows/buttonSouth]'
+  - m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: InputSprint
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_ActionId: 980e881e-182c-404c-8cbf-3d09fdb48fef
+    m_ActionName: 'Player/Sprint[/Keyboard/leftShift,/XInputControllerWindows/leftTrigger]'
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: e4ce1614-c754-48c1-9103-33130441661f
+    m_ActionName: UI/New action
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Player
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}

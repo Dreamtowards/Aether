@@ -78,6 +78,7 @@ namespace Aether
         private float _cinemachineTargetPitch;
         public float m_CameraDistance = 4;
         public CinemachineVirtualCamera m_VirtualCamera;
+        public GameObject m_CharacterGeometry;
 
         // player
         private float _speed;
@@ -212,7 +213,8 @@ namespace Aether
                 _cinemachineTargetYaw, 0.0f);
 
             m_CameraDistance += Input.mouseScrollDelta.y;
-            // m_CameraDistance = Mathf.Clamp(0, 10);
+            m_CameraDistance = Mathf.Max(0, m_CameraDistance);
+            m_CharacterGeometry.SetActive(m_CameraDistance > 0);
             
             if (m_VirtualCamera.GetCinemachineComponent(CinemachineCore.Stage.Body) is Cinemachine3rdPersonFollow comp) 
             {
