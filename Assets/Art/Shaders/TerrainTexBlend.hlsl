@@ -43,6 +43,7 @@ void TexBlend_float(
 	float TexTriplanarBlendPow,
 	float TexHeightmapBlendPow, 
 	float TexIdOffset,
+	float NormSharpness,
 
 	out float3 outAlbedo,
 	out float3 outNormal, 
@@ -78,12 +79,12 @@ void TexBlend_float(
 	TexTriplanar(TexDiff, PosTrip, TexIds[idxMaxHigh], BlendTrip, TexCount).xyz;
 					 
 	outNormal = //float3(0,0,1);
-	TexTriplanar(TexNorm, PosTrip, TexIds[idxMaxHigh], BlendTrip, TexCount).xyz;
+	pow(TexTriplanar(TexNorm, PosTrip, TexIds[idxMaxHigh], BlendTrip, TexCount).xyz, NormSharpness);
 
 	// outAlbedo = outNormal;//(outNormal + 1) / 2.0; outNormal = float3(0,0,1);
 	
-	outEmission = 0;
+	outEmission = 0;//DRAM.y;
 	outSmoothness = 1.0 - DRAM.y;
-	outAO = DRAM.z;
-	outMetallic = 0;
+	outAO = 0.7;//DRAM.z;
+	outMetallic = 0;// DRAM.w;
 }
