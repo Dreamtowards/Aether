@@ -108,9 +108,13 @@ namespace Aether
 
         private bool _hasAnimator;
 
+        public static PlayerController instance;
+
 
         private void Awake()
         {
+            instance = this;
+            
             // get a reference to our main camera
             if (_mainCamera == null)
             {

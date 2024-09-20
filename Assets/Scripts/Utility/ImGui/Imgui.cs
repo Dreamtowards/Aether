@@ -124,6 +124,7 @@ namespace Aether
                 }
                 if (ImGui.BeginMenu("Graphics"))
                 {
+                    ImGui.SliderFloat("FOV", ref PlayerController.instance.m_VirtualCamera.m_Lens.FieldOfView, 0, 140);
                     
                     ImGui.EndMenu();
                 }
