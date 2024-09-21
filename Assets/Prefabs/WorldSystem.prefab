@@ -74,19 +74,19 @@ MonoBehaviour:
       mRotationType3D: 0
       mTransformType3D: 3
       mFractalType: 1
-      mOctaves: 3
+      mOctaves: 6
       mLacunarity: 2
       mGain: 0.5
       mWeightedStrength: 0
       mPingPongStrength: 2
-      mFractalBounding: 0.5714286
+      mFractalBounding: 0.50793654
       mCellularDistanceFunction: 1
       mCellularReturnType: 1
       mCellularJitterModifier: 1
       mDomainWarpType: 0
       mWarpTransformType3D: 3
       mDomainWarpAmp: 1
-  m_TerrainAvgHeight: 14
+  m_TerrainAvgHeight: 10
 --- !u!114 &2612486761673052499
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,25 +706,25 @@ MonoBehaviour:
   scriptInteractions: 1
   cpuEvaluateRipples: 0
   customMaterial: {fileID: 0}
-  startSmoothness: 0.95
-  endSmoothness: 0.85
+  startSmoothness: 1
+  endSmoothness: 0.738488
   smoothnessFadeStart: 100
   smoothnessFadeDistance: 500
   tessellation: 1
   maxTessellationFactor: 3
   tessellationFactorFadeStart: 150
   tessellationFactorFadeRange: 1850
-  refractionColor: {r: 0.010022826, g: 0.21404114, b: 0.21404114, a: 1}
-  maxRefractionDistance: 0.5
-  absorptionDistance: 1.5
-  scatteringColor: {r: 0, g: 0.13286833, b: 0.13286833, a: 1}
+  refractionColor: {r: 0.61720663, g: 0.80695236, b: 0.79910284, a: 1}
+  maxRefractionDistance: 1.4
+  absorptionDistance: 3.2
+  scatteringColor: {r: 0.00699541, g: 0.086500466, b: 0.22322798, a: 1}
   ambientScattering: 0.2
-  heightScattering: 0.2
-  displacementScattering: 0.1
-  directLightTipScattering: 0.6
-  directLightBodyScattering: 0.5
+  heightScattering: 0.35
+  displacementScattering: 0.65
+  directLightTipScattering: 1
+  directLightBodyScattering: 0.864
   maximumHeightOverride: 0
-  caustics: 0
+  caustics: 1
   causticsIntensity: 0.5
   causticsPlaneBlendDistance: 1
   causticsResolution: 256
@@ -739,7 +739,7 @@ MonoBehaviour:
   waterCurrentDebugMode: 0
   currentDebugMultiplier: 1
   waterFoamDebugMode: 0
-  underWater: 0
+  underWater: 1
   volumeBounds: {fileID: 0}
   volumeDepth: 50
   volumeHeight: 0
@@ -753,7 +753,7 @@ MonoBehaviour:
   decalRegionAnchor: {fileID: 0}
   supportLargeCurrent: 0
   largeCurrentRes: 512
-  largeCurrentSpeedValue: 0
+  largeCurrentSpeedValue: 2.5
   largeCurrentMap: {fileID: 0}
   largeCurrentRegionExtent: {x: 100, y: 100}
   largeCurrentRegionOffset: {x: 0, y: 0}
@@ -769,14 +769,14 @@ MonoBehaviour:
   deformationRes: 512
   foam: 1
   foamResolution: 512
-  foamPersistenceMultiplier: 0.5
-  foamCurrentInfluence: 0.6
+  foamPersistenceMultiplier: 0.401
+  foamCurrentInfluence: 0.488
   foamColor: {r: 1, g: 1, b: 1, a: 1}
   foamTextureTiling: 0.15
-  foamSmoothness: 1
-  simulationFoamAmount: 0.2
+  foamSmoothness: 0.183
+  simulationFoamAmount: 0.782
   supportSimulationFoamMask: 0
-  simulationFoamMask: {fileID: 0}
+  simulationFoamMask: {fileID: 2800000, guid: 2b18c0489e498bb42ace2e4c864fafed, type: 3}
   simulationFoamMaskExtent: {x: 100, y: 100}
   simulationFoamMaskOffset: {x: 0, y: 0}
   simulationFoamWindCurve:
@@ -784,28 +784,10 @@ MonoBehaviour:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.2
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0
-      outWeight: 0
-    - serializedVersion: 3
-      time: 0.3
       value: 1
       inSlope: 0
       outSlope: 0
-      tangentMode: 0
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
@@ -814,17 +796,17 @@ MonoBehaviour:
       value: 1
       inSlope: 0
       outSlope: 0
-      tangentMode: 0
+      tangentMode: 34
       weightedMode: 0
       inWeight: 0
       outWeight: 0
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  repetitionSize: 500
+  repetitionSize: 2813
   largeOrientationValue: 0
-  largeWindSpeed: 30
-  largeChaos: 0.85
+  largeWindSpeed: 36
+  largeChaos: 0.69
   largeBand0Multiplier: 1
   largeBand0FadeMode: 1
   largeBand0FadeStart: 1500
