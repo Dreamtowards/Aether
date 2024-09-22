@@ -107,8 +107,7 @@ namespace Aether
 
 		private void OnApplicationFocus(bool hasFocus)
 		{
-			if (enabledGameInputs)
-				LockCursor(cursorLocked && hasFocus);
+			LockCursor(enabledGameInputs && cursorLocked && hasFocus);
 		}
 
 		public static void LockCursor(bool newState)
