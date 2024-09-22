@@ -34,7 +34,7 @@ namespace Aether
         }
 
         public WorldInfo Info => m_WorldInfo;
-        public UInt32 Seed => m_WorldInfo.Seed;
+        public int Seed => m_WorldInfo.Seed;
         public float DayTime => m_WorldInfo.DayTime;
     }
 
@@ -42,7 +42,7 @@ namespace Aether
     public class WorldInfo
     {
         public string Name;
-        public UInt32 Seed;
+        public int Seed;
         
         public float DayTime;  // [0, 1]. 0=6AM, 0.5=6PM
         public float DayTimeLength = 60 * 60;  // Seconds
