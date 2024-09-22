@@ -39,7 +39,7 @@ namespace Aether
             }
             Vox vox = m_Vox;
 
-            Gizmos.color = vox.IsNil() ? Color.gray : Color.green;
+            Gizmos.color = vox.IsTexNil() ? Color.gray : Color.green;
             Gizmos.DrawWireCube((float3)p + 0.5f, (float3)1);
 
             if (m_DrawChunkBound)

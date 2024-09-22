@@ -68,8 +68,9 @@ namespace Aether
                     });
                 }
             });
-            
-            // m_InChunkSystem.MarkChunkMeshDirty(chunkpos);
+
+            if (IsNeighborsAllLoaded())
+                m_InChunkSystem.MarkChunkMeshDirty(chunkpos);
         }
         public void UnlinkNeighborChunks()
         {

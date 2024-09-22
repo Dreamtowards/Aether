@@ -19,7 +19,7 @@ public static class ChunkMeshGenerator
         return;
         chunk.ForVoxels((int3 localpos, ref Vox vox) =>
         {
-            if (vox.IsNil())
+            if (vox.IsTexNil())
                 return;
 
             PutCube(vbuf, localpos, vox, chunk);
@@ -165,12 +165,12 @@ public static class ChunkMeshGenerator
                 
                 for (int quadv_i = 0; quadv_i < 6; ++quadv_i)
                 {
-                    int winded_vi = c0.IsDensitySolid() ? quadv_i : 5 - quadv_i;
+                    int winded_vi = !c0.IsIsoNil() ? quadv_i : 5 - quadv_i;
                     int3 quadp = lp + ADJACENT[axis_i, winded_vi];
                     
                     var c = chunk.GetVoxelOr(quadp);
 
-                    bool badQuad = c.IsNil();
+                    bool badQuad = c.IsTexNil();
                     //if (badQuad)
                     //{
                     //    vts.RemoveVertex((int)Maths.Floor(vts.VertexCount(), 6), quadv_i);
@@ -207,7 +207,7 @@ public static class ChunkMeshGenerator
                     foreach (var vp in SN_VERT) {
                         if (!chunk.GetVoxel(quadp + vp, out var vc))
                             continue;
-                        if (!vc.IsTexNil() && vc.IsDensitySolid() && vc.density < min_dist)
+                        if (!vc.IsTexNil() && !vc.IsIsoNil() && vc.density < min_dist)
                         {
                             min_dist = vc.density;
                             texId = vc.texId;

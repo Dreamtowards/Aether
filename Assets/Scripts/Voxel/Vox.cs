@@ -22,18 +22,19 @@ namespace Aether
 
 
         public bool IsTexNil() => texId == 0;
+
+        public bool IsIsoNil() => density <= 0;
         
 
-        public bool IsNil()
-        {
-            return texId == 0;
-        }
-        public bool IsOpaque()
-        {
-            return !IsNil();
-        }
-
-        public bool IsDensitySolid() => density > 0;
+        // public bool IsNil()
+        // {
+        //     return texId == 0;
+        // }
+        // public bool IsOpaque()
+        // {
+        //     return !IsNil();
+        // }
+        // public bool IsDensitySolid() => density > 0;
     }
 
     public struct VoxLight
