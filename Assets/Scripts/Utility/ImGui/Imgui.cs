@@ -1,4 +1,6 @@
-﻿using ImGuiNET;
+﻿using System;
+using ImGuiNET;
+using Sirenix.Utilities;
 using UImGui;
 using Unity.Mathematics;
 using UnityEngine;
@@ -115,10 +117,18 @@ namespace Aether
                     ImGui.SeparatorText("World Info");
                     ImGui.SliderFloat("Day Time", ref wi.DayTime, 0, 1.0f, Utility.StrDayTime(wi.DayTime));
                     ImGui.SliderFloat("Day Time Length", ref wi.DayTimeLength, 0, 24*60.0f, Utility.StrDuration((int)wi.DayTimeLength));
+                    ImGui.InputText("Name", ref wi.Name, 20);
+                    ImGui.InputInt("Seed", ref wi.Seed);
                     
                     var cs = ChunkSystem.instance;
                     ImGui.SeparatorText("Voxel");
                     ImGui.SliderInt3("Chunks Load Range", ref cs.m_ChunkLoadMarker.m_ChunksLoadDistance.x, -1, 20);
+                    if (ImGui.MenuItem("Regenerate All Chunks")) ;
+                    if (ImGui.MenuItem("Remesh All Chunks")) {
+                        ChunkSystem.instance.m_Chunks.Keys.ForEach(e => {
+                            ChunkSystem.instance.MarkChunkMeshDirty(e);
+                        });
+                    }
                     
                     ImGui.EndMenu();
                 }
@@ -146,6 +156,9 @@ namespace Aether
             }
         }
 
+
+
+        private static string _DbgTx_SysInfo;
         private void ShowDebugTextInfoOverlay()
         {
             ImGui.SetNextWindowPos(new(-8, 40));
@@ -154,6 +167,17 @@ namespace Aether
             
             ImGui.Text($"fps: {1.0f / Time.deltaTime:0.00}, {1.0f / Time.smoothDeltaTime:0.00}; dt: {Time.deltaTime*1000.0:0.00}ms; time: {Time.realtimeSinceStartup:0.00}; t-scale: {Time.timeScale:0.00}");
 
+            if (Utility.AtInterval(10.0f) || _DbgTx_SysInfo==null) {
+                // {SystemInfo.deviceName}, 
+                _DbgTx_SysInfo = $"OS:  {SystemInfo.operatingSystem}, {SystemInfo.deviceModel}. @ {Environment.UserName}\n" +
+                                 $"CPU: {SystemInfo.processorModel}, x{SystemInfo.processorCount}, {SystemInfo.processorFrequency/1024f:0.00} GHz\n" +
+                                 $"GPU: {SystemInfo.graphicsDeviceName}; VRAM: {SystemInfo.graphicsMemorySize/1024f:0.00} GB\n" +
+                                 $"RAM: {System.GC.GetTotalMemory(false)/(1024*1024*1024f):0.00} / {SystemInfo.systemMemorySize/1024f:0.00} GB";
+            }
+            ImGui.NewLine();
+            ImGui.Text(_DbgTx_SysInfo);
+            
+            
             ImGui.NewLine();
             
             var world = World.instance;
