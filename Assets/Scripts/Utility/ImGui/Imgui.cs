@@ -169,7 +169,7 @@ namespace Aether
 
             if (Utility.AtInterval(10.0f) || _DbgTx_SysInfo==null) {
                 // {SystemInfo.deviceName}, 
-                _DbgTx_SysInfo = $"OS:  {SystemInfo.operatingSystem}, {SystemInfo.deviceModel}. @ {Environment.UserName}\n" +
+                _DbgTx_SysInfo = $"OS:  {SystemInfo.operatingSystem}, {SystemInfo.deviceModel}. *{Environment.UserName}\n" +
                                  $"CPU: {SystemInfo.processorModel}, x{SystemInfo.processorCount}, {SystemInfo.processorFrequency/1024f:0.00} GHz\n" +
                                  $"GPU: {SystemInfo.graphicsDeviceName}; VRAM: {SystemInfo.graphicsMemorySize/1024f:0.00} GB\n" +
                                  $"RAM: {System.GC.GetTotalMemory(false)/(1024*1024*1024f):0.00} / {SystemInfo.systemMemorySize/1024f:0.00} GB";
