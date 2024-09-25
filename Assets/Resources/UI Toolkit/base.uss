@@ -1,4 +1,5 @@
 .btn-text {
+    color: rgba(255, 255, 255, 0.53);
 }
 
 .btn-text:hover {

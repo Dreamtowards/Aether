@@ -28,6 +28,7 @@ namespace Aether
 		public PlayerInput m_PlayerInput;
 
 		public GameObject m_UiPauseMenu;
+		public GameObject m_UiChat;
 		
 		public static bool IsCurrentDeviceMouse => instance.m_PlayerInput.currentControlScheme == "KeyboardMouse";
 
@@ -81,8 +82,18 @@ namespace Aether
 		void OnEscape(InputValue val)
 		{
 			enabledGameInputs = !enabledGameInputs;
-			
 			LockCursor(enabledGameInputs);
+			
+			m_UiPauseMenu.SetActive(!enabledGameInputs);
+		}
+
+		void OnCommand(InputValue val)
+		{
+			enabledGameInputs = !enabledGameInputs;
+			LockCursor(enabledGameInputs);
+			
+			if (enabledGameInputs)
+				m_UiChat.SetActive(true);
 		}
 #endif
 		
@@ -115,7 +126,6 @@ namespace Aether
 		void LockCursor(bool newState)
 		{
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
-			m_UiPauseMenu.SetActive(!newState);
 		}
 	}
 	
