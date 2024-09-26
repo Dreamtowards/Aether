@@ -148,7 +148,7 @@ namespace Aether
                     ImGui.SeparatorText("Debug");
                     ImGui.MenuItem("Debug Text Info", null, ref m_ShowDebugTextInfo);
                     ImGui.MenuItem("ImGui Demo Window", null, ref m_ShowDemoWindow);
-                    ImGui.MenuItem("Game Controls", null, ref InputManager.instance.enabledGameInputs);
+                    ImGui.MenuItem("Game Controls", null, InputManager.IsPlayingInput);
                     ImGui.EndMenu();
                 }
                 

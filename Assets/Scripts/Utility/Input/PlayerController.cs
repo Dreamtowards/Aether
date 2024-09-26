@@ -143,7 +143,7 @@ namespace Aether
 
             GroundedCheck();
 
-            if (!InputManager.instance.enabledGameInputs)
+            if (!InputManager.IsPlayingInput)
                 return;
             
             if (Grounded)
@@ -161,7 +161,7 @@ namespace Aether
 
             Move();
             
-            if (InputManager.instance.enabledGameInputs)
+            if (InputManager.IsPlayingInput)
                 CameraRotation();
         }
 

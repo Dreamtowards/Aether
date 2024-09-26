@@ -10,7 +10,9 @@ namespace Aether
 {
 	public class InputManager : MonoBehaviour
 	{
-		public bool enabledGameInputs;
+		// Is Gameplay Control/Input Enabled e.g. WSAD/CursorLook etc
+		public static bool IsPlayingInput { get; private set; }
+		
 		
 		[Header("Character Input Values")]
 		public Vector2 move;
@@ -34,11 +36,30 @@ namespace Aether
 
 		public static InputManager instance;
 
+
+		private static GameObject g_CurrentUI;
+		public static GameObject currentUI
+		{
+			get => g_CurrentUI;
+			set
+			{
+				if (g_CurrentUI == value)
+					return;
+				
+				IsPlayingInput = value == null;
+				LockCursor(IsPlayingInput);
+
+				g_CurrentUI?.SetActive(false);
+				
+				g_CurrentUI = value;
+				
+				g_CurrentUI?.SetActive(true);
+			}
+		}
+
 		private void Start() {
 			Assert.IsNull(instance);
 			instance = this;
-			
-			LockCursor(enabledGameInputs);
 		}
 
 #if ENABLE_INPUT_SYSTEM
@@ -81,19 +102,13 @@ namespace Aether
 
 		void OnEscape(InputValue val)
 		{
-			enabledGameInputs = !enabledGameInputs;
-			LockCursor(enabledGameInputs);
-			
-			m_UiPauseMenu.SetActive(!enabledGameInputs);
+			currentUI = !currentUI ? m_UiPauseMenu : null;
 		}
 
 		void OnCommand(InputValue val)
 		{
-			enabledGameInputs = !enabledGameInputs;
-			LockCursor(enabledGameInputs);
-			
-			if (enabledGameInputs)
-				m_UiChat.SetActive(true);
+			if (IsPlayingInput)
+				currentUI = m_UiChat;
 		}
 #endif
 		
@@ -120,10 +135,10 @@ namespace Aether
 
 		private void OnApplicationFocus(bool hasFocus)
 		{
-			LockCursor(enabledGameInputs && cursorLocked && hasFocus);
+			LockCursor(IsPlayingInput && cursorLocked && hasFocus);
 		}
 
-		void LockCursor(bool newState)
+		static void LockCursor(bool newState)
 		{
 			Cursor.lockState = newState ? CursorLockMode.Locked : CursorLockMode.None;
 		}
