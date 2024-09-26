@@ -12,13 +12,14 @@ namespace Aether
 
         public GameObject m_PrefabChatMessage;
 
-
         void Start()
         {
             m_ChatInput.onSubmit.AddListener(line =>
             {
                 var msg = Instantiate(m_PrefabChatMessage, m_MessagesContainer.transform);
                 msg.GetComponent<Text>().text = line;
+
+                FocusInput();
             });
         }
 
@@ -28,6 +29,17 @@ namespace Aether
 
             
             
+        }
+
+        void FocusInput()
+        {
+            m_ChatInput.Select();
+            m_ChatInput.ActivateInputField();
+        }
+
+        void OnEnable()
+        {
+            FocusInput();
         }
 
     }
