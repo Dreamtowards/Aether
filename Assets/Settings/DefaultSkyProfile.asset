@@ -468,11 +468,11 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: {x: 0, y: -6378.1, z: 0}
   windOrientation:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0
   windSpeed:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 999
   fogType:
     m_OverrideState: 1
     m_Value: 0
@@ -536,7 +536,7 @@ MonoBehaviour:
     m_Value: 0
   m_CloudPreset:
     m_OverrideState: 1
-    m_Value: 3
+    m_Value: 4
   cumulusMap:
     m_OverrideState: 0
     m_Value: {fileID: 0}
@@ -580,8 +580,8 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.037
-        value: 1
+        time: 0.177522
+        value: 1.8758087
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -589,8 +589,8 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.6
-        value: 1
+        time: 0.8762604
+        value: 1.3688011
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -723,7 +723,7 @@ MonoBehaviour:
     m_Value: 0.85
   shapeScale:
     m_OverrideState: 1
-    m_Value: 5
+    m_Value: 4.2
   shapeOffset:
     m_OverrideState: 0
     m_Value: {x: 0, y: 0, z: 0}
@@ -755,14 +755,14 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 0.1
   globalWindSpeed:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value:
       mode: 1
       customValue: 100
       additiveValue: 0
       multiplyValue: 1
   orientation:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value:
       mode: 1
       customValue: 0
