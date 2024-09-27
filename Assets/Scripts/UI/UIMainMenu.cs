@@ -1,8 +1,17 @@
 ﻿using System;
+using Sirenix.OdinInspector;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Aether
 {
+    [Serializable]
+    public class AudioInfo
+    {
+        public AudioClip clip;
+        public float time;
+    }
+    
     public class UIMainMenu : MonoBehaviour
     {
         public float m_Time;
@@ -14,6 +23,19 @@ namespace Aether
         public AnimationCurve m_CameraPitchCurve;
         public AnimationCurve m_CameraHeightCurve;
         
+        [ShowInInspector]
+        [SerializeField]
+        public AudioInfo[] m_Musics;
+
+        private void Start()
+        {
+            var aud = gameObject.AddComponent<AudioSource>();
+            var bgm = m_Musics[Random.Range(0, m_Musics.Length)];
+            aud.clip = bgm.clip;
+            aud.time = bgm.time;
+            aud.Play();
+        }
+
         private void Update()
         {
             m_Time += Time.deltaTime;
