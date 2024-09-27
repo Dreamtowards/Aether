@@ -28,7 +28,6 @@ namespace Aether
             m_ChatInput.gameObject.SetActive(InputManager.currentUI == gameObject);
 
             
-            
         }
 
         void FocusInput()
