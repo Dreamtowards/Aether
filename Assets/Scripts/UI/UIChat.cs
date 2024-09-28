@@ -25,7 +25,7 @@ namespace Aether
 
         void Update()
         {
-            m_ChatInput.gameObject.SetActive(InputManager.currentUI == gameObject);
+            m_ChatInput.gameObject.SetActive(UIManager.CurrentScreen == gameObject);
 
             
         }

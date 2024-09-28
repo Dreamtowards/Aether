@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1075177487067441975}
   - component: {fileID: 2219894732843089068}
   - component: {fileID: 7846468916894560590}
+  - component: {fileID: 3803654170406536676}
   m_Layer: 0
   m_Name: ButtonText
   m_TagString: Untagged
@@ -67,12 +68,12 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: cd79b650eb6a018469aa2ca16cc2ec37, type: 3}
-    m_FontSize: 14
+    m_Font: {fileID: 12800000, guid: 4cc9c416153886e458508e48630ffccc, type: 3}
+    m_FontSize: 17
     m_FontStyle: 0
     m_BestFit: 0
-    m_MinSize: 10
-    m_MaxSize: 40
+    m_MinSize: 1
+    m_MaxSize: 147
     m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
@@ -124,3 +125,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3803654170406536676
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2436767361044352445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 647b08e742d2479c9e3224efd3aa7039, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SFXHover: {fileID: 8300000, guid: 68cc768b793b9f646a15653a6d6c5bd6, type: 3}
+  m_SFXClick: {fileID: 8300000, guid: 03ca18807c4aeb847908d9c7e1986713, type: 3}
+  m_TargetText: {fileID: 0}

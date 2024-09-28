@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace Aether
 {
-    public class UIGrandButton : MonoBehaviour, IPointerEnterHandler, IPointerDownHandler
+    public class UIGrandButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
     {
         public AudioClip m_SFXHover;
         public AudioClip m_SFXClick;
@@ -18,7 +18,7 @@ namespace Aether
             PlaySound(m_SFXHover);
         }
 
-        public void OnPointerDown(PointerEventData evt)
+        public void OnPointerClick(PointerEventData evt)
         {
             PlaySound(m_SFXClick);
             

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -92,5 +93,28 @@ namespace Aether
                 c = obj.AddComponent<T>();
             return c;
         }
+        
+        public static void LockCursor(bool lockCursor)
+        {
+            Cursor.lockState = lockCursor ? CursorLockMode.Locked : CursorLockMode.None;
+        }
+
+
+        public static bool TryRemoveLast<T>(this List<T> ls)
+        {
+            if (ls.Count == 0)
+                return false;
+            ls.RemoveAt(ls.Count-1);
+            return true;
+        }
+
+        public static T LastOr<T>(this List<T> ls, T orDefault)
+        {
+            if (ls.Count == 0)
+                return orDefault;
+            return ls[ls.Count - 1];
+        }
+
+        public static bool IsEmpty<T>(this List<T> ls) => ls.Count == 0;
     }
 }

@@ -1,49 +1,33 @@
 ﻿using System;
-using Sirenix.OdinInspector;
 using UnityEngine;
-using Random = UnityEngine.Random;
+using UnityEngine.UI;
 
 namespace Aether
 {
-    [Serializable]
-    public class AudioInfo
-    {
-        public AudioClip clip;
-        public float time;
-    }
-    
     public class UIMainMenu : MonoBehaviour
     {
-        public float m_Time;
-        
-        public Light m_Light;
-        public AnimationCurve m_LightIntensityCurve;
-        
-        public Camera m_Camera;
-        public AnimationCurve m_CameraPitchCurve;
-        public AnimationCurve m_CameraHeightCurve;
-        
-        [ShowInInspector]
-        [SerializeField]
-        public AudioInfo[] m_Musics;
+        public Button m_BtnPlay, m_BtnSettings, m_BtnExit;
 
+        public GameObject m_ScreenPlay, m_ScreenSettings;
+        
         private void Start()
         {
-            var aud = gameObject.AddComponent<AudioSource>();
-            var bgm = m_Musics[Random.Range(0, m_Musics.Length)];
-            aud.clip = bgm.clip;
-            aud.time = bgm.time;
-            aud.Play();
-        }
-
-        private void Update()
-        {
-            m_Time += Time.deltaTime;
+            UIManager.PushScreen(gameObject);  // so switch to other screen will hide this screen.
             
-            m_Light.intensity = m_LightIntensityCurve.Evaluate(m_Time);
+            m_BtnPlay.onClick.AddListener(() =>
+            {
+                UIManager.PushScreen(m_ScreenPlay);
+            });
             
-            m_Camera.transform.rotation = Quaternion.Euler(m_CameraPitchCurve.Evaluate(m_Time), 0, 0);
-            m_Camera.transform.position = m_CameraHeightCurve.Evaluate(m_Time) * Vector3.up;
+            m_BtnSettings.onClick.AddListener(() =>
+            {
+                UIManager.PushScreen(m_ScreenSettings);
+            });
+            
+            m_BtnExit.onClick.AddListener(() =>
+            {
+                Application.Quit();
+            });
         }
     }
 }
