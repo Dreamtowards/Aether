@@ -15,7 +15,7 @@ namespace Aether
 
         public static bool AtInterval(float interval)
         {
-            return FrametimeIntervals(interval, Time.deltaTime, Time.realtimeSinceStartup) != 0;
+            return FrametimeIntervals(interval, Time.deltaTime, Time.time) != 0;
         }
 
         public static void ForVolume(int3 min, int3 max, Action<int3> visitor)
@@ -79,6 +79,18 @@ namespace Aether
             float s = math.frac(mn) * 60;
             
             return $"{math.floor(hr12 ? hr % 13 : hr):00}:{math.floor(mn):00}:{math.floor(s):00}{(hr12? (hr < 13 ? " AM" : " PM") :"")}";
+        }
+        
+        
+        
+        
+
+        public static T GetOrAddComponent<T>(this GameObject obj) where T : Component
+        {
+            var c = obj.GetComponent<T>();
+            if (!c)
+                c = obj.AddComponent<T>();
+            return c;
         }
     }
 }
