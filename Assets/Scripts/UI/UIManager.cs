@@ -1,13 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Aether
 {
     public class UIManager : MonoBehaviour
     {
-        public UIManager instance;
+        public static UIManager instance;
+        
+        private void Start()
+        {
+            instance = this;
+        }
 
         private static GameObject g_CurrentUI;
         public static GameObject CurrentScreen
@@ -15,17 +21,19 @@ namespace Aether
             get => g_CurrentUI;
             set
             {
-                if (g_CurrentUI == value)
-                    return;
-				
                 InputManager.IsPlayingInput = value == null;
                 Utility.LockCursor(InputManager.IsPlayingInput);
+                
+                if (g_CurrentUI == value)
+                    return;
 
-                g_CurrentUI?.SetActive(false);
+                if (g_CurrentUI)
+                    g_CurrentUI.SetActive(false);
 				
                 g_CurrentUI = value;
 				
-                g_CurrentUI?.SetActive(true);
+                if (g_CurrentUI)
+                    g_CurrentUI.SetActive(true);
             }
         }
 
@@ -33,20 +41,40 @@ namespace Aether
 
         public static void PushScreen(GameObject screen)
         {
-            OpendScreens.Add(screen);
+            if (screen)
+                OpendScreens.Add(screen);
             CurrentScreen = screen;
         }
         public static void PopScreen(bool keepLastScreen = false)
         {
-            if (OpendScreens.Count == 1 && keepLastScreen)
+            OpendScreens.RemoveIf(e => e == null);  // Clear Nil Screens after switch Scene
+            
+            if (OpendScreens.Count <= 1 && keepLastScreen)
                 return;
             OpendScreens.TryRemoveLast();
             CurrentScreen = OpendScreens.LastOr(null);
         }
-        
-        private void Start()
+
+        [Serializable]
+        public class Screens
         {
-            instance = this;
+            public GameObject
+                MainTitle,
+                WorldList,
+                Settings,
+                Pause,
+                Chat;
         }
+        [ShowInInspector]
+        public Screens m_Screens;
+
+        public static Screens Screen => instance.m_Screens;
+
+        // public GameObject
+        //     UiScreenMainTitle,
+        //     UiScreenWorldList,
+        //     UiScreenSettings,
+        //     UiScreenPause,
+        //     UiScreenChat;
     }
 }

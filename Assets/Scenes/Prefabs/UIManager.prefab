@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &901828035256750074
+--- !u!1 &2052334454546506723
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,22 +8,22 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4478425626586147271}
-  - component: {fileID: 3411516156321852412}
+  - component: {fileID: 6878228009551100664}
+  - component: {fileID: 6767407509253366577}
   m_Layer: 0
-  m_Name: SoundManager
+  m_Name: UIManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4478425626586147271
+--- !u!4 &6878228009551100664
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 901828035256750074}
+  m_GameObject: {fileID: 2052334454546506723}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
@@ -32,17 +32,21 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3411516156321852412
+--- !u!114 &6767407509253366577
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 901828035256750074}
+  m_GameObject: {fileID: 2052334454546506723}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 049bfcd96bc444b4995a504ccf0e237e, type: 3}
+  m_Script: {fileID: 11500000, guid: 91ca77b7a47043f3ab85fefb4c9479d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_SFXHover: {fileID: 8300000, guid: 68cc768b793b9f646a15653a6d6c5bd6, type: 3}
-  m_SFXClick: {fileID: 8300000, guid: 03ca18807c4aeb847908d9c7e1986713, type: 3}
+  m_Screens:
+    MainTitle: {fileID: 6440889726001644129, guid: 98302da183eca5747b1a5d303b5dea0b, type: 3}
+    WorldList: {fileID: 2722409200095411126, guid: 750f8d53693cf034bac703a405e89e47, type: 3}
+    Settings: {fileID: 2722409200095411126, guid: 30f34c356c2dfb24b8052b84a45ceea2, type: 3}
+    Pause: {fileID: 4170970195045262388, guid: a91f94909f69c914db47591c80ff0b1e, type: 3}
+    Chat: {fileID: 0}

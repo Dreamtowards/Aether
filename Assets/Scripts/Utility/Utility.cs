@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -67,9 +68,19 @@ namespace Aether
             return numRemoved;
         }
 
-        public static string StrDuration(int sec)
+        public static string StrTimeDuration(int sec, string txHr=":", string txMin=":", string txSec="", bool forceUnits = false)
         {
-            return $"{sec/60/60:00}:{sec/60:00}:{sec % 60:00}";
+            StringBuilder sb = new($"{sec % 60:00}{txSec}");
+
+            var min = sec / 60 % 60;
+            if (min > 0 || forceUnits)
+                sb.Insert(0, $"{min:00}{txMin}");
+            
+            var hr = sec / 60 / 60;
+            if (hr > 0 || forceUnits)
+                sb.Insert(0, $"{hr:00}{txHr}");
+
+            return sb.ToString();
         }
 
         public static string StrDayTime(float daytime, bool hr12 = true)
@@ -102,7 +113,7 @@ namespace Aether
 
         public static bool TryRemoveLast<T>(this List<T> ls)
         {
-            if (ls.Count == 0)
+            if (ls.IsEmpty())
                 return false;
             ls.RemoveAt(ls.Count-1);
             return true;

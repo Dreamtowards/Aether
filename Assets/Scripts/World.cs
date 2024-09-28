@@ -51,5 +51,7 @@ namespace Aether
         public UInt64 TimeMidified;
         
         public float TimeInhabited;
+
+        public string FilePath;
     }
 }

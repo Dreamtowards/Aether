@@ -40,6 +40,8 @@ namespace Aether
 		private void Start() {
 			Assert.IsNull(instance);
 			instance = this;
+
+			UIManager.CurrentScreen = null;
 		}
 
 #if ENABLE_INPUT_SYSTEM
@@ -82,13 +84,16 @@ namespace Aether
 
 		void OnEscape(InputValue val)
 		{
-			UIManager.CurrentScreen = !UIManager.CurrentScreen ? m_UiPauseMenu : null;
+			if (UIManager.CurrentScreen)
+				UIManager.PopScreen();
+			else 
+				UIManager.PushScreen(m_UiPauseMenu);
 		}
 
 		void OnCommand(InputValue val)
 		{
 			if (IsPlayingInput)
-				UIManager.CurrentScreen = m_UiChat;
+				UIManager.PushScreen(m_UiChat);
 		}
 #endif
 		
@@ -113,10 +118,10 @@ namespace Aether
 			sprint = newSprintState;
 		}
 
-		private void OnApplicationFocus(bool hasFocus)
-		{
-			Utility.LockCursor(IsPlayingInput && cursorLocked && hasFocus);
-		}
+		// private void OnApplicationFocus(bool hasFocus)
+		// {
+		// 	Utility.LockCursor(IsPlayingInput && cursorLocked && hasFocus);
+		// }
 	}
 	
 }
