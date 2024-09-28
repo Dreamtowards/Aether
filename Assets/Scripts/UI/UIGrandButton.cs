@@ -7,20 +7,14 @@ namespace Aether
 {
     public class UIGrandButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandler
     {
-        public AudioClip m_SFXHover;
-        public AudioClip m_SFXClick;
-
-        public Text m_TargetText;
-
-        
         public void OnPointerEnter(PointerEventData evt)
         {
-            SoundManager.instance.Play(m_SFXHover);
+            SoundManager.instance.PlaySfxButtonHover();
         }
 
         public void OnPointerClick(PointerEventData evt)
         {
-            SoundManager.instance.Play(m_SFXClick);
+            SoundManager.instance.PlaySfxButtonClick();
             
             EventSystem.current.SetSelectedGameObject(null);
         }

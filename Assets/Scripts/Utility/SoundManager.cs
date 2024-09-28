@@ -14,6 +14,9 @@ namespace Aether
         
         [NonSerialized] 
         public List<AudioSource> m_Playing = new();
+        
+        public AudioClip m_SFXHover;
+        public AudioClip m_SFXClick;
 
         private void Start()
         {
@@ -35,6 +38,13 @@ namespace Aether
             aud.Play();
             m_Playing.Add(aud);
             return aud;
+        }
+
+        public void PlaySfxButtonHover() {
+            Play(m_SFXHover);
+        }
+        public void PlaySfxButtonClick() {
+            Play(m_SFXClick);
         }
         
         private void ReleaseAllStopped()
