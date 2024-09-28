@@ -107,6 +107,19 @@ namespace Aether
             ls.RemoveAt(ls.Count-1);
             return true;
         }
+        public static int RemoveIf<T>(this List<T> ls, Func<T, bool> predict)
+        {
+            int numRemoved = 0;
+            for (int i = 0; i < ls.Count;) {
+                if (predict(ls[i])) {
+                    ls.RemoveAt(i);
+                    ++numRemoved;
+                    continue;
+                }
+                ++i;
+            }
+            return numRemoved;
+        }
 
         public static T LastOr<T>(this List<T> ls, T orDefault)
         {

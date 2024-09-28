@@ -15,21 +15,14 @@ namespace Aether
         
         public void OnPointerEnter(PointerEventData evt)
         {
-            PlaySound(m_SFXHover);
+            SoundManager.instance.Play(m_SFXHover);
         }
 
         public void OnPointerClick(PointerEventData evt)
         {
-            PlaySound(m_SFXClick);
+            SoundManager.instance.Play(m_SFXClick);
             
             EventSystem.current.SetSelectedGameObject(null);
-        }
-
-        public void PlaySound(AudioClip clip)
-        {
-            var aud = gameObject.GetOrAddComponent<AudioSource>();
-            aud.clip = clip;
-            aud.Play();
         }
     }
 }
