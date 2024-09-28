@@ -123,7 +123,7 @@ namespace Aether
                     var cs = ChunkSystem.instance;
                     ImGui.SeparatorText("Voxel");
                     ImGui.SliderInt3("Chunks Load Range", ref cs.m_ChunkLoadMarker.m_ChunksLoadDistance.x, -1, 20);
-                    if (ImGui.MenuItem("Regenerate All Chunks")) ;
+                    if (ImGui.MenuItem("Regenerate All Chunks")) { }
                     if (ImGui.MenuItem("Remesh All Chunks")) {
                         ChunkSystem.instance.m_Chunks.Keys.ForEach(e => {
                             ChunkSystem.instance.MarkChunkMeshDirty(e);

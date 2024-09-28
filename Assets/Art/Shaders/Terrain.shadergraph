@@ -29,6 +29,9 @@
         },
         {
             "m_Id": "caf0717358fa413982566dbc437cffb3"
+        },
+        {
+            "m_Id": "91e9e39e29194bd397df29dd0167934d"
         }
     ],
     "m_Keywords": [],
@@ -137,6 +140,9 @@
         },
         {
             "m_Id": "e3f75f31ec71403aa7abe71ca696d43f"
+        },
+        {
+            "m_Id": "262aabba708d435ba9f7d028b8f5c0b6"
         }
     ],
     "m_GroupDatas": [],
@@ -168,6 +174,20 @@
                     "m_Id": "427e43e0b205400396a4b1a8b2e9fcbb"
                 },
                 "m_SlotId": 12
+            }
+        },
+        {
+            "m_OutputSlot": {
+                "m_Node": {
+                    "m_Id": "262aabba708d435ba9f7d028b8f5c0b6"
+                },
+                "m_SlotId": 0
+            },
+            "m_InputSlot": {
+                "m_Node": {
+                    "m_Id": "427e43e0b205400396a4b1a8b2e9fcbb"
+                },
+                "m_SlotId": 21
             }
         },
         {
@@ -652,6 +672,31 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
+    "m_ObjectId": "08ed8a5936094fdf843d279f93cf3430",
+    "m_Id": 0,
+    "m_DisplayName": "HighlightPosRadius",
+    "m_SlotType": 1,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "Out",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.Vector1MaterialSlot",
     "m_ObjectId": "0a86c4ceac7f4938a71f7121a512b643",
     "m_Id": 5,
@@ -848,6 +893,42 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.PropertyNode",
+    "m_ObjectId": "262aabba708d435ba9f7d028b8f5c0b6",
+    "m_Group": {
+        "m_Id": ""
+    },
+    "m_Name": "Property",
+    "m_DrawState": {
+        "m_Expanded": true,
+        "m_Position": {
+            "serializedVersion": "2",
+            "x": -661.9999389648438,
+            "y": 1607.9998779296875,
+            "width": 178.0,
+            "height": 34.0
+        }
+    },
+    "m_Slots": [
+        {
+            "m_Id": "08ed8a5936094fdf843d279f93cf3430"
+        }
+    ],
+    "synonyms": [],
+    "m_Precision": 0,
+    "m_PreviewExpanded": true,
+    "m_DismissedVersion": 0,
+    "m_PreviewMode": 0,
+    "m_CustomColors": {
+        "m_SerializableColors": []
+    },
+    "m_Property": {
+        "m_Id": "91e9e39e29194bd397df29dd0167934d"
+    }
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.ShaderGraph.BlockNode",
     "m_ObjectId": "264aa74c8b844de5a80fa38ee99ff781",
     "m_Group": {
@@ -905,6 +986,31 @@
 
 {
     "m_SGVersion": 0,
+    "m_Type": "UnityEditor.ShaderGraph.Vector4MaterialSlot",
+    "m_ObjectId": "2a3e4d20b9be447abb39abc4cc500eac",
+    "m_Id": 21,
+    "m_DisplayName": "HighlightPosRadius",
+    "m_SlotType": 0,
+    "m_Hidden": false,
+    "m_ShaderOutputName": "HighlightPosRadius",
+    "m_StageCapability": 3,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_DefaultValue": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    },
+    "m_Labels": []
+}
+
+{
+    "m_SGVersion": 0,
     "m_Type": "UnityEditor.Rendering.HighDefinition.ShaderGraph.SystemData",
     "m_ObjectId": "2db4b95bc1844bc6a49c2905ce894fc1",
     "m_MaterialNeedsUpdateHash": 0,
@@ -934,7 +1040,7 @@
     "m_TessellationMaxDisplacement": 0.009999999776482582,
     "m_DebugSymbols": false,
     "m_Version": 2,
-    "inspectorFoldoutMask": 0
+    "inspectorFoldoutMask": 9
 }
 
 {
@@ -1264,6 +1370,9 @@
         },
         {
             "m_Id": "23479aa47d784fff977e5f4a953cddc6"
+        },
+        {
+            "m_Id": "2a3e4d20b9be447abb39abc4cc500eac"
         },
         {
             "m_Id": "97b14a0617ac44ecb0417490ea5b6323"
@@ -1842,6 +1951,9 @@
         },
         {
             "m_Id": "caf0717358fa413982566dbc437cffb3"
+        },
+        {
+            "m_Id": "91e9e39e29194bd397df29dd0167934d"
         }
     ]
 }
@@ -2112,6 +2224,34 @@
     },
     "m_Labels": [],
     "m_Space": 0
+}
+
+{
+    "m_SGVersion": 1,
+    "m_Type": "UnityEditor.ShaderGraph.Internal.Vector4ShaderProperty",
+    "m_ObjectId": "91e9e39e29194bd397df29dd0167934d",
+    "m_Guid": {
+        "m_GuidSerialized": "21a52e3d-139e-4095-a3c0-01b60c8e495d"
+    },
+    "m_Name": "HighlightPosRadius",
+    "m_DefaultRefNameVersion": 1,
+    "m_RefNameGeneratedByDisplayName": "HighlightPosRadius",
+    "m_DefaultReferenceName": "_HighlightPosRadius",
+    "m_OverrideReferenceName": "",
+    "m_GeneratePropertyBlock": true,
+    "m_UseCustomSlotLabel": false,
+    "m_CustomSlotLabel": "",
+    "m_DismissedVersion": 0,
+    "m_Precision": 0,
+    "overrideHLSLDeclaration": false,
+    "hlslDeclarationOverride": 0,
+    "m_Hidden": false,
+    "m_Value": {
+        "x": 0.0,
+        "y": 0.0,
+        "z": 0.0,
+        "w": 0.0
+    }
 }
 
 {

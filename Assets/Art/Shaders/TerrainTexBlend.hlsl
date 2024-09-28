@@ -44,6 +44,7 @@ void TexBlend_float(
 	float TexHeightmapBlendPow, 
 	float TexIdOffset,
 	float NormSharpness,
+	float4 HighlightPosRadius,
 
 	out float3 outAlbedo,
 	out float3 outNormal, 
@@ -74,12 +75,14 @@ void TexBlend_float(
 	// int idxVertTex = idxMaxHigh;  // triangle vertex idx of Current Frag Mtl. usually = i_MaxBary, or i_MaxHigh
 
 	float4 DRAM = triDRAM[idxMaxHigh];
+	
+	float highlightDist = max(0, HighlightPosRadius.w - length(WorldPos - HighlightPosRadius.xyz));
 
 	outAlbedo = 
-	TexTriplanar(TexDiff, PosTrip, TexIds[idxMaxHigh], BlendTrip, TexCount).xyz;
+	TexTriplanar(TexDiff, PosTrip, TexIds[idxMaxHigh], BlendTrip, TexCount).xyz  +smoothstep(0, 1, highlightDist) * 0.4f;
 					 
 	outNormal = //float3(0,0,1);
-	pow(TexTriplanar(TexNorm, PosTrip, TexIds[idxMaxHigh], BlendTrip, TexCount).xyz, NormSharpness);
+	pow(abs(TexTriplanar(TexNorm, PosTrip, TexIds[idxMaxHigh], BlendTrip, TexCount).xyz), NormSharpness);
 
 	// outAlbedo = outNormal;//(outNormal + 1) / 2.0; outNormal = float3(0,0,1);
 	

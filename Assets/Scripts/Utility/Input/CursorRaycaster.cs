@@ -1,5 +1,6 @@
 ﻿using System;
 using Sirenix.OdinInspector;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Aether
@@ -25,6 +26,8 @@ namespace Aether
         
         [ShowInInspector]
         public HitResult hitResult;
+        
+        public Material m_TerrainMaterial;
 
         void Start()
         {
@@ -45,6 +48,8 @@ namespace Aether
                 hitResult.normal = hit.normal;
                 hitResult.distance = hit.distance;
             }
+
+            m_TerrainMaterial.SetVector("_HighlightPosRadius", new float4(hitResult.point, 2));
         }
     }
 }
