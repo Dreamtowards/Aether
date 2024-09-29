@@ -140,7 +140,7 @@ namespace Aether
             }
             if (GetNeighborChunk(relpos, out var chunk)) {
                 func(ref chunk.AtVoxel(LocalPos(relpos)));
-                return true;
+                return true;  // todo popagation
             }
             return false;
         }
@@ -174,6 +174,7 @@ namespace Aether
         public static int3 LocalPos(int3 p) {
             return new(Maths.Mod16(p.x), Maths.Mod16(p.y), Maths.Mod16(p.z));
         }
+        public static int3 LocalPos(float3 p) => LocalPos((int3)math.floor(p)); 
 
         public static bool IsChunkPos(int3 p) {
             return math.all(p % 16 == int3.zero);

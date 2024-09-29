@@ -285,6 +285,35 @@ namespace Aether
 
         #endregion
         
+        
+        
+        
+
+        public void ModifySphere(float3 point, float radius, float intensity = 1, int texId = -1)
+        {
+            int3 lastChunkPos;
+            if (!GetChunk(lastChunkPos=Chunk.ChunkPos(point), out var chunk))
+                return;
+            var lpMid = Chunk.LocalPos(point);
+
+            MarkChunkMeshDirty(lastChunkPos);
+            Utility.ForVolumeMid(0, (int)math.ceil(radius), p =>
+            {
+                chunk.SetVoxel(lpMid + p, (ref Vox vox) =>
+                {
+                    float dist = math.length(p);
+                    float f = math.max(0, radius - dist);
+                    vox.density += f*intensity;
+                    if (texId >= 0 && vox.density > 0 && f > 0) {
+                        vox.texId = (ushort)texId;
+                    }
+                });
+                var cp = Chunk.ChunkPos((int3)point + p);
+                if (math.any(lastChunkPos != cp)) {
+                    MarkChunkMeshDirty(lastChunkPos=cp);
+                }
+            });
+        }
     }
 
 }

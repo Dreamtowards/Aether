@@ -28,6 +28,11 @@ namespace Aether
                 visitor(new int3(x, y, z));
         }
 
+        public static void ForVolumeMid(int3 mid, int radiusInclusive, Action<int3> visitor)
+        {
+            ForVolume(mid-radiusInclusive, mid+radiusInclusive+1, visitor);
+        }
+
         public static void ForVolumeSpread(int nXZ, int nY, Action<int3> visitor)
         {
             var nMax = math.max(nXZ, nY);
