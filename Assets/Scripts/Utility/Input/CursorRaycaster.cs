@@ -12,7 +12,9 @@ namespace Aether
         public Vector3 point, normal;
         public float distance;
         
+        [ShowInInspector]
         public Ray ray;
+        [ShowInInspector]
         public RaycastHit hitInfo;
 
         public void Reset()
