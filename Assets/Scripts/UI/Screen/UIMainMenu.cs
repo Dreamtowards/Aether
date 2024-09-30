@@ -6,9 +6,16 @@ namespace Aether
 {
     public class UIMainMenu : MonoBehaviour
     {
-        public Button m_BtnPlay, m_BtnSettings, m_BtnExit;
+        public Button 
+            m_BtnPlay, 
+            m_BtnSettings, 
+            m_BtnExit, 
+            m_BtnCredits;
 
-        public GameObject m_ScreenPlay, m_ScreenSettings;
+        public GameObject 
+            m_ScreenPlay, 
+            m_ScreenSettings, 
+            m_ScreenCredits;
         
         private void Start()
         {
@@ -27,6 +34,11 @@ namespace Aether
             m_BtnExit.onClick.AddListener(() =>
             {
                 Application.Quit();
+            });
+            
+            m_BtnCredits.onClick.AddListener(() =>
+            {
+                UIManager.PushScreen(m_ScreenCredits);
             });
         }
     }
