@@ -7,7 +7,6 @@ using UnityEngine;
 namespace Aether
 {
     // NOTE: item prototype, handles logics instead of any data. only 1 instance for a type of item. if you want multiple items instances see ItemStack.
-    [Serializable]
     public class Item
     {
         public string id;
@@ -21,7 +20,6 @@ namespace Aether
         public float fuel;
         
         [NonSerialized, OdinSerialize]
-        [ShowInInspector]
         public List<ItemComponent> components = new();
 
         // on starts using. Right Click
@@ -52,19 +50,16 @@ namespace Aether
 
     }
     
-    [Serializable]
     public class ItemComponent
     {
-        public int tmp = 2;
+        // public int tmp = 2;
     }
 
-    [Serializable]
     public class ItemComponentFood : ItemComponent
     {
         public int heal;
     }
         
-    [Serializable]
     public class ItemComponentTool : ItemComponent
     {
         public int durability = 10;
