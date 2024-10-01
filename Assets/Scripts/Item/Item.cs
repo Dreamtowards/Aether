@@ -52,7 +52,6 @@ namespace Aether
     
     public class ItemComponent
     {
-        // public int tmp = 2;
     }
 
     public class ItemComponentFood : ItemComponent

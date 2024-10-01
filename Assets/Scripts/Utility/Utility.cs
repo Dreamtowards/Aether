@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Unity.Mathematics;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Aether
 {
@@ -145,5 +146,22 @@ namespace Aether
         }
 
         public static bool IsEmpty<T>(this List<T> ls) => ls.Count == 0;
+
+
+        public static void ForChildren(this Transform obj, Action<Transform> visitor)
+        {
+            for (int i = 0; i < obj.childCount; i++)
+            {
+                visitor(obj.GetChild(i));
+            }
+        }
+
+        public static void DestroyChildren(this Transform obj, bool immediately)
+        {
+            obj.ForChildren(e => {
+                if (immediately) UnityEngine.Object.DestroyImmediate(e);
+                else UnityEngine.Object.Destroy(e);
+            });
+        }
     }
 }

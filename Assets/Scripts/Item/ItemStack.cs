@@ -1,12 +1,13 @@
 ﻿namespace Aether
 {
-    public class ItemStack
+    public struct ItemStack
     {
         public Item item;
         public int count;
 
 
 
+        public bool IsEmpty => count == 0 || item == null;
 
         #region Damage
 
