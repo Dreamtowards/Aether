@@ -5,6 +5,11 @@
         public Item item;
         public int count;
 
+        public ItemStack(Item item, int count) {
+            this.item = item;
+            this.count = count;
+            this.m_Damage = 0;
+        }
 
 
         public bool IsEmpty => count == 0 || item == null;

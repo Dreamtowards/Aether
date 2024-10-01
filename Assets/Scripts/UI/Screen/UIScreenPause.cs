@@ -24,5 +24,20 @@ namespace Aether
                 SceneManager.LoadScene("Scenes/Limbo");
             });
         }
+        
+        public UIInventory m_UIInventory;
+        public EntityPlayer m_Player;
+        
+        void OnEnable()
+        {
+            int idx = 0;
+            ItemManager.instance.registry.entries.ForEach(e =>
+            {
+                m_Player.inventory.items[++idx] = new ItemStack(e, idx * 3);
+            });
+            
+            m_UIInventory.inventory = m_Player.inventory;
+            m_UIInventory.UpdateInventory();
+        }
     }
 }
