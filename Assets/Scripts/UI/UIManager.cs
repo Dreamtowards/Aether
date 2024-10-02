@@ -14,9 +14,11 @@ namespace Aether
         public bool IsHideHUDOnScreenOpened;
 
         public GameObject
-            ScreenPause, 
-            ScreenSettings, 
+            ScreenPause,
+            ScreenSettings,
             ScreenChat;
+        
+        public UIItemTooltip UiItemTooltip;
         
         private void Start()
         {

@@ -1,10 +1,12 @@
 ﻿using Sirenix.OdinInspector;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 namespace Aether
 {
-    public class UIItemSlot : MonoBehaviour
+    public class UIItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         public Button m_Border;
         
@@ -43,6 +45,22 @@ namespace Aether
                 m_CountText.text = stack.count.ToString();
             }
         }
-        
+
+
+        public void OnPointerEnter(PointerEventData evt)
+        {
+            if (ItemStack.IsEmpty)
+                return;
+            var tip = UIManager.instance.UiItemTooltip;
+            tip.gameObject.SetActive(true);
+            tip.UpdateItemStack(ItemStack);
+            tip.transform.position = transform.position + tip.offset;
+        }
+
+        public void OnPointerExit(PointerEventData evt)
+        {
+            var tip = UIManager.instance.UiItemTooltip;
+            tip.gameObject.SetActive(false);
+        }
     }
 }
