@@ -137,7 +137,9 @@ namespace Aether
                 }
                 if (ImGui.BeginMenu("Graphics"))
                 {
+                    ImGui.SeparatorText("Camera");
                     ImGui.SliderFloat("FOV", ref PlayerController.instance.m_VirtualCamera.m_Lens.FieldOfView, 0, 140);
+                    ImGui.SliderFloat("Distance", ref PlayerController.instance.m_CameraDistance, 0, 100);
                     
                     ImGui.EndMenu();
                 }

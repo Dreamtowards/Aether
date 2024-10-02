@@ -24,14 +24,7 @@ namespace Aether
 		public Vector2 move;
 		public Vector2 look;
 		public bool jump;
-		public bool sprint;
-
-		[Header("Movement Settings")]
 		public bool analogMovement;
-
-		[Header("Mouse Cursor Settings")]
-		public bool cursorLocked = true;
-		public bool cursorInputForLook = true;
 
 		public PlayerInput m_PlayerInput;
 
@@ -42,6 +35,8 @@ namespace Aether
 		public InputAction actionUse;
 		public InputAction actionAttack;
 		public InputAction actionDropItem;
+		
+		public InputAction actionSprint;
 		
 		public InputAction actionCameraDistanceModifier;
 		// public InputActionReference actionCameraDistanceModifierRef;
@@ -60,6 +55,8 @@ namespace Aether
 			actionUse.Enable();
 			actionAttack.Enable();
 			actionDropItem.Enable();
+			
+			actionSprint.Enable();
 			actionCameraDistanceModifier.Enable();
 			// actionCameraDistanceModifierRef.action.Enable();
 		}
@@ -167,18 +164,15 @@ namespace Aether
 			// PlayAnimSwingHand()
 		}
 
-#if ENABLE_INPUT_SYSTEM
 		public void OnMove(InputValue value)
 		{
-			MoveInput(value.Get<Vector2>());
+			move = value.Get<Vector2>();
 		}
 
 		public void OnLook(InputValue value)
 		{
-			if(cursorInputForLook)
-			{
-				LookInput(value.Get<Vector2>());
-			}
+			//cursorInputForLook
+			look = value.Get<Vector2>();
 		}
 
 		private float m_TimeLastJump;
@@ -197,12 +191,7 @@ namespace Aether
 			if (isFlying)
 				return;  // No Jump when DoubleJump Fly
 			
-			JumpInput(value.isPressed);
-		}
-
-		public void OnSprint(InputValue value)
-		{
-			SprintInput(value.isPressed);
+			jump = value.isPressed;
 		}
 
 		void OnEscape(InputValue val)
@@ -218,33 +207,7 @@ namespace Aether
 			if (IsPlayingInput)
 				UIManager.PushScreen(UIManager.instance.ScreenChat);
 		}
-#endif
-		
 
-		public void MoveInput(Vector2 newMoveDirection)
-		{
-			move = newMoveDirection;
-		} 
-
-		public void LookInput(Vector2 newLookDirection)
-		{
-			look = newLookDirection;
-		}
-
-		public void JumpInput(bool newJumpState)
-		{
-			jump = newJumpState;
-		}
-
-		public void SprintInput(bool newSprintState)
-		{
-			sprint = newSprintState;
-		}
-
-		// private void OnApplicationFocus(bool hasFocus)
-		// {
-		// 	Utility.LockCursor(IsPlayingInput && cursorLocked && hasFocus);
-		// }
 	}
 	
 }

@@ -143,6 +143,17 @@ namespace Aether
 
             GroundedCheck();
 
+            {   // Camera Distance
+                if (InputManager.instance.actionCameraDistanceModifier.IsPressed())
+                    m_CameraDistance += Input.mouseScrollDelta.y;
+                m_CameraDistance = Mathf.Max(0, m_CameraDistance);
+                m_CharacterGeometry.SetActive(m_CameraDistance > 0);
+            
+                if (m_VirtualCamera.GetCinemachineComponent(CinemachineCore.Stage.Body) is Cinemachine3rdPersonFollow comp) {
+                    comp.CameraDistance = m_CameraDistance;
+                }
+            }
+            
             if (!InputManager.IsPlayingInput)
                 return;
             
@@ -161,15 +172,6 @@ namespace Aether
 
             Move();
             
-            
-            if (InputManager.instance.actionCameraDistanceModifier.IsPressed())
-                m_CameraDistance += Input.mouseScrollDelta.y;
-            m_CameraDistance = Mathf.Max(0, m_CameraDistance);
-            m_CharacterGeometry.SetActive(m_CameraDistance > 0);
-            
-            if (m_VirtualCamera.GetCinemachineComponent(CinemachineCore.Stage.Body) is Cinemachine3rdPersonFollow comp) {
-                comp.CameraDistance = m_CameraDistance;
-            }
             
             if (InputManager.IsPlayingInput)
                 CameraRotation();
@@ -231,7 +233,7 @@ namespace Aether
         private void Move()
         {
             // set target speed based on move speed, sprint speed and if sprint is pressed
-            float targetSpeed = _input.sprint ? SprintSpeed : MoveSpeed;
+            float targetSpeed = _input.actionSprint.IsPressed() ? SprintSpeed : MoveSpeed;
 
             // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 
