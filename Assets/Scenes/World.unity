@@ -118,6 +118,17 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!114 &14029287 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 552644321323831528, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+  m_PrefabInstance: {fileID: 1169391342}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &83988147
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1179,6 +1190,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Name: Prim
+  health: 100
+  maxHealth: 100
 --- !u!1001 &1061983536
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1740,6 +1753,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1829635162740182788, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: m_HealthBar
+      value: 
+      objectReference: {fileID: 14029287}
+    - target: {fileID: 1829635162740182788, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: m_EntityPlayer
+      value: 
+      objectReference: {fileID: 981948687}
     - target: {fileID: 1949639837755297168, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
       propertyPath: registry
       value: 
@@ -1772,6 +1793,26 @@ PrefabInstance:
       propertyPath: _camera
       value: 
       objectReference: {fileID: 176808302}
+    - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: actionCameraDistanceModifier.m_Name
+      value: Action Camera Distance Modifier
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: actionCameraDistanceModifier.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: actionCameraDistanceModifier.m_SingletonActionBindings.Array.data[0].m_Id
+      value: f2da52a5-0dba-4eff-b819-14a649990092
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: actionCameraDistanceModifier.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/leftAlt
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: actionCameraDistanceModifier.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Action Camera Distance Modifier
+      objectReference: {fileID: 0}
     - target: {fileID: 3363939224535683765, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1986,6 +2027,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8913237781004910899, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
       propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8913237781004910899, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

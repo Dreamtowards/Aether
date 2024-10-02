@@ -20,7 +20,7 @@ namespace Aether
                 var slot = Instantiate(m_PrefabItemSlot, transform).GetComponent<UIItemSlot>();
                 slots.Add(slot);
                 
-                slot.m_ItemStack = inventory.items[i];
+                slot.ItemStack = inventory.items[i];
                 slot.UpdateItemStack();
             }
         }

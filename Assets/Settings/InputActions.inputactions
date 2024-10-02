@@ -103,6 +103,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "CameraDistanceModifier",
+                    "type": "Button",
+                    "id": "2a529eb3-bb55-41e4-8a0c-f0cf8c95759a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -510,6 +519,17 @@
                     "processors": "",
                     "groups": ";Keyboard&Mouse",
                     "action": "Command",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7a64ec4b-825f-463c-a5e0-d51f560c6dbd",
+                    "path": "<Keyboard>/leftAlt",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "CameraDistanceModifier",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

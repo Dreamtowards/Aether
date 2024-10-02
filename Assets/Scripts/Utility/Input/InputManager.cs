@@ -36,12 +36,18 @@ namespace Aether
 
 		public static InputManager instance;
 
+		public InputAction actionCameraDistanceModifier;
+		// public InputActionReference actionCameraDistanceModifierRef;
 
 		private void Start() {
 			Assert.IsNull(instance);
 			instance = this;
+			
+			// LockMouse
+			UIManager.PushScreen(null);
 
-			UIManager.CurrentScreen = null;
+			actionCameraDistanceModifier.Enable();
+			// actionCameraDistanceModifierRef.action.Enable();
 		}
 
 #if ENABLE_INPUT_SYSTEM

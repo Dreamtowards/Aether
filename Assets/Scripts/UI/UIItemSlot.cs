@@ -25,12 +25,12 @@ namespace Aether
         public Text m_CountText;
 
         [ShowInInspector]
-        public ItemStack m_ItemStack;
+        public ItemStack ItemStack;
 
         [Button]
         public void UpdateItemStack()
         {
-            var stack = m_ItemStack;
+            var stack = ItemStack;
 
             if (stack.IsEmpty) {
                 m_ItemImage.enabled = false;

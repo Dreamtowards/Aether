@@ -216,7 +216,7 @@ namespace Aether
             CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
                 _cinemachineTargetYaw, 0.0f);
 
-            if (Input.GetKey(KeyCode.LeftAlt))
+            if (InputManager.instance.actionCameraDistanceModifier.IsPressed())
                 m_CameraDistance += Input.mouseScrollDelta.y;
             m_CameraDistance = Mathf.Max(0, m_CameraDistance);
             m_CharacterGeometry.SetActive(m_CameraDistance > 0);
