@@ -1530,6 +1530,10 @@ PrefabInstance:
       value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 4416926081852918490, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      propertyPath: FOVSmoothness
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4416926081852918490, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
       propertyPath: m_VirtualCamera
       value: 
       objectReference: {fileID: 1951789790}
@@ -1882,8 +1886,16 @@ PrefabInstance:
       value: Action Attack
       objectReference: {fileID: 0}
     - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: actionSprint.m_Name
+      value: Action Sprint
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
       propertyPath: actionDropItem.m_Name
       value: Action Drop Item
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: actionCameraZoom.m_Name
+      value: Action Camera Zoom
       objectReference: {fileID: 0}
     - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
       propertyPath: actionUse.m_SingletonActionBindings.Array.size
@@ -1894,7 +1906,15 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: actionSprint.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
       propertyPath: actionDropItem.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: actionCameraZoom.m_SingletonActionBindings.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
@@ -1910,6 +1930,10 @@ PrefabInstance:
       value: 8a2cfdd7-fb59-4dd5-be57-d3ee3b9082e8
       objectReference: {fileID: 0}
     - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: actionSprint.m_SingletonActionBindings.Array.data[0].m_Id
+      value: 99688fda-38a0-42de-a43d-a10b9e4e45a0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
       propertyPath: actionUse.m_SingletonActionBindings.Array.data[0].m_Action
       value: Action Use
       objectReference: {fileID: 0}
@@ -1922,16 +1946,36 @@ PrefabInstance:
       value: 201f4ff6-a248-41fe-8cc1-2e908f062c06
       objectReference: {fileID: 0}
     - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: actionSprint.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/shift
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
       propertyPath: actionAttack.m_SingletonActionBindings.Array.data[0].m_Action
       value: Action Attack
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: actionCameraZoom.m_SingletonActionBindings.Array.data[0].m_Id
+      value: 530956cd-4eeb-4744-a6b9-e45ac803cf34
       objectReference: {fileID: 0}
     - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
       propertyPath: actionDropItem.m_SingletonActionBindings.Array.data[0].m_Path
       value: <Keyboard>/t
       objectReference: {fileID: 0}
     - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: actionSprint.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Action Sprint
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: actionCameraZoom.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/c
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
       propertyPath: actionDropItem.m_SingletonActionBindings.Array.data[0].m_Action
       value: Action Drop Item
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: actionCameraZoom.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Action Camera Zoom
       objectReference: {fileID: 0}
     - target: {fileID: 3257823569386859261, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
       propertyPath: m_IsActive

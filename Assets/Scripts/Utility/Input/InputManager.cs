@@ -37,6 +37,7 @@ namespace Aether
 		public InputAction actionDropItem;
 		
 		public InputAction actionSprint;
+		public InputAction actionCameraZoom;
 		
 		public InputAction actionCameraDistanceModifier;
 		// public InputActionReference actionCameraDistanceModifierRef;
@@ -57,6 +58,7 @@ namespace Aether
 			actionDropItem.Enable();
 			
 			actionSprint.Enable();
+			actionCameraZoom.Enable();
 			actionCameraDistanceModifier.Enable();
 			// actionCameraDistanceModifierRef.action.Enable();
 		}

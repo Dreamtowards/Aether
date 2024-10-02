@@ -80,6 +80,12 @@ namespace Aether
         public CinemachineVirtualCamera m_VirtualCamera;
         public GameObject m_CharacterGeometry;
 
+        public float 
+            NormalFOV = 75,
+            TargetFOV, 
+            CurrentFOV,
+            FOVSmoothness = 0.3f;
+
         // player
         private float _speed;
         private float _animationBlend;
@@ -151,6 +157,20 @@ namespace Aether
             
                 if (m_VirtualCamera.GetCinemachineComponent(CinemachineCore.Stage.Body) is Cinemachine3rdPersonFollow comp) {
                     comp.CameraDistance = m_CameraDistance;
+                }
+            }
+            {
+                TargetFOV = NormalFOV;
+                if (InputManager.instance.actionSprint.IsPressed())
+                    TargetFOV = NormalFOV + 16;
+                if (InputManager.instance.actionCameraZoom.IsPressed())
+                    TargetFOV = 14;
+                
+                var oldFov = CurrentFOV;
+                CurrentFOV = Mathf.Lerp(CurrentFOV, TargetFOV, Time.deltaTime / FOVSmoothness);
+                if (!Mathf.Approximately(oldFov, CurrentFOV))
+                {
+                    m_VirtualCamera.m_Lens.FieldOfView = CurrentFOV;
                 }
             }
             
