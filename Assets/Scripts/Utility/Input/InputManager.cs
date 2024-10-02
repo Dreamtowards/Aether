@@ -55,6 +55,7 @@ namespace Aether
 
 		void Update()
 		{
+			// Pause Game Control, Release Cursor
 			if (Input.GetKeyDown(KeyCode.LeftAlt) || Input.GetKeyUp(KeyCode.LeftAlt))
 				UpdateIsPlayingInput();
 		}

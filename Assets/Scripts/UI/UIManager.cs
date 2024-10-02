@@ -11,6 +11,7 @@ namespace Aether
         public static UIManager instance;
 
         public GameObject HUD;
+        public bool IsHideHUDOnScreenOpened;
 
         public GameObject
             ScreenPause, 
@@ -42,7 +43,8 @@ namespace Aether
                 InputManager.UpdateIsPlayingInput();
                 
                 // Hide HUD when opened UIScreen
-                instance.HUD?.SetActive(g_CurrentUI == null);
+                if (instance && instance.IsHideHUDOnScreenOpened)
+                    instance.HUD?.SetActive(g_CurrentUI == null);
             }
         }
 
