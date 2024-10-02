@@ -6,11 +6,6 @@ A Sandbox Survival Voxel Experience.
 - Stack: Unity6 HDRP; Burst; Odin;
 - Platform: High-end Desktop (Windows, Linux, macOS); PCVR; 
 [README.md](../Rust/Ethertum/README.md)
-## Play
-
-1. Download .zip in Releases
-2. Run `Aether.exe`
-
 
 ## Showcase
 
@@ -19,21 +14,13 @@ Video: [YouTube](https://www.youtube.com/watch?v=ZHfLAT47AXk), [Bilibili]()
 ![](https://github.com/Dreamtowards/Aether/releases/download/aether-0.1.1-2024.09d/screenshot-20241001-1915227.png)
 ![](https://github.com/Dreamtowards/Aether/releases/download/aether-0.1.1-2024.09d/screenshot-20240928-114913.png)
 
+## Play
 
-## Getting Started
-
-1. Install latest Unity 6
-2. `git clone https://github.com/Dreamtowards/Aether.git` with LFS enabled.
-3. Done
-
-> Do I need a really good PC to dev? no, as the main dev, my PC is: under [$220, ¥1500]
-> - CPU: Intel E5 2690v4 2.6GHz 14T28C [$20 USD, ¥140 CNY]
-> - GPU: RTX 2060S 8G [$142, ¥1000] <sup><del>(Thaumstrial gave to me, so its Free/Priceless hha)</del></sup>
-> - RAM: 32G: Random DDR3 2133MHz 16G *2 [$10, ¥70] *2
-> - Disk: HDD 4T Seagate CMR [$65, ¥460] (ST4000VX015)
+1. Download .zip in Releases
+2. Run `Aether.exe`
 
 
-## Controls
+### Controls
 
 - Esc: Pause/Back
 - WSAD: Move
@@ -45,12 +32,28 @@ Video: [YouTube](https://www.youtube.com/watch?v=ZHfLAT47AXk), [Bilibili]()
 - F3: Debug Text Info
 - F12: Debug MenuBar
 
+## Getting Started Development
+
+1. Install latest Unity 6 (e.g. 6000.0.21f1)
+2. `git clone https://github.com/Dreamtowards/Aether.git` with LFS enabled.
+3. Done
+
+> Do I need a really good PC to dev? no, as the main dev, my PC is: under [$220, ¥1500]
+> - CPU: Intel E5 2690v4 2.6GHz 14T28C [$20 USD, ¥140 CNY]
+> - GPU: RTX 2060S 8G [$142, ¥1000] <sup><del>(Thaumstrial gave to me, so its Free/Priceless hha)</del></sup>
+> - RAM: 32G: Random DDR3 2133MHz 16G *2 [$10, ¥70] *2
+> - Disk: HDD 4T Seagate CMR [$65, ¥460] (ST4000VX015)
+
+
 ## Credits
 
-### Transcendental Contributors
+### Tremendous<!--Transcendental--> Contributors
 
-- Luna
-- Dreamtowards
+- Luna <sup>Graphics</sup>
+- Thaumstrial <sup>WorldGen</sup>
+- LootDust <sup>WorldGen</sup>
+- Nerd <sup>LoD</sup>
+- Dreamtowards <sup>Voxel, Isosurface, Gameplay</sup>
 
 ### Resources
 

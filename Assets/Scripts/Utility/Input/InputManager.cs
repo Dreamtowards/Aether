@@ -12,6 +12,12 @@ namespace Aether
 	{
 		// Is Gameplay Control/Input Enabled e.g. WSAD/CursorLook etc
 		public static bool IsPlayingInput;// { get; private set; }
+
+		public static void UpdateIsPlayingInput()
+		{
+			IsPlayingInput = UIManager.CurrentScreen == null && !Input.GetKey(KeyCode.LeftAlt);
+			Utility.LockCursor(InputManager.IsPlayingInput);
+		}
 		
 		
 		[Header("Character Input Values")]
@@ -29,9 +35,6 @@ namespace Aether
 
 		public PlayerInput m_PlayerInput;
 
-		public GameObject m_UiPauseMenu;
-		public GameObject m_UiChat;
-		
 		public static bool IsCurrentDeviceMouse => instance.m_PlayerInput.currentControlScheme == "KeyboardMouse";
 
 		public static InputManager instance;
@@ -44,10 +47,16 @@ namespace Aether
 			instance = this;
 			
 			// LockMouse
-			UIManager.PushScreen(null);
+			UpdateIsPlayingInput();
 
 			actionCameraDistanceModifier.Enable();
 			// actionCameraDistanceModifierRef.action.Enable();
+		}
+
+		void Update()
+		{
+			if (Input.GetKeyDown(KeyCode.LeftAlt) || Input.GetKeyUp(KeyCode.LeftAlt))
+				UpdateIsPlayingInput();
 		}
 
 #if ENABLE_INPUT_SYSTEM
@@ -93,13 +102,13 @@ namespace Aether
 			if (UIManager.CurrentScreen)
 				UIManager.PopScreen();
 			else 
-				UIManager.PushScreen(m_UiPauseMenu);
+				UIManager.PushScreen(UIManager.instance.ScreenPause);
 		}
 
 		void OnCommand(InputValue val)
 		{
 			if (IsPlayingInput)
-				UIManager.PushScreen(m_UiChat);
+				UIManager.PushScreen(UIManager.instance.ScreenChat);
 		}
 #endif
 		

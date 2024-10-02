@@ -40,7 +40,7 @@ namespace Aether
         {
             var oldSlot = CurrentSlotIndex;
             
-            if (!InputManager.instance.actionCameraDistanceModifier.IsPressed())
+            if (!InputManager.instance.actionCameraDistanceModifier.IsPressed() && InputManager.IsPlayingInput)
                 CurrentSlotIndex += (int)math.sign(-Input.mouseScrollDelta.y);
             CurrentSlotIndex = (int)Maths.Mod(CurrentSlotIndex, SlotSize);
 

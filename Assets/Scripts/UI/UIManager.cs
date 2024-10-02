@@ -9,6 +9,13 @@ namespace Aether
     public class UIManager : MonoBehaviour
     {
         public static UIManager instance;
+
+        public GameObject HUD;
+
+        public GameObject
+            ScreenPause, 
+            ScreenSettings, 
+            ScreenChat;
         
         private void Start()
         {
@@ -21,9 +28,6 @@ namespace Aether
             get => g_CurrentUI;
             set
             {
-                InputManager.IsPlayingInput = value == null;
-                Utility.LockCursor(InputManager.IsPlayingInput);
-                
                 if (g_CurrentUI == value)
                     return;
 
@@ -34,6 +38,11 @@ namespace Aether
 				
                 if (g_CurrentUI)
                     g_CurrentUI.SetActive(true);
+                
+                InputManager.UpdateIsPlayingInput();
+                
+                // Hide HUD when opened UIScreen
+                instance.HUD?.SetActive(g_CurrentUI == null);
             }
         }
 
@@ -55,20 +64,20 @@ namespace Aether
             CurrentScreen = OpendScreens.LastOr(null);
         }
 
-        [Serializable]
-        public class Screens
-        {
-            public GameObject
-                MainTitle,
-                WorldList,
-                Settings,
-                Pause,
-                Chat;
-        }
-        [ShowInInspector]
-        public Screens m_Screens;
-
-        public static Screens Screen => instance.m_Screens;
+        // [Serializable]
+        // public class Screens
+        // {
+        //     public GameObject
+        //         MainTitle,
+        //         WorldList,
+        //         Settings,
+        //         Pause,
+        //         Chat;
+        // }
+        // [ShowInInspector]
+        // public Screens m_Screens;
+        //
+        // public static Screens Screen => instance.m_Screens;
 
         // public GameObject
         //     UiScreenMainTitle,

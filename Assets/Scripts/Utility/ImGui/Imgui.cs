@@ -17,6 +17,9 @@ namespace Aether
 
         private void OnLayout(UImGui.UImGui obj)
         {
+            if (UIManager.CurrentScreen == UIManager.instance.ScreenPause)
+                return;
+            
             if (Input.GetKeyDown(KeyCode.F12)) m_ShowDockspace = !m_ShowDockspace;
             if (m_ShowDockspace)
                 ShowDockspaceAndMainMenubar();
