@@ -22,18 +22,26 @@ namespace Aether
         [NonSerialized, OdinSerialize]
         public List<ItemComponent> components = new();
 
-        // on starts using. Right Click
         public void OnUse(EntityPlayer user, ItemStack stack)
         {
-            
+            components.ForEach(e => e.OnUse(user, stack));
         }
 
         public void OnUsingTick() { }
 
-        public void OnUseFinished() { }
-        
-        public void OnUseInterrupted() {}
+        public void OnUseCompleted(EntityPlayer user, ItemStack stack)
+        {
+            components.ForEach(e => e.OnUseCompleted(user, stack));
+        }
 
+        public float GetMaxUseTime() {
+            float maxTime = 0;
+            foreach (var c in components) {
+                maxTime += c.GetMaxUseTime();
+            }
+            return maxTime;
+        }
+        
         public bool IsItemBarVisible(ItemStack stack) => false;
 
         public float GetItemBarStep(ItemStack stack) => 1;
@@ -52,11 +60,35 @@ namespace Aether
     
     public class ItemComponent
     {
+        // on starts using. Right Click
+        public virtual void OnUse(EntityPlayer user, ItemStack stack)
+        {
+            
+        }
+        
+        public virtual void OnUseCompleted(EntityPlayer user, ItemStack stack)
+        {
+            
+        }
+
+        // the maximum use (right-click) time of this item
+        public virtual float GetMaxUseTime() {
+            return 0;
+        }
     }
 
     public class ItemComponentFood : ItemComponent
     {
         public int heal;
+        public float eatTime = 2;
+
+        public override void OnUseCompleted(EntityPlayer user, ItemStack stack)
+        {
+            user.health += heal;
+            stack.Decrement();
+        }
+
+        public override float GetMaxUseTime() => eatTime;
     }
         
     public class ItemComponentTool : ItemComponent

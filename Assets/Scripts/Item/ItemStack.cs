@@ -1,18 +1,26 @@
 ﻿namespace Aether
 {
-    public struct ItemStack
+    public class ItemStack
     {
         public Item item;
         public int count;
 
-        public ItemStack(Item item, int count) {
+        public ItemStack(Item item = null, int count = 1) {
             this.item = item;
             this.count = count;
-            this.m_Damage = 0;
         }
 
 
         public bool IsEmpty => count == 0 || item == null;
+
+        public void Increment(int n = 1) {
+            count += n;
+        }
+        public void Decrement(int n = 1) {
+            if (count == 0)
+                return;
+            count -= n;
+        }
 
         #region Damage
 

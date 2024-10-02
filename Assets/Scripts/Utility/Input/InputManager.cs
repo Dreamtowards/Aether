@@ -39,8 +39,16 @@ namespace Aether
 
 		public static InputManager instance;
 
+		public InputAction actionUse;
+		public InputAction actionAttack;
+		public InputAction actionDropItem;
+		
 		public InputAction actionCameraDistanceModifier;
 		// public InputActionReference actionCameraDistanceModifierRef;
+
+		// the controlling player
+		public EntityPlayer player;
+
 
 		private void Start() {
 			Assert.IsNull(instance);
@@ -48,7 +56,10 @@ namespace Aether
 			
 			// LockMouse
 			UpdateIsPlayingInput();
-
+			
+			actionUse.Enable();
+			actionAttack.Enable();
+			actionDropItem.Enable();
 			actionCameraDistanceModifier.Enable();
 			// actionCameraDistanceModifierRef.action.Enable();
 		}
@@ -58,6 +69,102 @@ namespace Aether
 			// Pause Game Control, Release Cursor
 			if (Input.GetKeyDown(KeyCode.LeftAlt) || Input.GetKeyUp(KeyCode.LeftAlt))
 				UpdateIsPlayingInput();
+
+
+			if (actionDropItem.WasPressedThisFrame())
+			{
+				player.DropHoldingItem(Input.GetKey(KeyCode.LeftControl));
+			}
+			
+			UpdateUseItem();
+		}
+
+		public bool isBreakingVoxel;
+
+		public float itemUseTimeLeft;
+		public float itemUseTimeMax;
+		
+		private void UpdateUseItem()
+		{
+			var holdItem = player.GetHoldingItem();
+
+			if (player.isUsingItem)
+			{
+				if (!actionUse.IsPressed()) {
+					// Sync Selection, UseStopped.
+					// holdItem.item.OnUseStopped();
+					player.isUsingItem = false;
+				}
+				
+				itemUseTimeLeft -= Time.deltaTime;
+				UIManager.instance.SetCrosshairProgress(1 - itemUseTimeLeft / itemUseTimeMax);
+
+				if (itemUseTimeLeft < 0)
+				{
+					holdItem.item.OnUseCompleted(player, holdItem);
+					player.isUsingItem = false;
+				}
+				else
+				{
+					holdItem.item.OnUsingTick();
+				}
+			}
+			else
+			{
+				UIManager.instance.SetCrosshairProgress(-1);
+				
+				// Use
+				if (actionUse.WasPressedThisFrame())
+				{
+					HandleHandUse();
+				}
+
+				// Attack
+				if (actionAttack.WasPressedThisFrame())
+				{
+					DoAttack();
+				}
+				
+				// Pick Item "MouseMiddleKey"
+			}
+			
+		}
+
+		private void HandleHandUse() {
+			if (isBreakingVoxel)
+				return;
+			
+			var hit = CursorRaycaster.instance.hitResult;
+
+			if (hit.GetHitEntity(out var entity))
+			{
+				entity.Interact(player, hit.point);
+			}
+			else if (hit.isHitVoxel)
+			{
+				
+			}
+			
+			var holdItem = player.GetHoldingItem();
+			if (!holdItem.IsEmpty) {
+				holdItem.item.OnUse(player, holdItem);
+				itemUseTimeLeft = itemUseTimeMax = holdItem.item.GetMaxUseTime();
+				if (itemUseTimeMax > 0) {
+					player.isUsingItem = true;
+				}
+			}
+		}
+
+		public void DoAttack()
+		{
+			var hit = CursorRaycaster.instance.hitResult;
+			if (hit.isHitVoxel)
+			{
+						
+			}
+			// player.Attack();
+			// Entity or Voxel
+			// PlayAnimSwingHand()
 		}
 
 #if ENABLE_INPUT_SYSTEM

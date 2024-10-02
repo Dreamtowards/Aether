@@ -19,6 +19,16 @@ namespace Aether
             ScreenChat;
         
         public UIItemTooltip UiItemTooltip;
+
+        public RectTransform UiCrosshairProgressBar;
+
+        public void SetCrosshairProgress(float progress) {
+            var parent = UiCrosshairProgressBar.parent as RectTransform;
+            parent.gameObject.SetActive(progress > 0);
+            if (progress <= 0) 
+                return;
+            UiCrosshairProgressBar.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, (parent.sizeDelta.x-2) * progress);
+        }
         
         private void Start()
         {

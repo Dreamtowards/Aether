@@ -161,6 +161,16 @@ namespace Aether
 
             Move();
             
+            
+            if (InputManager.instance.actionCameraDistanceModifier.IsPressed())
+                m_CameraDistance += Input.mouseScrollDelta.y;
+            m_CameraDistance = Mathf.Max(0, m_CameraDistance);
+            m_CharacterGeometry.SetActive(m_CameraDistance > 0);
+            
+            if (m_VirtualCamera.GetCinemachineComponent(CinemachineCore.Stage.Body) is Cinemachine3rdPersonFollow comp) {
+                comp.CameraDistance = m_CameraDistance;
+            }
+            
             if (InputManager.IsPlayingInput)
                 CameraRotation();
         }
@@ -216,15 +226,6 @@ namespace Aether
             CinemachineCameraTarget.transform.rotation = Quaternion.Euler(_cinemachineTargetPitch + CameraAngleOverride,
                 _cinemachineTargetYaw, 0.0f);
 
-            if (InputManager.instance.actionCameraDistanceModifier.IsPressed())
-                m_CameraDistance += Input.mouseScrollDelta.y;
-            m_CameraDistance = Mathf.Max(0, m_CameraDistance);
-            m_CharacterGeometry.SetActive(m_CameraDistance > 0);
-            
-            if (m_VirtualCamera.GetCinemachineComponent(CinemachineCore.Stage.Body) is Cinemachine3rdPersonFollow comp) 
-            {
-                comp.CameraDistance = m_CameraDistance;
-            }
         }
 
         private void Move()

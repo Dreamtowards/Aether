@@ -11,12 +11,21 @@ namespace Aether
         public bool isHit;
         public Vector3 point, normal;
         public float distance;
+
+        public Entity entity;
+
+        public bool isHitVoxel;
         
         [ShowInInspector]
         public Ray ray;
         [ShowInInspector]
         public RaycastHit hitInfo;
 
+        public bool GetHitEntity(out Entity entity) {
+            entity = this.entity;
+            return this.entity != null;
+        }
+        
         public void Reset()
         {
             isHit = false;

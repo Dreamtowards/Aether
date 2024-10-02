@@ -67,6 +67,9 @@ MonoBehaviour:
     - Name: heal
       Entry: 3
       Data: 3
+    - Name: eatTime
+      Entry: 4
+      Data: 3
     - Name: 
       Entry: 8
       Data: 

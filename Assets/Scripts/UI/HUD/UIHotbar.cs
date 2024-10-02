@@ -7,7 +7,7 @@ namespace Aether
 {
     public class UIHotbar : MonoBehaviour
     {
-        public int CurrentSlotIndex = -1;  // -1 so triggers SlotChange, apply selected
+        // public int CurrentSlotIndex = -1;  // -1 so triggers SlotChange, apply selected
         public int SlotSize = 9;
         
         public UIItemSlot[] m_ItemSlots;
@@ -15,8 +15,6 @@ namespace Aether
         public Image m_HealthBar;
         public int m_HealthBarMaxWidth = 236;
         
-        public EntityPlayer m_EntityPlayer;
-
         private void Start()
         {
             m_ItemSlots = transform.GetComponentsInChildren<UIItemSlot>();
@@ -24,11 +22,13 @@ namespace Aether
 
         void Update()
         {
-            UpdateHealthBar(m_EntityPlayer.health / m_EntityPlayer.maxHealth);
+            var player = InputManager.instance.player;
             
-            UpdateHotbarSelection();
+            UpdateHealthBar(player.health / player.maxHealth);
             
-            UpdateHotbarSlots();
+            UpdateHotbarSelection(player);
+            
+            UpdateHotbarSlots(player);
         }
 
         public void UpdateHealthBar(float healthPercent)
@@ -36,25 +36,32 @@ namespace Aether
             m_HealthBar.rectTransform.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, healthPercent * m_HealthBarMaxWidth);
         }
 
-        private void UpdateHotbarSelection()
+        private void UpdateHotbarSelection(EntityPlayer player)
         {
-            var oldSlot = CurrentSlotIndex;
+            var oldSlot = player.holdingSlotIndex;
+            var newSlot = oldSlot;
             
-            if (!InputManager.instance.actionCameraDistanceModifier.IsPressed() && InputManager.IsPlayingInput)
-                CurrentSlotIndex += (int)math.sign(-Input.mouseScrollDelta.y);
-            CurrentSlotIndex = (int)Maths.Mod(CurrentSlotIndex, SlotSize);
+            if (InputManager.IsPlayingInput)  // !InputManager.instance.actionCameraDistanceModifier.IsPressed() && 
+                newSlot += (int)math.sign(-Input.mouseScrollDelta.y);
+            newSlot = (int)Maths.Mod(newSlot, SlotSize);
 
-            if (oldSlot != CurrentSlotIndex) {
+            if (oldSlot != newSlot) 
+            {
                 m_ItemSlots[oldSlot].IsSelected = false;
-                m_ItemSlots[CurrentSlotIndex].IsSelected = true;
+                m_ItemSlots[newSlot].IsSelected = true;
+                player.holdingSlotIndex = newSlot;
+            } 
+            else if (!m_ItemSlots[newSlot].IsSelected)
+            {
+                m_ItemSlots[newSlot].IsSelected = true;
             }
         }
 
-        private void UpdateHotbarSlots()
+        private void UpdateHotbarSlots(EntityPlayer player)
         {
             for (int i = 0; i < m_ItemSlots.Length; i++) {
                 var slot = m_ItemSlots[i];
-                slot.ItemStack = m_EntityPlayer.inventory.items[i];
+                slot.ItemStack = player.inventory.items[i];
                 slot.UpdateItemStack();
             }
         }
