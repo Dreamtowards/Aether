@@ -63,6 +63,8 @@ namespace Aether
 			// actionCameraDistanceModifierRef.action.Enable();
 		}
 
+		private float m_LastTimeMoveForward;
+
 		void Update()
 		{
 			// Pause Game Control, Release Cursor
@@ -72,7 +74,23 @@ namespace Aether
 
 			if (!IsPlayingInput)
 				return;
+
+			// Sprint 
+			if (actionSprint.IsPressed()) {
+				player.isSprinting = true;
+			}
+			if (Input.GetKeyDown(KeyCode.W)) {
+				if (Time.time - m_LastTimeMoveForward < 0.3f) {
+					player.isSprinting = true;
+				}
+				m_LastTimeMoveForward = Time.time;
+			} 
+			bool isPressedMoveForward = move.y > 0;
+			if (!isPressedMoveForward) {
+				player.isSprinting = false;
+			}
 			
+			// Drop
 			if (actionDropItem.WasPressedThisFrame())
 			{
 				player.DropHoldingItem(Input.GetKey(KeyCode.LeftControl));
@@ -180,18 +198,18 @@ namespace Aether
 			look = value.Get<Vector2>();
 		}
 
-		private float m_TimeLastJump;
+		private float m_LastTimeJump;
 
 		public bool isFlying;
 
 		public void OnJump(InputValue value)
 		{
 			var time = Time.time;
-			if (time - m_TimeLastJump < 0.3f) {
+			if (time - m_LastTimeJump < 0.3f) {
 				// Double Click Jump
 				isFlying = !isFlying;
 			}
-			m_TimeLastJump = time;
+			m_LastTimeJump = time;
 
 			if (isFlying)
 				return;  // No Jump when DoubleJump Fly

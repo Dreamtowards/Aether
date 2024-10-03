@@ -1278,6 +1278,7 @@ MonoBehaviour:
   Name: Prim
   health: 80
   maxHealth: 100
+  isSprinting: 0
   holdingSlotIndex: 0
   isUsingItem: 0
 --- !u!1001 &1061983536
@@ -2220,6 +2221,14 @@ PrefabInstance:
     - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
       propertyPath: actionCameraZoom.m_SingletonActionBindings.Array.data[0].m_Action
       value: Action Camera Zoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 3011889656273539088, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: m_Interval
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3011889656273539088, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: m_Intensity
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 3257823569386859261, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
       propertyPath: m_IsActive

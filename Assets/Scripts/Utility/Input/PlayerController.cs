@@ -161,7 +161,7 @@ namespace Aether
             }
             {
                 TargetFOV = NormalFOV;
-                if (InputManager.instance.actionSprint.IsPressed())
+                if (InputManager.instance.player.isSprinting)
                     TargetFOV = NormalFOV + 16;
                 if (InputManager.instance.actionCameraZoom.IsPressed())
                     TargetFOV = 14;
@@ -253,7 +253,7 @@ namespace Aether
         private void Move()
         {
             // set target speed based on move speed, sprint speed and if sprint is pressed
-            float targetSpeed = _input.actionSprint.IsPressed() ? SprintSpeed : MoveSpeed;
+            float targetSpeed = InputManager.instance.player.isSprinting ? SprintSpeed : MoveSpeed;
 
             // a simplistic acceleration and deceleration designed to be easy to remove, replace, or iterate upon
 

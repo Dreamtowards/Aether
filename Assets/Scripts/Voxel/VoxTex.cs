@@ -11,8 +11,11 @@ namespace Aether
         [ShowInInspector]
         public VoxelRegistry m_VoxReg;
 
+        public static VoxelRegistry registry;
+
         void Start()
         {
+            registry = m_VoxReg;
             Refresh();
         }
 

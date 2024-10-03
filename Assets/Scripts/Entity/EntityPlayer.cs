@@ -14,6 +14,8 @@ namespace Aether
 
         public PlayerAbilities abilities = new();
         
+        public bool isSprinting;
+        
         public int holdingSlotIndex;
         public bool isUsingItem;
 
