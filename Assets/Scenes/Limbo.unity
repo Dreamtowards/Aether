@@ -463,8 +463,9 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "Luna \nGraphics; Senior Technical Advisor\n\nThaumstrial\nWorldGen & Mathmatics\n\nLootDust\nWorldGen
-    & Mathmatics\n\nDreamtowards \nVoxel, Isosurface; Founder"
+  m_Text: "Thaumstrial\nWorldGen & Mathmatics\n\n\"LN\"\nGraphics; Senior Technical
+    Advisor\n\nLootDust\nWorldGen & Mathmatics\n\nDreamtowards \nVoxel, Isosurface;
+    Founder"
 --- !u!222 &217247606
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -46,7 +46,7 @@ namespace Aether
 		public EntityPlayer player;
 
 
-		private void Awake() {
+		private void Start() {
 			Assert.IsNull(instance);
 			instance = this;
 			
@@ -62,6 +62,12 @@ namespace Aether
 			actionCameraZoom.Enable();
 			actionCameraDistanceModifier.Enable();
 			// actionCameraDistanceModifierRef.action.Enable();
+			
+			int idx = 0;
+			ItemManager.instance.registry.entries.ForEach(e =>
+			{
+				player.inventory.items[++idx] = new ItemStack(e, idx * 3);
+			});
 		}
 
 		private float m_LastTimeMoveForward;

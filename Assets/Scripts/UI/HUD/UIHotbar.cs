@@ -18,12 +18,6 @@ namespace Aether
         private void Start()
         {
             m_ItemSlots = transform.GetComponentsInChildren<UIItemSlot>();
-            
-            int idx = 0;
-            ItemManager.instance.registry.entries.ForEach(e =>
-            {
-                InputManager.instance.player.inventory.items[++idx] = new ItemStack(e, idx * 3);
-            });
         }
 
         void Update()
@@ -47,7 +41,7 @@ namespace Aether
             var oldSlot = player.holdingSlotIndex;
             var newSlot = oldSlot;
             
-            if (InputManager.IsPlayingInput)  // !InputManager.instance.actionCameraDistanceModifier.IsPressed() && 
+            if (InputManager.IsPlayingInput && !InputManager.instance.actionCameraDistanceModifier.IsPressed()) 
                 newSlot += (int)math.sign(-Input.mouseScrollDelta.y);
             newSlot = (int)Maths.Mod(newSlot, SlotSize);
 
