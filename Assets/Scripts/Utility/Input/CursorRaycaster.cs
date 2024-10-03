@@ -41,10 +41,13 @@ namespace Aether
         
         public Material m_TerrainMaterial;
 
+        [Header("Terrain Dig")]
         public float m_ModifyRadius = 2;
         public float m_Intensity = 2;
         public int m_TexId = 2;
-
+        public float m_Interval = 0.1f;
+        private float m_LastTimeModify;
+        
         void Start()
         {
             instance = this;
@@ -70,10 +73,12 @@ namespace Aether
             {
                 m_TerrainMaterial.SetVector("_HighlightPosRadius", new float4(hitResult.point, m_ModifyRadius));
 
-                var LMB = Input.GetMouseButtonDown((int)MouseButton.Left);
-                var RMB = Input.GetMouseButtonDown((int)MouseButton.Right);
-                if (LMB || RMB)
+                var LMB = Input.GetMouseButton((int)MouseButton.Left);
+                var RMB = Input.GetMouseButton((int)MouseButton.Right);
+                
+                if ((LMB || RMB) && m_LastTimeModify + m_Interval < Time.time)
                 {
+                    m_LastTimeModify = Time.time;
                     var cs = ChunkSystem.instance;
                         cs.ModifySphere(hitResult.point, m_ModifyRadius, LMB ? -m_Intensity : m_Intensity, m_TexId);
                 }

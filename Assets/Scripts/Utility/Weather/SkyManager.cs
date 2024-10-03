@@ -13,7 +13,7 @@ namespace Aether
         {
             var daytime = World.instance.DayTime;
 
-            bool sun = daytime < 0.55f;
+            bool sun = daytime < 0.53f;
             m_Sun.gameObject.SetActive(sun);
             m_Moon.gameObject.SetActive(!sun);
             

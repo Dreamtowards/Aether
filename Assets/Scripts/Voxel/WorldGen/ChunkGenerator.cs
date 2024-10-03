@@ -49,12 +49,13 @@ namespace Aether
                 float f_terr2d = m_Noise.Sample(new float2(p.x, p.z) / 130f);
                 float f_3d = m_Noise.Sample((float3)p / 90f);
 
-                float val = 0;//f_terr2d - p.y / m_TerrainAvgHeight + f_3d * m_Noise3DFactor;
+                float val = f_terr2d - p.y / m_TerrainAvgHeight + f_3d * m_Noise3DFactor;
 
-                float xzDistToOrigin = math.length(p.xz);
-                val += (m_IslandRadiusHeight.x - xzDistToOrigin) / m_IslandRadiusHeight.x + (1.0f - p.y / m_IslandRadiusHeight.y);
-
-                val += f_terr2d - p.y / m_TerrainAvgHeight + f_3d * m_Noise3DFactor;
+                // Island the Cone.
+                // float xzDistToOrigin = math.length(p.xz);
+                // val += (m_IslandRadiusHeight.x - xzDistToOrigin) / m_IslandRadiusHeight.x + (1.0f - p.y / m_IslandRadiusHeight.y);
+                //
+                // val += f_terr2d - p.y / m_TerrainAvgHeight + f_3d * m_Noise3DFactor;
                 
                 if (val > 0)
                     vox.texId = VoxTex.stone.NumId;
