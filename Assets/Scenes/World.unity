@@ -1547,6 +1547,10 @@ PrefabInstance:
       value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 4416926081852918490, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
+      propertyPath: JumpTimeout
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4416926081852918490, guid: 64dce48905ffd9b4293e595fa6941544, type: 3}
       propertyPath: FOVSmoothness
       value: 0.1
       objectReference: {fileID: 0}
@@ -2127,6 +2131,10 @@ PrefabInstance:
       value: Action Use
       objectReference: {fileID: 0}
     - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: actionJump.m_Name
+      value: Action Jump
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
       propertyPath: actionAttack.m_Name
       value: Action Attack
       objectReference: {fileID: 0}
@@ -2144,6 +2152,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
       propertyPath: actionUse.m_SingletonActionBindings.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: actionJump.m_SingletonActionBindings.Array.size
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
@@ -2167,12 +2179,20 @@ PrefabInstance:
       value: 5dadf098-3478-408f-a1a3-cab08072cfdd
       objectReference: {fileID: 0}
     - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: actionJump.m_SingletonActionBindings.Array.data[0].m_Id
+      value: e45f82f8-e172-4956-8b74-004bcd4281dd
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
       propertyPath: actionUse.m_SingletonActionBindings.Array.data[0].m_Path
       value: <Mouse>/rightButton
       objectReference: {fileID: 0}
     - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
       propertyPath: actionAttack.m_SingletonActionBindings.Array.data[0].m_Id
       value: 8a2cfdd7-fb59-4dd5-be57-d3ee3b9082e8
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: actionJump.m_SingletonActionBindings.Array.data[0].m_Path
+      value: <Keyboard>/space
       objectReference: {fileID: 0}
     - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
       propertyPath: actionSprint.m_SingletonActionBindings.Array.data[0].m_Id
@@ -2189,6 +2209,10 @@ PrefabInstance:
     - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
       propertyPath: actionDropItem.m_SingletonActionBindings.Array.data[0].m_Id
       value: 201f4ff6-a248-41fe-8cc1-2e908f062c06
+      objectReference: {fileID: 0}
+    - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: actionJump.m_SingletonActionBindings.Array.data[0].m_Action
+      value: Action Jump
       objectReference: {fileID: 0}
     - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
       propertyPath: actionSprint.m_SingletonActionBindings.Array.data[0].m_Path
@@ -2221,6 +2245,10 @@ PrefabInstance:
     - target: {fileID: 2748778882169102213, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
       propertyPath: actionCameraZoom.m_SingletonActionBindings.Array.data[0].m_Action
       value: Action Camera Zoom
+      objectReference: {fileID: 0}
+    - target: {fileID: 3011889656273539088, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
+      propertyPath: m_TexId
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3011889656273539088, guid: 127fdb40c34ba534c9f8d3b9a3b53c35, type: 3}
       propertyPath: m_Interval

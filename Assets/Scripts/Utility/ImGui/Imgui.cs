@@ -138,7 +138,7 @@ namespace Aether
                     ImGui.SliderFloat("Radius", ref rc.m_ModifyRadius, 0, 32.0f);
                     ImGui.SliderFloat("Intensity", ref rc.m_Intensity, 0, 1.6f);
                     ImGui.SliderFloat("Time Interval", ref rc.m_Interval, 0, 1.0f);
-                    ImGui.SliderInt("Tex Id", ref rc.m_TexId, 0, VoxTex.registry.mapStr2NumId.Count-1);
+                    ImGui.SliderInt("Tex Id", ref rc.m_TexId, 0, VoxTex.registry.Voxels.Count-1);
                     
                     
                     ImGui.EndMenu();

@@ -18,6 +18,12 @@ namespace Aether
         private void Start()
         {
             m_ItemSlots = transform.GetComponentsInChildren<UIItemSlot>();
+            
+            int idx = 0;
+            ItemManager.instance.registry.entries.ForEach(e =>
+            {
+                InputManager.instance.player.inventory.items[++idx] = new ItemStack(e, idx * 3);
+            });
         }
 
         void Update()

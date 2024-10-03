@@ -15,7 +15,7 @@ namespace Aether
 
 		public static void UpdateIsPlayingInput()
 		{
-			IsPlayingInput = UIManager.CurrentScreen == null && !Input.GetKey(KeyCode.LeftAlt);
+			IsPlayingInput = UIManager.CurrentScreen == null;// && !Input.GetKey(KeyCode.LeftAlt);
 			Utility.LockCursor(InputManager.IsPlayingInput);
 		}
 		
@@ -23,7 +23,6 @@ namespace Aether
 		[Header("Character Input Values")]
 		public Vector2 move;
 		public Vector2 look;
-		public bool jump;
 		public bool analogMovement;
 
 		public PlayerInput m_PlayerInput;
@@ -37,6 +36,7 @@ namespace Aether
 		public InputAction actionDropItem;
 		
 		public InputAction actionSprint;
+		public InputAction actionJump;
 		public InputAction actionCameraZoom;
 		
 		public InputAction actionCameraDistanceModifier;
@@ -46,7 +46,7 @@ namespace Aether
 		public EntityPlayer player;
 
 
-		private void Start() {
+		private void Awake() {
 			Assert.IsNull(instance);
 			instance = this;
 			
@@ -58,6 +58,7 @@ namespace Aether
 			actionDropItem.Enable();
 			
 			actionSprint.Enable();
+			actionJump.Enable();
 			actionCameraZoom.Enable();
 			actionCameraDistanceModifier.Enable();
 			// actionCameraDistanceModifierRef.action.Enable();
@@ -67,13 +68,21 @@ namespace Aether
 
 		void Update()
 		{
-			// Pause Game Control, Release Cursor
-			if (Input.GetKeyDown(KeyCode.LeftAlt) || Input.GetKeyUp(KeyCode.LeftAlt))
-				UpdateIsPlayingInput();
+			// // Pause Game Control, Release Cursor
+			// if (Input.GetKeyDown(KeyCode.LeftAlt) || Input.GetKeyUp(KeyCode.LeftAlt))
+			// 	UpdateIsPlayingInput();
 
 
 			if (!IsPlayingInput)
 				return;
+
+			// Jump
+			if (actionJump.WasPressedThisFrame()) {
+				if (Time.time - m_LastTimeJump < 0.3f) {  // Double Click Jump
+					isFlying = !isFlying;
+				}
+				m_LastTimeJump = Time.time;
+			}
 
 			// Sprint 
 			if (actionSprint.IsPressed()) {
@@ -202,20 +211,7 @@ namespace Aether
 
 		public bool isFlying;
 
-		public void OnJump(InputValue value)
-		{
-			var time = Time.time;
-			if (time - m_LastTimeJump < 0.3f) {
-				// Double Click Jump
-				isFlying = !isFlying;
-			}
-			m_LastTimeJump = time;
-
-			if (isFlying)
-				return;  // No Jump when DoubleJump Fly
-			
-			jump = value.isPressed;
-		}
+		
 
 		void OnEscape(InputValue val)
 		{

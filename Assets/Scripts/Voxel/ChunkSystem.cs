@@ -304,7 +304,7 @@ namespace Aether
                     float dist = math.length(p);
                     float f = math.max(0, radius - dist);
                     vox.density += f*intensity;
-                    if (texId >= 0 && vox.density > 0 && f > 0) {
+                    if (texId > 0 && vox.density > 0 && f > 0) {
                         vox.texId = (ushort)texId;
                     }
                 });
