@@ -10,6 +10,11 @@
             this.count = count;
         }
 
+        public void Swap(ItemStack other)
+        {
+            (this.item, other.item) = (other.item, this.item);
+            (this.count, other.count) = (other.count, this.count);
+        }
 
         public bool IsEmpty => count == 0 || item == null;
 

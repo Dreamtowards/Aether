@@ -7,7 +7,9 @@ namespace Aether
     {
         public List<ItemStack> items = new();
 
-        public Inventory(int size = 0) {
+        public Inventory() {
+        }
+        public Inventory(int size) {
             if (size > 0)
                 Resize(size);
         }

@@ -10,26 +10,6 @@ namespace Aether
     {
         public static UIManager instance;
 
-        public GameObject HUD;
-        public bool IsHideHUDOnScreenOpened;
-
-        public GameObject
-            ScreenPause,
-            ScreenSettings,
-            ScreenChat;
-        
-        public UIItemTooltip UiItemTooltip;
-
-        public RectTransform UiCrosshairProgressBar;
-
-        public void SetCrosshairProgress(float progress) {
-            var parent = UiCrosshairProgressBar.parent as RectTransform;
-            parent.gameObject.SetActive(progress > 0);
-            if (progress <= 0) 
-                return;
-            UiCrosshairProgressBar.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, (parent.sizeDelta.x-2) * progress);
-        }
-        
         private void Start()
         {
             instance = this;
@@ -57,6 +37,8 @@ namespace Aether
                 // Hide HUD when opened UIScreen
                 if (instance && instance.IsHideHUDOnScreenOpened)
                     instance.HUD?.SetActive(g_CurrentUI == null);
+                
+                HideItemTooltip();
             }
         }
 
@@ -77,6 +59,66 @@ namespace Aether
             OpendScreens.TryRemoveLast();
             CurrentScreen = OpendScreens.LastOr(null);
         }
+
+        
+        
+        
+        
+        
+        public GameObject HUD;
+        public bool IsHideHUDOnScreenOpened;
+
+        public GameObject
+            ScreenPause,
+            ScreenSettings,
+            ScreenChat;
+        
+        
+        
+        public UIItemTooltip UiItemTooltip;
+
+        public static void HideItemTooltip()
+        {
+            instance?.UiItemTooltip?.gameObject.SetActive(false);
+        }
+
+        public UIItemSlot UiItemHolding;
+
+        public static void ShowItemHolding(ItemStack stack)
+        {
+            var h = instance.UiItemHolding;
+            h.gameObject.SetActive(true);
+            h.itemStack = stack;
+            h.UpdateItemStack();
+        }
+        
+        public static void HideItemHolding()
+        {
+            instance?.UiItemHolding?.gameObject.SetActive(false);
+        }
+
+        
+        
+        public RectTransform UiCrosshairProgressBar;
+
+        public void SetCrosshairProgress(float progress) {
+            var parent = UiCrosshairProgressBar.parent as RectTransform;
+            parent.gameObject.SetActive(progress > 0);
+            if (progress <= 0) 
+                return;
+            UiCrosshairProgressBar.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, (parent.sizeDelta.x-2) * progress);
+        }
+
+
+        private void Update()
+        {
+            if (UIItemSlot.holdingSlot) {
+                UiItemHolding.transform.position = Input.mousePosition;
+            }
+            
+            
+        }
+
 
         // [Serializable]
         // public class Screens

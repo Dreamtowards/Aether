@@ -70,6 +70,9 @@ namespace Aether
 				UpdateIsPlayingInput();
 
 
+			if (!IsPlayingInput)
+				return;
+			
 			if (actionDropItem.WasPressedThisFrame())
 			{
 				player.DropHoldingItem(Input.GetKey(KeyCode.LeftControl));

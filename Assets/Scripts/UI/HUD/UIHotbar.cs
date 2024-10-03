@@ -61,7 +61,7 @@ namespace Aether
         {
             for (int i = 0; i < m_ItemSlots.Length; i++) {
                 var slot = m_ItemSlots[i];
-                slot.ItemStack = player.inventory.items[i];
+                slot.itemStack = player.inventory.items[i];
                 slot.UpdateItemStack();
             }
         }

@@ -6,9 +6,9 @@ using UnityEngine.UI;
 
 namespace Aether
 {
-    public class UIItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class UIItemSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
     {
-        public Button m_Border;
+        public Selectable m_Border;
         
         private bool m_IsSelected;
 
@@ -27,12 +27,12 @@ namespace Aether
         public Text m_CountText;
 
         [ShowInInspector]
-        public ItemStack ItemStack;
+        public ItemStack itemStack;
 
         [Button]
         public void UpdateItemStack()
         {
-            var stack = ItemStack;
+            var stack = itemStack;
 
             if (stack.IsEmpty) {
                 m_ItemImage.enabled = false;
@@ -49,18 +49,45 @@ namespace Aether
 
         public void OnPointerEnter(PointerEventData evt)
         {
-            if (ItemStack.IsEmpty)
+            if ((itemStack?.IsEmpty ?? true) || holdingSlot)
                 return;
             var tip = UIManager.instance.UiItemTooltip;
             tip.gameObject.SetActive(true);
-            tip.UpdateItemStack(ItemStack);
+            tip.UpdateItemStack(itemStack);
             tip.transform.position = transform.position + tip.offset;
         }
 
         public void OnPointerExit(PointerEventData evt)
         {
-            var tip = UIManager.instance.UiItemTooltip;
-            tip.gameObject.SetActive(false);
+            UIManager.HideItemTooltip();
+        }
+
+        public static UIItemSlot holdingSlot;
+
+        public void SwapItem(UIItemSlot slot)
+        {
+            slot.itemStack.Swap(this.itemStack);
+            this.UpdateItemStack();
+            slot.UpdateItemStack();
+        }
+        
+        public void OnPointerClick(PointerEventData evt)
+        {
+            if (holdingSlot)
+            {
+                SwapItem(holdingSlot);
+                holdingSlot = null;
+                UIManager.HideItemHolding();
+            }
+            else
+            {
+                if (this.itemStack?.IsEmpty == false)
+                {
+                    holdingSlot = this;
+                    UIManager.HideItemTooltip();
+                    UIManager.ShowItemHolding(holdingSlot.itemStack);
+                }
+            }
         }
     }
 }
