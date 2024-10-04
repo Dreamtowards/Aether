@@ -22,15 +22,18 @@ Video: [YouTube](https://www.youtube.com/watch?v=ZHfLAT47AXk), [Bilibili]()
 
 ### Controls
 
-- Esc: Pause/Back
-- WSAD: Move
-- Ctrl: Sneak
-- Shift / Double W: Sprint
-- MouseScroll: Hotbar Selection
-- Alt+MouseScroll: CameraDistance
-- Slash "/": Chat / Command Prompt
-- F3: Debug Text Info
-- F12: Debug MenuBar
+Key | What
+--- | ---
+<key>ESC</key> | Pause/Back
+WSAD | Move
+Shift / Double W | Sprint
+Ctrl | Sneak
+MouseScroll | Hotbar Selection
+Slash ("/") | Chat or Command
+Alt + MouseScroll | Camera Distance
+C | Camera Zoom
+F3 | Debug Text Info
+F12 | Debug MenuBar
 
 ## Getting Started Development
 

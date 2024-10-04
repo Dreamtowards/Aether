@@ -159,8 +159,10 @@ namespace Aether
             }
         }
 
-        public static void DestroyChildren(this Transform obj, bool immediately = false) {
+        public static void DestroyChildren(this Transform obj, bool immediately = false, Func<Transform, bool> delIf = null) {
             obj.ForChildrenRev(e => {
+                if (delIf != null && !delIf(e))
+                    return;
                 if (immediately) UnityEngine.Object.DestroyImmediate(e.gameObject);
                 else UnityEngine.Object.Destroy(e.gameObject);
             });

@@ -1,0 +1,71 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a5a5e300646c4bc58759889430b164ad, type: 3}
+  m_Name: RecipeRegistry
+  m_EditorClassIdentifier: 
+  entries:
+  - output:
+      item: {fileID: 11400000, guid: 1cf5570695b9aef43b67a8f257112169, type: 2}
+      count: 1
+    inputs:
+    - item: {fileID: 11400000, guid: ff09711011f6cb648be3dfadc6bbb188, type: 2}
+      count: 2
+    - item: {fileID: 11400000, guid: c863310e9b44a804690320fd392122dc, type: 2}
+      count: 1
+  - output:
+      item: {fileID: 11400000, guid: 5baf09c9df96fc24883ee757b24092de, type: 2}
+      count: 1
+    inputs:
+    - item: {fileID: 11400000, guid: c863310e9b44a804690320fd392122dc, type: 2}
+      count: 6
+  - output:
+      item: {fileID: 11400000, guid: b2d7f05cc1bc789438681fbda7a06aa0, type: 2}
+      count: 1
+    inputs:
+    - item: {fileID: 11400000, guid: 5baf09c9df96fc24883ee757b24092de, type: 2}
+      count: 1
+    - item: {fileID: 11400000, guid: c863310e9b44a804690320fd392122dc, type: 2}
+      count: 4
+  - output:
+      item: {fileID: 11400000, guid: 176c66dbab5795e4eb60e6926b87a143, type: 2}
+      count: 1
+    inputs:
+    - item: {fileID: 11400000, guid: 02368b40220ee174d92b8f13c44427ce, type: 2}
+      count: 3
+  - output:
+      item: {fileID: 11400000, guid: 0a0ba275ac63b644eb055be2e0ef22a5, type: 2}
+      count: 1
+    inputs:
+    - item: {fileID: 11400000, guid: ff09711011f6cb648be3dfadc6bbb188, type: 2}
+      count: 3
+  - output:
+      item: {fileID: 11400000, guid: c57fd9507f4b1054b9cd630b4b1a5f6d, type: 2}
+      count: 1
+    inputs:
+    - item: {fileID: 11400000, guid: 02368b40220ee174d92b8f13c44427ce, type: 2}
+      count: 3
+    - item: {fileID: 11400000, guid: c863310e9b44a804690320fd392122dc, type: 2}
+      count: 2
+  - output:
+      item: {fileID: 11400000, guid: e19f7cd9a1fcea541bb977bf1de380ed, type: 2}
+      count: 1
+    inputs:
+    - item: {fileID: 11400000, guid: 02368b40220ee174d92b8f13c44427ce, type: 2}
+      count: 1
+    - item: {fileID: 11400000, guid: c863310e9b44a804690320fd392122dc, type: 2}
+      count: 2
+  - output:
+      item: {fileID: 11400000, guid: d1c5d26a016d557409540a115b4a0422, type: 2}
+      count: 1
+    inputs:
+    - item: {fileID: 11400000, guid: 02368b40220ee174d92b8f13c44427ce, type: 2}
+      count: 2

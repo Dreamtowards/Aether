@@ -1,5 +1,8 @@
-﻿namespace Aether
+﻿using System;
+
+namespace Aether
 {
+    [Serializable]
     public class ItemStack
     {
         public Item item;

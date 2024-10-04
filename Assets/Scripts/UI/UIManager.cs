@@ -88,8 +88,7 @@ namespace Aether
         {
             var h = instance.UiItemHolding;
             h.gameObject.SetActive(true);
-            h.itemStack = stack;
-            h.UpdateItemStack();
+            h.SetItemStack(stack);
         }
         
         public static void HideItemHolding()

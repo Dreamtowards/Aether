@@ -7,19 +7,21 @@ using UnityEngine;
 namespace Aether
 {
     // NOTE: item prototype, handles logics instead of any data. only 1 instance for a type of item. if you want multiple items instances see ItemStack.
-    public class Item
+    [CreateAssetMenu(fileName = "Data", menuName = "Aether/Item")]
+    public class Item : SerializedScriptableObject
     {
         public string id;
         public string name;
         public Sprite icon;
+        public string description;
 
-        public int maxCount = 1;
+        public int maxCount = 64;
         
         public Rarity rarity = Rarity.Common;
 
         public float fuel;
         
-        [NonSerialized, OdinSerialize]
+        // [NonSerialized, OdinSerialize]
         public List<ItemComponent> components = new();
 
         public void OnUse(EntityPlayer user, ItemStack stack)

@@ -22,6 +22,8 @@ namespace Aether
                 m_IsSelected = value;
             }
         }
+
+        public bool IsLocked;
         
         public Image m_ItemImage;
         public Text m_CountText;
@@ -34,7 +36,7 @@ namespace Aether
         {
             var stack = itemStack;
 
-            if (stack.IsEmpty) {
+            if (stack?.IsEmpty ?? true) {
                 m_ItemImage.enabled = false;
                 m_CountText.enabled = false;
             } else {
@@ -44,6 +46,12 @@ namespace Aether
                 m_ItemImage.sprite = stack.item.icon;
                 m_CountText.text = stack.count.ToString();
             }
+        }
+
+        public void SetItemStack(ItemStack stack)
+        {
+            itemStack = stack;
+            UpdateItemStack();
         }
 
 
@@ -73,6 +81,9 @@ namespace Aether
         
         public void OnPointerClick(PointerEventData evt)
         {
+            if (IsLocked)
+                return;
+
             if (holdingSlot)
             {
                 SwapItem(holdingSlot);

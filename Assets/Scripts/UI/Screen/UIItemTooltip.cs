@@ -16,7 +16,7 @@ namespace Aether
         {
             title.text = itemStack.item.name;
             quantity.text = itemStack.count.ToString();
-            description.text = "";
+            description.text = itemStack.item.description;
             itemIcon.sprite = itemStack.item.icon;
         }
     }
