@@ -87,7 +87,7 @@ void TexBlend_float(
 	// outAlbedo = outNormal;//(outNormal + 1) / 2.0; outNormal = float3(0,0,1);
 	
 	outEmission = 0;//DRAM.y;
-	outSmoothness = 1.0 - DRAM.y;
-	outAO = 0.7;//DRAM.z;
+	outSmoothness= 1.0 - DRAM.y;
+	outAO = 0.25;//DRAM.z;
 	outMetallic = 0;// DRAM.w;
 }

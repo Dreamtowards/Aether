@@ -197,7 +197,7 @@ namespace Aether
             
             var world = World.instance;
             var wi = world.Info;
-            ImGui.Text($"World: '{wi.Name}', seed: {wi.Seed}; daytime: {wi.DayTime:0.00} {Utility.StrDayTime(wi.DayTime)}, daylen: {Utility.StrTimeDuration((int)wi.DayTimeLength)}; inhabited: {Utility.StrTimeDuration((int)wi.TimeInhabited)}");
+            ImGui.Text($"World: '{wi.Name}', seed: {wi.Seed}; daytime: {wi.DayTime:0.0000} {Utility.StrDayTime(wi.DayTime)}, daylen: {Utility.StrTimeDuration((int)wi.DayTimeLength)}; inhabited: {Utility.StrTimeDuration((int)wi.TimeInhabited)}");
 
             var cs = FindFirstObjectByType<ChunkSystem>();
             ImGui.Text($"Chunk: loaded: {cs.NumChunks}, loading: {cs.m_ChunksLoading.Count}, mesh_dirty: {cs.m_ChunksMeshDirty.Count}, meshing: {cs.m_ChunksMeshing.Count} ");
