@@ -543,16 +543,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: da5ab44aadfb1804db5fd470983ac1b8, type: 3}
   m_Name: LiftGammaGain
   m_EditorClassIdentifier: 
-  active: 0
+  active: 1
   lift:
     m_OverrideState: 1
-    m_Value: {x: 0.91033244, y: 0.96962714, z: 1, w: 0}
+    m_Value: {x: 0.93, y: 0.98483336, z: 1, w: 0}
   gamma:
     m_OverrideState: 1
-    m_Value: {x: 0.9581009, y: 0.9706798, z: 1, w: 0}
+    m_Value: {x: 0.96, y: 0.972, z: 1, w: 0}
   gain:
     m_OverrideState: 1
-    m_Value: {x: 0.92289335, y: 0.9442731, z: 1, w: 0}
+    m_Value: {x: 0.92, y: 0.94266665, z: 1, w: 0}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -753,8 +753,8 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.177522
-        value: 1.8758087
+        time: 0.21336995
+        value: 0.60673946
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -762,8 +762,8 @@ MonoBehaviour:
         inWeight: 0
         outWeight: 0
       - serializedVersion: 3
-        time: 0.8762604
-        value: 1.3688011
+        time: 0.60927737
+        value: 0.62957764
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -896,7 +896,7 @@ MonoBehaviour:
     m_Value: 0.85
   shapeScale:
     m_OverrideState: 1
-    m_Value: 4.2
+    m_Value: 5
   shapeOffset:
     m_OverrideState: 0
     m_Value: {x: 0, y: 0, z: 0}
