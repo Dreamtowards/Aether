@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 14760d02513336a4cb2d32523be3c62c
+timeCreated: 1484679218
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 258020
+  packageName: Simple Car Controller
+  packageVersion: 1.0
+  assetPath: Assets/Simple Car Controller/Prefabs/SCC_Exhaust.prefab
+  uploadId: 593998

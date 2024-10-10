@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 535bb7b587b353548946763756b103fd
+timeCreated: 1482794969
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 258020
+  packageName: Simple Car Controller
+  packageVersion: 1.0
+  assetPath: Assets/Simple Car Controller/Prefabs/SCC_SkidSmoke.prefab
+  uploadId: 593998

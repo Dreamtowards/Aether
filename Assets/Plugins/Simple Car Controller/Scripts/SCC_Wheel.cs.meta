@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 972290ca72c3be64d83eecd704c89963
+timeCreated: 1482718769
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 258020
+  packageName: Simple Car Controller
+  packageVersion: 1.0
+  assetPath: Assets/Simple Car Controller/Scripts/SCC_Wheel.cs
+  uploadId: 593998

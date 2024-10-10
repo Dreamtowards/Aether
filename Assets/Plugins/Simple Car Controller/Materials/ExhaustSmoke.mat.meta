@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 21166e1a1f7367349b6f45af6eb79a4d
+timeCreated: 1484939451
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 258020
+  packageName: Simple Car Controller
+  packageVersion: 1.0
+  assetPath: Assets/Simple Car Controller/Materials/ExhaustSmoke.mat
+  uploadId: 593998

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 5243ddad90549e743b1f81827f6e4c83
+timeCreated: 1429548047
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 258020
+  packageName: Simple Car Controller
+  packageVersion: 1.0
+  assetPath: Assets/Simple Car Controller/Materials/Terrain.mat
+  uploadId: 593998

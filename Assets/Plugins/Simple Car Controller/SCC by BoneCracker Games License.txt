@@ -1,0 +1,8 @@
+Thank you for purchasing Simple Car Controller.
+
+Package contains all necessary scripts, models, and sound effects for ready to use in any personal / commercial purposes.
+
+You will find detailed documentation in the "Documentation" folder.
+
+Best Regards,
+Bugra

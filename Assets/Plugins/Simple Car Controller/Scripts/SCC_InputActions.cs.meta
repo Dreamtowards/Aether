@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 130251f89025ed74683b1578e2842d52
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 258020
+  packageName: Simple Car Controller
+  packageVersion: 1.0
+  assetPath: Assets/Simple Car Controller/Scripts/SCC_InputActions.cs
+  uploadId: 593998

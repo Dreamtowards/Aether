@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9a5c9b4b8370ee84284f6651c45978d9
+timeCreated: 1484099674
+licenseType: Store
+TextScriptImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 258020
+  packageName: Simple Car Controller
+  packageVersion: 1.0
+  assetPath: Assets/Simple Car Controller/SCC by BoneCracker Games License.txt
+  uploadId: 593998

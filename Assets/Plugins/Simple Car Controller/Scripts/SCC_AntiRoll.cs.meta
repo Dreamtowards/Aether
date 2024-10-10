@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 644551d79b08a3d448fe6fea3424d4fd
+timeCreated: 1484056080
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 258020
+  packageName: Simple Car Controller
+  packageVersion: 1.0
+  assetPath: Assets/Simple Car Controller/Scripts/SCC_AntiRoll.cs
+  uploadId: 593998

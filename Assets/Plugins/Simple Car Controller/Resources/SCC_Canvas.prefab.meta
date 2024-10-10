@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: b5bceac493b8f8f4ea59a438bb17b3c5
+timeCreated: 1484104296
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 258020
+  packageName: Simple Car Controller
+  packageVersion: 1.0
+  assetPath: Assets/Simple Car Controller/Resources/SCC_Canvas.prefab
+  uploadId: 593998

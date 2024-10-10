@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: d4c97cc1e88ab15408b80747079dcd90
+timeCreated: 1482794258
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 258020
+  packageName: Simple Car Controller
+  packageVersion: 1.0
+  assetPath: Assets/Simple Car Controller/Scripts/SCC_Audio.cs
+  uploadId: 593998

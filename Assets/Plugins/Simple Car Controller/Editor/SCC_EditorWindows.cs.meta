@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 3d64478cddcbbf84297728956983f821
+timeCreated: 1483961309
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 258020
+  packageName: Simple Car Controller
+  packageVersion: 1.0
+  assetPath: Assets/Simple Car Controller/Editor/SCC_EditorWindows.cs
+  uploadId: 593998

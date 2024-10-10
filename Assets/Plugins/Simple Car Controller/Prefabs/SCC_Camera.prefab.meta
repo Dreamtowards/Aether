@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 72b2b382147112d479a2bb303879d6d0
+timeCreated: 1484741956
+licenseType: Store
+NativeFormatImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 258020
+  packageName: Simple Car Controller
+  packageVersion: 1.0
+  assetPath: Assets/Simple Car Controller/Prefabs/SCC_Camera.prefab
+  uploadId: 593998

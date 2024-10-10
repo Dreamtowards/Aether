@@ -1,0 +1,17 @@
+fileFormatVersion: 2
+guid: 7e7147cbac3b2624a80e53700bd2c066
+timeCreated: 1542635149
+licenseType: Store
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 258020
+  packageName: Simple Car Controller
+  packageVersion: 1.0
+  assetPath: Assets/Simple Car Controller/Materials/Prototype (6W).mat
+  uploadId: 593998

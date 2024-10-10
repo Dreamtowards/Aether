@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 58bd53ce2e3fed349b9fedf0c04e284b
+timeCreated: 1482794268
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 258020
+  packageName: Simple Car Controller
+  packageVersion: 1.0
+  assetPath: Assets/Simple Car Controller/Scripts/SCC_Particles.cs
+  uploadId: 593998

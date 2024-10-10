@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 377c9da47e960a54ba9f9bd1091ad8f2
+NativeFormatImporter:
+  externalObjects: {}
+  mainObjectFileID: 4890085278179872738
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 258020
+  packageName: Simple Car Controller
+  packageVersion: 1.0
+  assetPath: Assets/Simple Car Controller/Demo Scenes/SCC_SampleSceneSettings.lighting
+  uploadId: 593998

@@ -1,0 +1,16 @@
+fileFormatVersion: 2
+guid: 72d6a8acee61df74ba0a630e9973ba37
+timeCreated: 1519000521
+licenseType: Store
+NativeFormatImporter:
+  mainObjectFileID: 2100000
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 258020
+  packageName: Simple Car Controller
+  packageVersion: 1.0
+  assetPath: Assets/Simple Car Controller/Models/Materials/No Name.mat
+  uploadId: 593998

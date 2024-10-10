@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: c5edc4291d76f6a4dafc9818fd171636
+timeCreated: 1484056101
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 258020
+  packageName: Simple Car Controller
+  packageVersion: 1.0
+  assetPath: Assets/Simple Car Controller/Scripts/SCC_RigidStabilizer.cs
+  uploadId: 593998

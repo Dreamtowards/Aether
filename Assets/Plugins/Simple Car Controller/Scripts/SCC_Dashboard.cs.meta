@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: c6a6cca8ec92b864389caedd9d33e652
+timeCreated: 1484056183
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 258020
+  packageName: Simple Car Controller
+  packageVersion: 1.0
+  assetPath: Assets/Simple Car Controller/Scripts/SCC_Dashboard.cs
+  uploadId: 593998

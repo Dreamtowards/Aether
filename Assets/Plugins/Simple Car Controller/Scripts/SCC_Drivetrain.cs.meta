@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: 3c5c85938c68c4046aff50b36e527708
+timeCreated: 1482712898
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 258020
+  packageName: Simple Car Controller
+  packageVersion: 1.0
+  assetPath: Assets/Simple Car Controller/Scripts/SCC_Drivetrain.cs
+  uploadId: 593998

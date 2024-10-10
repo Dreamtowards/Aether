@@ -1,0 +1,19 @@
+fileFormatVersion: 2
+guid: edef010aa3ca55f4aadce2db7a61ba1d
+timeCreated: 1484741933
+licenseType: Store
+MonoImporter:
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 258020
+  packageName: Simple Car Controller
+  packageVersion: 1.0
+  assetPath: Assets/Simple Car Controller/Scripts/SCC_Camera.cs
+  uploadId: 593998

@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 287a16276b4a3ab43b035beb5ee1b07c
+timeCreated: 1484743295
+licenseType: Store
+DefaultImporter:
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 258020
+  packageName: Simple Car Controller
+  packageVersion: 1.0
+  assetPath: Assets/Simple Car Controller/Demo Scenes/SCC_SampleScene.unity
+  uploadId: 593998
