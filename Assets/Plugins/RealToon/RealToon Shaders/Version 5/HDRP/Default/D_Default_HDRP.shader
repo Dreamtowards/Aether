@@ -361,7 +361,7 @@ Shader "HDRP/RealToon/Version 5/Default"
 
     //Properties
 
-    #include "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/RT_HDRP_PROP.hlsl"
+    #include "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/RT_HDRP_PROP.hlsl"
 
 	ENDHLSL
 
@@ -396,7 +396,7 @@ Tags { "LightMode" = "SceneSelectionPass" }
         #include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Lit/Lit.hlsl"
         #include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Lit/ShaderPass/LitDepthPass.hlsl"
         #include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Lit/LitData.hlsl"
-        #include "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_DeOnPas.hlsl"
+        #include "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_DeOnPas.hlsl"
 
         #pragma vertex Vert
         #pragma fragment Frag
@@ -447,7 +447,7 @@ Cull [_DoubleSidedOutline]//OL_RCUL
 
 			#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/BuiltinGIUtilities.hlsl"
 
-			#include "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_OutPas.hlsl"
+			#include "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_OutPas.hlsl"
 
 			ENDHLSL
 			
@@ -502,7 +502,7 @@ Tags{"LightMode"="GBuffer"}
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Lit/ShaderPass/LitSharePass.hlsl"
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Lit/LitData.hlsl"
 
-			#include "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_GBuPas.hlsl"
+			#include "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_GBuPas.hlsl"
 
             #pragma vertex Vert
             #pragma fragment Frag
@@ -541,7 +541,7 @@ Tags{"LightMode"="ShadowCaster"}
 
 			#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Material.hlsl"
 
-			#include "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ShaCasPas.hlsl"
+			#include "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ShaCasPas.hlsl"
 			
             ENDHLSL
         }
@@ -594,7 +594,7 @@ Tags{"LightMode"="DepthOnly"}
 
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Lit/LitData.hlsl"
 
-			#include "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_DeOnPas.hlsl"
+			#include "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_DeOnPas.hlsl"
 
             #pragma vertex Vert
             #pragma fragment Frag
@@ -650,7 +650,7 @@ Tags{"LightMode"="MotionVectors"}
 
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/Material/Lit/LitData.hlsl"
 
-			#include "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_MoVecPas.hlsl"
+			#include "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_MoVecPas.hlsl"
 
             #pragma vertex Vert
             #pragma fragment Frag
@@ -733,7 +733,7 @@ Tags{"LightMode"="ForwardOnly"}
 			#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/AreaLighting.hlsl"
 			#include "Packages/com.unity.render-pipelines.high-definition/Runtime/Lighting/AtmosphericScattering/AtmosphericScattering.hlsl"
 
-			#include "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl"
+			#include "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl"
 			
             ENDHLSL
 			 
@@ -823,7 +823,7 @@ Tags{"LightMode" = "IndirectDXR"}
         #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/Raytracing/Shaders/RaytracingSampling.hlsl"
         #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/Raytracing/Shaders/Common/AtmosphericScatteringRayTracing.hlsl"
 
-        #include "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_RT_IndirPas.hlsl"
+        #include "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_RT_IndirPas.hlsl"
 
         ENDHLSL
     }
@@ -872,7 +872,7 @@ Tags{"LightMode" = "ForwardDXR"}
         #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/Raytracing/Shaders/RaytracingFragInputs.hlsl"
         #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/Raytracing/Shaders/Common/AtmosphericScatteringRayTracing.hlsl"
 
-        #include "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_RT_ForwPas.hlsl"
+        #include "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_RT_ForwPas.hlsl"
 
         ENDHLSL
     }
@@ -922,7 +922,7 @@ Tags{"LightMode" = "GBufferDXR"}
 
         #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/Raytracing/Shaders/RaytracingFragInputs.hlsl"
 
-        #include "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_RT_GBuPas.hlsl"
+        #include "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_RT_GBuPas.hlsl"
 
         ENDHLSL
     }
@@ -958,7 +958,7 @@ Tags{"LightMode" = "VisibilityDXR"}
             #include "Packages/com.unity.render-pipelines.core/ShaderLibrary\CommonMaterial.hlsl"
             #include "Packages/com.unity.render-pipelines.high-definition/Runtime/RenderPipeline/Raytracing/Shaders/RaytracingFragInputs.hlsl"
 
-            #include "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_RT_VisiPas.hlsl"
+            #include "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_RT_VisiPas.hlsl"
 
             ENDHLSL
 

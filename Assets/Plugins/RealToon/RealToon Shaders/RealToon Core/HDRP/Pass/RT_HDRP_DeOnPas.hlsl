@@ -1,7 +1,7 @@
 ﻿//RealToon HDRP - DeOnPas
 //MJQStudioWorks
 
-#include "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/RT_HDRP_Other.hlsl"
+#include "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/RT_HDRP_Other.hlsl"
 
 #if (SHADERPASS != SHADERPASS_DEPTH_ONLY && SHADERPASS != SHADERPASS_SHADOWS)
 	#error SHADERPASS_is_not_correctly_define

@@ -1,7 +1,7 @@
 ﻿//RealToon HDRP - OutPas
 //MJQStudioWorks
 
-#include "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/RT_HDRP_Core.hlsl"
+#include "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/RT_HDRP_Core.hlsl"
 
 struct Attributes
 {

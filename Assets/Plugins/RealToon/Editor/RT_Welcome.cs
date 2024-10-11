@@ -11,7 +11,7 @@ namespace RealToon.Editor.Welcome
     {
 
         #region RT_Welcome
-        static readonly string rt_welcome_settings = "Assets/RealToon/Editor/RTW.sett";
+        static readonly string rt_welcome_settings = "Assets/Plugins/RealToon/Editor/RTW.sett";
 
         static RT_Welcome()
         {

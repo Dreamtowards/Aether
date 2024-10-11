@@ -1,8 +1,8 @@
 ﻿//RealToon HDRP RT - GBuPas
 //MJQStudioWorks
 
-#include "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/RT_HDRP_Core.hlsl"
-#include "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/RT_HDRP_Lit_Func_RT.hlsl"
+#include "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/RT_HDRP_Core.hlsl"
+#include "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/RT_HDRP_Lit_Func_RT.hlsl"
 
 [shader("closesthit")]
 void ClosestHitGBuffer(inout RayIntersectionGBuffer rayIntersectionGbuffer : SV_RayPayload, AttributeData attributeData : SV_IntersectionAttributes)

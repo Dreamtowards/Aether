@@ -1,7 +1,7 @@
 ﻿//RealToon HDRP - MoVecPas
 //MJQStudioWorks
 
-#include "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/RT_HDRP_Other.hlsl"
+#include "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/RT_HDRP_Other.hlsl"
 
 #if SHADERPASS != SHADERPASS_MOTION_VECTORS
 #error SHADERPASS_is_not_correctly_define

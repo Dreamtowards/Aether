@@ -1,8 +1,8 @@
 ﻿//RealToon HDRP RT - Forwa
 //MJQStudioWorks
 
-#include "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/RT_HDRP_Core.hlsl"
-#include "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/RT_HDRP_Lit_Func_RT.hlsl"
+#include "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/RT_HDRP_Core.hlsl"
+#include "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/RT_HDRP_Lit_Func_RT.hlsl"
 
 [shader("closesthit")]
 void ClosestHitForward(inout RayIntersection rayIntersection : SV_RayPayload, AttributeData attributeData : SV_IntersectionAttributes)

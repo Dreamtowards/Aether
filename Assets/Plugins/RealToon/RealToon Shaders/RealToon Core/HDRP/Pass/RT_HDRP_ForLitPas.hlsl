@@ -1,8 +1,8 @@
 //RealToon HDRP - ForLitPas
 //MJQStudioWorks
 
-#include "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/RT_HDRP_Core.hlsl"
-#include "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/RT_HDRP_Lit_Func_For_Lit.hlsl"
+#include "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/RT_HDRP_Core.hlsl"
+#include "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/RT_HDRP_Lit_Func_For_Lit.hlsl"
 			
 //Tessellation is still in development
 //#include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Tessellation.hlsl"

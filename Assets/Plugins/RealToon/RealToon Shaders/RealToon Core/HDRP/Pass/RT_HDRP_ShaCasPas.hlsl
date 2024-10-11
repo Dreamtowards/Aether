@@ -1,7 +1,7 @@
 ﻿//RealToon HDRP - ShaCasPas
 //MJQStudioWorks
 
-#include "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/RT_HDRP_Other.hlsl"
+#include "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/RT_HDRP_Other.hlsl"
 
 float4 _ShadowBias;
 float3 _LightDirection;

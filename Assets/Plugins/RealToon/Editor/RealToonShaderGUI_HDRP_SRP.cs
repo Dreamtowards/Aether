@@ -3690,7 +3690,7 @@ HDRenderPipelineAsset hdrpasset;
         #region Check_RE_OL
         void Check_RE_OL()
         {
-            if (ReaLi("//OL_RE", "Assets/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader"))
+            if (ReaLi("//OL_RE", "Assets/Plugins/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader"))
             {
                 remoout = true;
                 REMO_OUTL();
@@ -3708,60 +3708,60 @@ HDRenderPipelineAsset hdrpasset;
         {
             if (remoout == true)
             {
-                ChanLi("Tags{" + (char)34 + "LightMode" + (char)34 + "=" + (char)34 + "SRPDefaultUnlit" + (char)34 + "}", "Tags{" + (char)34 + "LightMode" + (char)34 + "=" + (char)34 + "remove" + (char)34 + "}", "Assets/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader");
-                ChanLi("Cull [_DoubleSidedOutline]//OL_RCUL", "//Cull [_DoubleSidedOutline]//OL_RCUL", "Assets/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader");
+                ChanLi("Tags{" + (char)34 + "LightMode" + (char)34 + "=" + (char)34 + "SRPDefaultUnlit" + (char)34 + "}", "Tags{" + (char)34 + "LightMode" + (char)34 + "=" + (char)34 + "remove" + (char)34 + "}", "Assets/Plugins/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader");
+                ChanLi("Cull [_DoubleSidedOutline]//OL_RCUL", "//Cull [_DoubleSidedOutline]//OL_RCUL", "Assets/Plugins/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader");
 
-                ChanLi("#ifdef UNITY_COLORSPACE_GAMMA//SSOL", "//#ifdef UNITY_COLORSPACE_GAMMA//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("_OutlineColor=float4(LinearToGamma22(_OutlineColor.rgb),_OutlineColor.a);//SSOL", "//_OutlineColor=float4(LinearToGamma22(_OutlineColor.rgb),_OutlineColor.a);//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("#endif//SSOL", "//#endif//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("#ifdef UNITY_COLORSPACE_GAMMA//SSOL", "//#ifdef UNITY_COLORSPACE_GAMMA//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("_OutlineColor=float4(LinearToGamma22(_OutlineColor.rgb),_OutlineColor.a);//SSOL", "//_OutlineColor=float4(LinearToGamma22(_OutlineColor.rgb),_OutlineColor.a);//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("#endif//SSOL", "//#endif//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
 
-                ChanLi("#if N_F_O_ON//SSOL", "//#if N_F_O_ON//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("float3 SSOLi=(float3)EdgDet(sceneUVs.xy,input.positionCS);//SSOL", "//float3 SSOLi=(float3)EdgDet(sceneUVs.xy,input.positionCS);//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("#if N_F_O_MOTTSO_ON//SSOL", "//#if N_F_O_MOTTSO_ON//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("float3 Init_FO=(RTD_CA*RTD_SON_CHE_1)*lerp((float3)1.0,_OutlineColor.rgb,SSOLi);//SSOL", "//float3 Init_FO=(RTD_CA*RTD_SON_CHE_1)*lerp((float3)1.0,_OutlineColor.rgb,SSOLi);//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("float4 finalRGBA=float4(Init_FO,Trans_Val);//FOP", "//float4 finalRGBA=float4(Init_FO,Trans_Val);//FOP", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("#else//SSOL", "//#else//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("float3 Init_FO=lerp((RTD_CA*RTD_SON_CHE_1),_OutlineColor.rgb,SSOLi);//SSOL", "//float3 Init_FO=lerp((RTD_CA*RTD_SON_CHE_1),_OutlineColor.rgb,SSOLi);//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("float4 finalRGBA=float4(Init_FO,Trans_Val);//FOP2", "//float4 finalRGBA=float4(Init_FO,Trans_Val);//FOP2", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("#endif//SSOL", "//#endif//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("#else//SSOL", "//#else//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("float4 finalRGBA=float4((RTD_CA*RTD_SON_CHE_1),Trans_Val);//FOP", "//float4 finalRGBA=float4((RTD_CA*RTD_SON_CHE_1),Trans_Val);//FOP", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("#endif//SSOL", "//#endif//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("#if N_F_O_ON//SSOL", "//#if N_F_O_ON//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("float3 SSOLi=(float3)EdgDet(sceneUVs.xy,input.positionCS);//SSOL", "//float3 SSOLi=(float3)EdgDet(sceneUVs.xy,input.positionCS);//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("#if N_F_O_MOTTSO_ON//SSOL", "//#if N_F_O_MOTTSO_ON//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("float3 Init_FO=(RTD_CA*RTD_SON_CHE_1)*lerp((float3)1.0,_OutlineColor.rgb,SSOLi);//SSOL", "//float3 Init_FO=(RTD_CA*RTD_SON_CHE_1)*lerp((float3)1.0,_OutlineColor.rgb,SSOLi);//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("float4 finalRGBA=float4(Init_FO,Trans_Val);//FOP", "//float4 finalRGBA=float4(Init_FO,Trans_Val);//FOP", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("#else//SSOL", "//#else//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("float3 Init_FO=lerp((RTD_CA*RTD_SON_CHE_1),_OutlineColor.rgb,SSOLi);//SSOL", "//float3 Init_FO=lerp((RTD_CA*RTD_SON_CHE_1),_OutlineColor.rgb,SSOLi);//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("float4 finalRGBA=float4(Init_FO,Trans_Val);//FOP2", "//float4 finalRGBA=float4(Init_FO,Trans_Val);//FOP2", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("#endif//SSOL", "//#endif//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("#else//SSOL", "//#else//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("float4 finalRGBA=float4((RTD_CA*RTD_SON_CHE_1),Trans_Val);//FOP", "//float4 finalRGBA=float4((RTD_CA*RTD_SON_CHE_1),Trans_Val);//FOP", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("#endif//SSOL", "//#endif//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
 
-                ChanLi("//float4 finalRGBA=float4(RTD_CA*RTD_SON_CHE_1,Trans_Val);//FOP", "float4 finalRGBA=float4(RTD_CA*RTD_SON_CHE_1,Trans_Val);//FOP", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("//float4 finalRGBA=float4(RTD_CA*RTD_SON_CHE_1,Trans_Val);//FOP", "float4 finalRGBA=float4(RTD_CA*RTD_SON_CHE_1,Trans_Val);//FOP", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
 
-                ChanLi("//OL_NRE", "//OL_RE", "Assets/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader");
+                ChanLi("//OL_NRE", "//OL_RE", "Assets/Plugins/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader");
 
-                ChanLi("//SSOL_U", "//SSOL_NU", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("//SSOL_U", "//SSOL_NU", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
 
                 //============================
                 //============================
 
-                ChanLi("static bool remoout = true;", "static bool remoout = false;", "Assets/RealToon/Editor/RealToonShaderGUI_HDRP_SRP.cs");
-                ChanLi("static string remooutstat = " + (char)34 + "Remove Outline" + (char)34 + ";", "static string remooutstat = " + (char)34 + "Add Outline" + (char)34 + ";", "Assets/RealToon/Editor/RealToonShaderGUI_HDRP_SRP.cs");
+                ChanLi("static bool remoout = true;", "static bool remoout = false;", "Assets/Plugins/RealToon/Editor/RealToonShaderGUI_HDRP_SRP.cs");
+                ChanLi("static string remooutstat = " + (char)34 + "Remove Outline" + (char)34 + ";", "static string remooutstat = " + (char)34 + "Add Outline" + (char)34 + ";", "Assets/Plugins/RealToon/Editor/RealToonShaderGUI_HDRP_SRP.cs");
 
-                AssetDatabase.ImportAsset("Assets/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader");
-                AssetDatabase.ImportAsset("Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                AssetDatabase.ImportAsset("Assets/RealToon/Editor/RealToonShaderGUI_HDRP_SRP.cs");
+                AssetDatabase.ImportAsset("Assets/Plugins/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader");
+                AssetDatabase.ImportAsset("Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                AssetDatabase.ImportAsset("Assets/Plugins/RealToon/Editor/RealToonShaderGUI_HDRP_SRP.cs");
                 Debug.Log("Outline feature removed on RealToon HDRP shader.");
             }
             else if (remoout == false)
             {
-                ChanLi("Tags{" + (char)34 + "LightMode" + (char)34 + "=" + (char)34 + "remove" + (char)34 + "}", "Tags{" + (char)34 + "LightMode" + (char)34 + "=" + (char)34 + "SRPDefaultUnlit" + (char)34 + "}", "Assets/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader");
-                ChanLi("//Cull [_DoubleSidedOutline]//OL_RCUL", "Cull [_DoubleSidedOutline]//OL_RCUL", "Assets/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader");
+                ChanLi("Tags{" + (char)34 + "LightMode" + (char)34 + "=" + (char)34 + "remove" + (char)34 + "}", "Tags{" + (char)34 + "LightMode" + (char)34 + "=" + (char)34 + "SRPDefaultUnlit" + (char)34 + "}", "Assets/Plugins/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader");
+                ChanLi("//Cull [_DoubleSidedOutline]//OL_RCUL", "Cull [_DoubleSidedOutline]//OL_RCUL", "Assets/Plugins/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader");
 
-                ChanLi("//OL_RE", "//OL_NRE", "Assets/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader");
+                ChanLi("//OL_RE", "//OL_NRE", "Assets/Plugins/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader");
 
                 Check_SSOL_TOL();
 
                 //============================
                 //============================
 
-                ChanLi("static bool remoout = false;", "static bool remoout = true;", "Assets/RealToon/Editor/RealToonShaderGUI_HDRP_SRP.cs");
-                ChanLi("static string remooutstat = " + (char)34 + "Add Outline" + (char)34 + ";", "static string remooutstat = " + (char)34 + "Remove Outline" + (char)34 + ";", "Assets/RealToon/Editor/RealToonShaderGUI_HDRP_SRP.cs");
+                ChanLi("static bool remoout = false;", "static bool remoout = true;", "Assets/Plugins/RealToon/Editor/RealToonShaderGUI_HDRP_SRP.cs");
+                ChanLi("static string remooutstat = " + (char)34 + "Add Outline" + (char)34 + ";", "static string remooutstat = " + (char)34 + "Remove Outline" + (char)34 + ";", "Assets/Plugins/RealToon/Editor/RealToonShaderGUI_HDRP_SRP.cs");
 
-                AssetDatabase.ImportAsset("Assets/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader");
-                AssetDatabase.ImportAsset("Assets/RealToon/Editor/RealToonShaderGUI_HDRP_SRP.cs");
+                AssetDatabase.ImportAsset("Assets/Plugins/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader");
+                AssetDatabase.ImportAsset("Assets/Plugins/RealToon/Editor/RealToonShaderGUI_HDRP_SRP.cs");
                 Debug.Log("Outline feature added on RealToon HDRP shader.");
             }
         }
@@ -3770,7 +3770,7 @@ HDRenderPipelineAsset hdrpasset;
         #region Check_SSOL_TOL
         void Check_SSOL_TOL()
         {
-            if (ReaLi("//SSOL_U", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl"))
+            if (ReaLi("//SSOL_U", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl"))
             {
                 UseSSOL = true;
                 USSOL_OR_TOL();
@@ -3788,78 +3788,78 @@ HDRenderPipelineAsset hdrpasset;
         {
             if (UseSSOL == true)
             {
-                ChanLi("Tags{" + (char)34 + "LightMode" + (char)34 + "=" + (char)34 + "SRPDefaultUnlit" + (char)34 + "}", "Tags{" + (char)34 + "LightMode" + (char)34 + "=" + (char)34 + "remove" + (char)34 + "}", "Assets/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader");
-                ChanLi("Cull [_DoubleSidedOutline]//OL_RCUL", "//Cull [_DoubleSidedOutline]//OL_RCUL", "Assets/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader");
+                ChanLi("Tags{" + (char)34 + "LightMode" + (char)34 + "=" + (char)34 + "SRPDefaultUnlit" + (char)34 + "}", "Tags{" + (char)34 + "LightMode" + (char)34 + "=" + (char)34 + "remove" + (char)34 + "}", "Assets/Plugins/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader");
+                ChanLi("Cull [_DoubleSidedOutline]//OL_RCUL", "//Cull [_DoubleSidedOutline]//OL_RCUL", "Assets/Plugins/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader");
 
-                ChanLi("//#ifdef UNITY_COLORSPACE_GAMMA//SSOL", "#ifdef UNITY_COLORSPACE_GAMMA//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("//_OutlineColor=float4(LinearToGamma22(_OutlineColor.rgb),_OutlineColor.a);//SSOL", "_OutlineColor=float4(LinearToGamma22(_OutlineColor.rgb),_OutlineColor.a);//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("//#endif//SSOL", "#endif//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("//#ifdef UNITY_COLORSPACE_GAMMA//SSOL", "#ifdef UNITY_COLORSPACE_GAMMA//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("//_OutlineColor=float4(LinearToGamma22(_OutlineColor.rgb),_OutlineColor.a);//SSOL", "_OutlineColor=float4(LinearToGamma22(_OutlineColor.rgb),_OutlineColor.a);//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("//#endif//SSOL", "#endif//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
 
-                ChanLi("//#if N_F_O_ON//SSOL", "#if N_F_O_ON//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("//float3 SSOLi=(float3)EdgDet(sceneUVs.xy,input.positionCS);//SSOL", "float3 SSOLi=(float3)EdgDet(sceneUVs.xy,input.positionCS);//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("//#if N_F_O_MOTTSO_ON//SSOL", "#if N_F_O_MOTTSO_ON//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("//float3 Init_FO=(RTD_CA*RTD_SON_CHE_1)*lerp((float3)1.0,_OutlineColor.rgb,SSOLi);//SSOL", "float3 Init_FO=(RTD_CA*RTD_SON_CHE_1)*lerp((float3)1.0,_OutlineColor.rgb,SSOLi);//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("//float4 finalRGBA=float4(Init_FO,Trans_Val);//FOP", "float4 finalRGBA=float4(Init_FO,Trans_Val);//FOP", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("//#else//SSOL", "#else//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("//float3 Init_FO=lerp((RTD_CA*RTD_SON_CHE_1),_OutlineColor.rgb,SSOLi);//SSOL", "float3 Init_FO=lerp((RTD_CA*RTD_SON_CHE_1),_OutlineColor.rgb,SSOLi);//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("//float4 finalRGBA=float4(Init_FO,Trans_Val);//FOP2", "float4 finalRGBA=float4(Init_FO,Trans_Val);//FOP2", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("//#endif//SSOL", "#endif//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("//#else//SSOL", "#else//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("//float4 finalRGBA=float4((RTD_CA*RTD_SON_CHE_1),Trans_Val);//FOP", "float4 finalRGBA=float4((RTD_CA*RTD_SON_CHE_1),Trans_Val);//FOP", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("//#endif//SSOL", "#endif//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("//#if N_F_O_ON//SSOL", "#if N_F_O_ON//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("//float3 SSOLi=(float3)EdgDet(sceneUVs.xy,input.positionCS);//SSOL", "float3 SSOLi=(float3)EdgDet(sceneUVs.xy,input.positionCS);//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("//#if N_F_O_MOTTSO_ON//SSOL", "#if N_F_O_MOTTSO_ON//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("//float3 Init_FO=(RTD_CA*RTD_SON_CHE_1)*lerp((float3)1.0,_OutlineColor.rgb,SSOLi);//SSOL", "float3 Init_FO=(RTD_CA*RTD_SON_CHE_1)*lerp((float3)1.0,_OutlineColor.rgb,SSOLi);//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("//float4 finalRGBA=float4(Init_FO,Trans_Val);//FOP", "float4 finalRGBA=float4(Init_FO,Trans_Val);//FOP", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("//#else//SSOL", "#else//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("//float3 Init_FO=lerp((RTD_CA*RTD_SON_CHE_1),_OutlineColor.rgb,SSOLi);//SSOL", "float3 Init_FO=lerp((RTD_CA*RTD_SON_CHE_1),_OutlineColor.rgb,SSOLi);//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("//float4 finalRGBA=float4(Init_FO,Trans_Val);//FOP2", "float4 finalRGBA=float4(Init_FO,Trans_Val);//FOP2", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("//#endif//SSOL", "#endif//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("//#else//SSOL", "#else//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("//float4 finalRGBA=float4((RTD_CA*RTD_SON_CHE_1),Trans_Val);//FOP", "float4 finalRGBA=float4((RTD_CA*RTD_SON_CHE_1),Trans_Val);//FOP", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("//#endif//SSOL", "#endif//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
 
-                ChanLi("float4 finalRGBA=float4(RTD_CA*RTD_SON_CHE_1,Trans_Val);//FOP", "//float4 finalRGBA=float4(RTD_CA*RTD_SON_CHE_1,Trans_Val);//FOP", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("float4 finalRGBA=float4(RTD_CA*RTD_SON_CHE_1,Trans_Val);//FOP", "//float4 finalRGBA=float4(RTD_CA*RTD_SON_CHE_1,Trans_Val);//FOP", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
 
-                ChanLi("//SSOL_NU", "//SSOL_U", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("//SSOL_NU", "//SSOL_U", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
 
                 //============================
                 //============================
 
-                ChanLi("static bool UseSSOL = true;", "static bool UseSSOL = false;", "Assets/RealToon/Editor/RealToonShaderGUI_HDRP_SRP.cs");
-                ChanLi("static string OLType = " + (char)34 + "Traditional" + (char)34 + ";", "static string OLType = " + (char)34 + "Screen Space" + (char)34 + ";", "Assets/RealToon/Editor/RealToonShaderGUI_HDRP_SRP.cs");
-                ChanLi("static string UseSSOLStat = " + (char)34 + "Use Screen Space Outline" + (char)34 + ";", "static string UseSSOLStat = " + (char)34 + "Use Traditional Outline" + (char)34 + ";", "Assets/RealToon/Editor/RealToonShaderGUI_HDRP_SRP.cs");
+                ChanLi("static bool UseSSOL = true;", "static bool UseSSOL = false;", "Assets/Plugins/RealToon/Editor/RealToonShaderGUI_HDRP_SRP.cs");
+                ChanLi("static string OLType = " + (char)34 + "Traditional" + (char)34 + ";", "static string OLType = " + (char)34 + "Screen Space" + (char)34 + ";", "Assets/Plugins/RealToon/Editor/RealToonShaderGUI_HDRP_SRP.cs");
+                ChanLi("static string UseSSOLStat = " + (char)34 + "Use Screen Space Outline" + (char)34 + ";", "static string UseSSOLStat = " + (char)34 + "Use Traditional Outline" + (char)34 + ";", "Assets/Plugins/RealToon/Editor/RealToonShaderGUI_HDRP_SRP.cs");
 
-                AssetDatabase.ImportAsset("Assets/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader");
-                AssetDatabase.ImportAsset("Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                AssetDatabase.ImportAsset("Assets/RealToon/Editor/RealToonShaderGUI_HDRP_SRP.cs");
+                AssetDatabase.ImportAsset("Assets/Plugins/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader");
+                AssetDatabase.ImportAsset("Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                AssetDatabase.ImportAsset("Assets/Plugins/RealToon/Editor/RealToonShaderGUI_HDRP_SRP.cs");
                 Debug.Log("Screen Space Outline is now use.");
             }
             else if (UseSSOL == false)
             {
-                ChanLi("Tags{" + (char)34 + "LightMode" + (char)34 + "=" + (char)34 + "remove" + (char)34 + "}", "Tags{" + (char)34 + "LightMode" + (char)34 + "=" + (char)34 + "SRPDefaultUnlit" + (char)34 + "}", "Assets/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader");
-                ChanLi("//Cull [_DoubleSidedOutline]//OL_RCUL", "Cull [_DoubleSidedOutline]//OL_RCUL", "Assets/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader");
+                ChanLi("Tags{" + (char)34 + "LightMode" + (char)34 + "=" + (char)34 + "remove" + (char)34 + "}", "Tags{" + (char)34 + "LightMode" + (char)34 + "=" + (char)34 + "SRPDefaultUnlit" + (char)34 + "}", "Assets/Plugins/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader");
+                ChanLi("//Cull [_DoubleSidedOutline]//OL_RCUL", "Cull [_DoubleSidedOutline]//OL_RCUL", "Assets/Plugins/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader");
 
-                ChanLi("#ifdef UNITY_COLORSPACE_GAMMA//SSOL", "//#ifdef UNITY_COLORSPACE_GAMMA//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("_OutlineColor=float4(LinearToGamma22(_OutlineColor.rgb),_OutlineColor.a);//SSOL", "//_OutlineColor=float4(LinearToGamma22(_OutlineColor.rgb),_OutlineColor.a);//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("#endif//SSOL", "//#endif//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("#ifdef UNITY_COLORSPACE_GAMMA//SSOL", "//#ifdef UNITY_COLORSPACE_GAMMA//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("_OutlineColor=float4(LinearToGamma22(_OutlineColor.rgb),_OutlineColor.a);//SSOL", "//_OutlineColor=float4(LinearToGamma22(_OutlineColor.rgb),_OutlineColor.a);//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("#endif//SSOL", "//#endif//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
 
-                ChanLi("#if N_F_O_ON//SSOL", "//#if N_F_O_ON//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("float3 SSOLi=(float3)EdgDet(sceneUVs.xy,input.positionCS);//SSOL", "//float3 SSOLi=(float3)EdgDet(sceneUVs.xy,input.positionCS);//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("#if N_F_O_MOTTSO_ON//SSOL", "//#if N_F_O_MOTTSO_ON//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("float3 Init_FO=(RTD_CA*RTD_SON_CHE_1)*lerp((float3)1.0,_OutlineColor.rgb,SSOLi);//SSOL", "//float3 Init_FO=(RTD_CA*RTD_SON_CHE_1)*lerp((float3)1.0,_OutlineColor.rgb,SSOLi);//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("float4 finalRGBA=float4(Init_FO,Trans_Val);//FOP", "//float4 finalRGBA=float4(Init_FO,Trans_Val);//FOP", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("#else//SSOL", "//#else//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("float3 Init_FO=lerp((RTD_CA*RTD_SON_CHE_1),_OutlineColor.rgb,SSOLi);//SSOL", "//float3 Init_FO=lerp((RTD_CA*RTD_SON_CHE_1),_OutlineColor.rgb,SSOLi);//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("float4 finalRGBA=float4(Init_FO,Trans_Val);//FOP2", "//float4 finalRGBA=float4(Init_FO,Trans_Val);//FOP2", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("#endif//SSOL", "//#endif//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("#else//SSOL", "//#else//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("float4 finalRGBA=float4((RTD_CA*RTD_SON_CHE_1),Trans_Val);//FOP", "//float4 finalRGBA=float4((RTD_CA*RTD_SON_CHE_1),Trans_Val);//FOP", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                ChanLi("#endif//SSOL", "//#endif//SSOL", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("#if N_F_O_ON//SSOL", "//#if N_F_O_ON//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("float3 SSOLi=(float3)EdgDet(sceneUVs.xy,input.positionCS);//SSOL", "//float3 SSOLi=(float3)EdgDet(sceneUVs.xy,input.positionCS);//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("#if N_F_O_MOTTSO_ON//SSOL", "//#if N_F_O_MOTTSO_ON//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("float3 Init_FO=(RTD_CA*RTD_SON_CHE_1)*lerp((float3)1.0,_OutlineColor.rgb,SSOLi);//SSOL", "//float3 Init_FO=(RTD_CA*RTD_SON_CHE_1)*lerp((float3)1.0,_OutlineColor.rgb,SSOLi);//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("float4 finalRGBA=float4(Init_FO,Trans_Val);//FOP", "//float4 finalRGBA=float4(Init_FO,Trans_Val);//FOP", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("#else//SSOL", "//#else//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("float3 Init_FO=lerp((RTD_CA*RTD_SON_CHE_1),_OutlineColor.rgb,SSOLi);//SSOL", "//float3 Init_FO=lerp((RTD_CA*RTD_SON_CHE_1),_OutlineColor.rgb,SSOLi);//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("float4 finalRGBA=float4(Init_FO,Trans_Val);//FOP2", "//float4 finalRGBA=float4(Init_FO,Trans_Val);//FOP2", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("#endif//SSOL", "//#endif//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("#else//SSOL", "//#else//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("float4 finalRGBA=float4((RTD_CA*RTD_SON_CHE_1),Trans_Val);//FOP", "//float4 finalRGBA=float4((RTD_CA*RTD_SON_CHE_1),Trans_Val);//FOP", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("#endif//SSOL", "//#endif//SSOL", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
 
-                ChanLi("//float4 finalRGBA=float4(RTD_CA*RTD_SON_CHE_1,Trans_Val);//FOP", "float4 finalRGBA=float4(RTD_CA*RTD_SON_CHE_1,Trans_Val);//FOP", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("//float4 finalRGBA=float4(RTD_CA*RTD_SON_CHE_1,Trans_Val);//FOP", "float4 finalRGBA=float4(RTD_CA*RTD_SON_CHE_1,Trans_Val);//FOP", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
 
-                ChanLi("//SSOL_U", "//SSOL_NU", "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                ChanLi("//SSOL_U", "//SSOL_NU", "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
 
                 //============================
                 //============================
 
-                ChanLi("static bool UseSSOL = false;", "static bool UseSSOL = true;", "Assets/RealToon/Editor/RealToonShaderGUI_HDRP_SRP.cs");
-                ChanLi("static string OLType = " + (char)34 + "Screen Space" + (char)34 + ";", "static string OLType = " + (char)34 + "Traditional" + (char)34 + ";", "Assets/RealToon/Editor/RealToonShaderGUI_HDRP_SRP.cs");
-                ChanLi("static string UseSSOLStat = " + (char)34 + "Use Traditional Outline" + (char)34 + ";", "static string UseSSOLStat = " + (char)34 + "Use Screen Space Outline" + (char)34 + ";", "Assets/RealToon/Editor/RealToonShaderGUI_HDRP_SRP.cs");
+                ChanLi("static bool UseSSOL = false;", "static bool UseSSOL = true;", "Assets/Plugins/RealToon/Editor/RealToonShaderGUI_HDRP_SRP.cs");
+                ChanLi("static string OLType = " + (char)34 + "Screen Space" + (char)34 + ";", "static string OLType = " + (char)34 + "Traditional" + (char)34 + ";", "Assets/Plugins/RealToon/Editor/RealToonShaderGUI_HDRP_SRP.cs");
+                ChanLi("static string UseSSOLStat = " + (char)34 + "Use Traditional Outline" + (char)34 + ";", "static string UseSSOLStat = " + (char)34 + "Use Screen Space Outline" + (char)34 + ";", "Assets/Plugins/RealToon/Editor/RealToonShaderGUI_HDRP_SRP.cs");
 
-                AssetDatabase.ImportAsset("Assets/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader");
-                AssetDatabase.ImportAsset("Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
-                AssetDatabase.ImportAsset("Assets/RealToon/Editor/RealToonShaderGUI_HDRP_SRP.cs");
+                AssetDatabase.ImportAsset("Assets/Plugins/RealToon/RealToon Shaders/Version 5/HDRP/Default/D_Default_HDRP.shader");
+                AssetDatabase.ImportAsset("Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/Pass/RT_HDRP_ForLitPas.hlsl");
+                AssetDatabase.ImportAsset("Assets/Plugins/RealToon/Editor/RealToonShaderGUI_HDRP_SRP.cs");
                 Debug.Log("Traditional Outline is now use.");
             }
         }

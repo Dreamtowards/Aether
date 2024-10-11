@@ -1,7 +1,7 @@
 ﻿//RealToon HDRP - GBuPas
 //MJQStudioWorks
 
-#include "Assets/RealToon/RealToon Shaders/RealToon Core/HDRP/RT_HDRP_Other.hlsl"
+#include "Assets/Plugins/RealToon/RealToon Shaders/RealToon Core/HDRP/RT_HDRP_Other.hlsl"
 
 #if SHADERPASS != SHADERPASS_GBUFFER
 #error SHADERPASS_is_not_correctly_define
