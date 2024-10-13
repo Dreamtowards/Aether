@@ -80,6 +80,7 @@ namespace Aether
                 {
                     m_LastTimeModify = Time.time;
                     var cs = ChunkSystem.instance;
+                    if (cs)
                         cs.ModifySphere(hitResult.point, m_ModifyRadius, LMB ? -m_Intensity : m_Intensity, m_TexId);
                 }
             }
