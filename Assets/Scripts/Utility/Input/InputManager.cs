@@ -72,6 +72,8 @@ namespace Aether
 
 		private float m_LastTimeMoveForward;
 
+		public AudioClip danceAudio;
+
 		void Update()
 		{
 			// // Pause Game Control, Release Cursor
@@ -81,6 +83,12 @@ namespace Aether
 
 			if (!IsPlayingInput)
 				return;
+
+			if (Input.GetKeyDown(KeyCode.V))
+			{
+				PlayerController.instance._animator.CrossFade("DanceHiasobi", 0.4f);
+				SoundManager.instance.Play(danceAudio);
+			}
 
 			// Jump
 			if (actionJump.WasPressedThisFrame()) {

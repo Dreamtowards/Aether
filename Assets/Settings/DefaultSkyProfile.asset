@@ -409,13 +409,13 @@ MonoBehaviour:
     m_Value: 1
   focusMode:
     m_OverrideState: 1
-    m_Value: 1
+    m_Value: 2
   focusDistance:
     m_OverrideState: 0
     m_Value: 10
   focusDistanceMode:
-    m_OverrideState: 0
-    m_Value: 0
+    m_OverrideState: 1
+    m_Value: 1
   nearFocusStart:
     m_OverrideState: 1
     m_Value: 0
@@ -424,7 +424,7 @@ MonoBehaviour:
     m_Value: 1.5
   farFocusStart:
     m_OverrideState: 1
-    m_Value: 200
+    m_Value: 70
   farFocusEnd:
     m_OverrideState: 1
     m_Value: 9000
@@ -1014,7 +1014,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d08ce26990eb1a4a9177b860541e702, type: 3}
   m_Name: Exposure
   m_EditorClassIdentifier: 
-  active: 1
+  active: 0
   mode:
     m_OverrideState: 1
     m_Value: 4
