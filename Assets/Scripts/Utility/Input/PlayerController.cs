@@ -177,8 +177,8 @@ namespace Aether
             if (!InputManager.IsPlayingInput)
                 return;
             
-            if (Grounded)
-                InputManager.instance.isFlying = false;
+            // if (Grounded)
+            //     InputManager.instance.isFlying = false;
             
             if (!IsFlying)
             {
@@ -198,7 +198,7 @@ namespace Aether
         }
 
         public float FlyingSpeed = 10;
-        public bool IsFlying => InputManager.instance.isFlying;
+        public bool IsFlying;
 
         private void LateUpdate()
         {
