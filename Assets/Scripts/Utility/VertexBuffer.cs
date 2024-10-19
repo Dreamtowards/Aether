@@ -32,6 +32,12 @@ public class VertexBuffer
                 return hash;
             }
         }
+
+        public Vertex SetNorm(Vector3 norm)
+        {
+            this.norm = norm;
+            return this;
+        }
     }
 
     public List<Vertex> Vertices;
@@ -67,9 +73,70 @@ public class VertexBuffer
         return IsIndexed() ? Indices.Count : Vertices.Count;
     }
 
+    public int NumTriangles() => 
+        VertexCount() / 3;
+
     public Vertex GetVertex(int idx)
     {
         return IsIndexed() ? Vertices[Indices[idx]] : Vertices[idx];
+    }
+
+    public void ComputeNormalsFlat() 
+    {
+        int numTris = NumTriangles();
+        for (int i = 0;i < numTris; i++) {
+            int v = i * 3;
+            var p0 = Vertices[v].pos;
+            var p1 = Vertices[v+1].pos;
+            var p2 = Vertices[v+2].pos;
+
+            var n = Vector3.Cross(p1 - p0, p2 - p0).normalized;
+
+            Vertices[v] = Vertices[v].SetNorm(n); 
+            Vertices[v+1] = Vertices[v+1].SetNorm(n); 
+            Vertices[v+2] = Vertices[v+2].SetNorm(n); 
+        }
+    }
+    
+    // HOLY SH*T, this performance would be terrible. compared to Rust semantic.
+    public void ComputeNormalsSmooth()
+    {
+        float SCALE = 100;
+
+        var pos2norm = new Dictionary<int3, float3>();
+        
+        int numTris = NumTriangles();
+        for (int tri_i = 0;tri_i < numTris; tri_i++) {
+            var p0 = GetVertex(tri_i * 3).pos;
+            var p1 = GetVertex(tri_i * 3 + 1).pos;
+            var p2 = GetVertex(tri_i * 3 + 2).pos;
+        
+            var n = Vector3.Cross(p1 - p0, p2 - p0).normalized;
+        
+            var a0 = Vector3.Angle(p1 - p0, p2 - p0);
+            var a1 = Vector3.Angle(p2 - p1, p0 - p1);
+            var a2 = Vector3.Angle(p0 - p2, p1 - p2);
+
+            // THIS is SH*T
+            pos2norm.TryAdd(new int3(p0 * SCALE), float3.zero);
+            pos2norm[new int3(p0 * SCALE)] += new float3(n * a0);
+            pos2norm.TryAdd(new int3(p1 * SCALE), float3.zero);
+            pos2norm[new int3(p1 * SCALE)] += new float3(n * a1);
+            pos2norm.TryAdd(new int3(p2 * SCALE), float3.zero);
+            pos2norm[new int3(p2 * SCALE)] += new float3(n * a2);
+        }
+        
+        // wasted
+        foreach (var key in new List<int3>(pos2norm.Keys)) {
+            pos2norm[key] = math.normalize(pos2norm[key]);
+        }
+        // foreach (var norm in pos2norm) {   // modify is not allowed while iterating
+        //     pos2norm[norm.Key] = math.normalize(norm.Value);
+        // }
+        
+        for (int i = 0;i < Vertices.Count; i++) {
+            Vertices[i] = Vertices[i].SetNorm(pos2norm[new int3(Vertices[i].pos * SCALE)]);
+        }
     }
 
     public VertexBuffer ComputeIndexed()

@@ -161,6 +161,7 @@ namespace Aether
 
                 if (GetChunk(chunkpos, out var chunk))
                 {
+                    vbuf.ComputeNormalsSmooth();
                     chunk.UploadMesh(vbuf.ToMesh());
                 }
                 s_VertexBufferPool.Release(vbuf);
