@@ -113,6 +113,10 @@ namespace Aether
         public static T GetOrAddComponent<T>(this Transform obj) where T : Component {
             return GetOrAddComponent<T>(obj.gameObject);
         }
+
+        public static void ToggleActive(this GameObject obj) {
+            obj.SetActive(obj.activeSelf);
+        }
         
         public static void LockCursor(bool lockCursor)
         {

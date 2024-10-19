@@ -1,4 +1,5 @@
 ﻿ using Cinemachine;
+ using Sirenix.Utilities;
  using Unity.Mathematics;
  using UnityEngine;
  using Random = UnityEngine.Random;
@@ -78,7 +79,7 @@ namespace Aether
         private float _cinemachineTargetPitch;
         public float m_CameraDistance = 4;
         public CinemachineVirtualCamera m_VirtualCamera;
-        public GameObject m_CharacterGeometry;
+        // public GameObject m_CharacterGeometry;
 
         public float 
             NormalFOV = 75,
@@ -116,6 +117,9 @@ namespace Aether
 
         public static PlayerController instance;
 
+        public DancerInfo[] avatars;
+        public int currentAvatar;
+        
 
         private void Awake()
         {
@@ -126,6 +130,16 @@ namespace Aether
             {
                 _mainCamera = GameObject.FindGameObjectWithTag("MainCamera");
             }
+
+            avatars = GetComponentsInChildren<DancerInfo>(true);
+            SwitchAvatar(0);
+        }
+
+        public void SwitchAvatar(int i)
+        {
+            avatars.ForEach(e => e.gameObject.SetActive(false));
+            avatars[i].gameObject.SetActive(true);
+            currentAvatar = i;
         }
 
         private void Start()
@@ -153,7 +167,7 @@ namespace Aether
                 if (InputManager.instance.actionCameraDistanceModifier.IsPressed())
                     m_CameraDistance += Input.mouseScrollDelta.y;
                 m_CameraDistance = Mathf.Max(0, m_CameraDistance);
-                m_CharacterGeometry.SetActive(m_CameraDistance > 0);
+                avatars[currentAvatar].gameObject.SetActive(m_CameraDistance > 0);
             
                 if (m_VirtualCamera.GetCinemachineComponent(CinemachineCore.Stage.Body) is Cinemachine3rdPersonFollow comp) {
                     comp.CameraDistance = m_CameraDistance;

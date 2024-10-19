@@ -14,6 +14,8 @@ namespace Aether
         public bool m_ShowDemoWindow = false;
 
         public bool m_ShowDebugTextInfo = true;
+
+        public bool m_HideHUD;
         
         public bool m_IsHideImguiOnPause = true;
 
@@ -23,6 +25,7 @@ namespace Aether
                 return;
             
             if (Input.GetKeyDown(KeyCode.F12)) m_ShowDockspace = !m_ShowDockspace;
+            if (Input.GetKeyDown(KeyCode.F1)) UIManager.instance.HUD.ToggleActive();
             if (m_ShowDockspace)
                 ShowDockspaceAndMainMenubar();
 
@@ -163,11 +166,15 @@ namespace Aether
                 if (ImGui.BeginMenu("View"))
                 {
                     ImGui.SeparatorText("Debug");
-                    ImGui.MenuItem("Debug Text Info", null, ref m_ShowDebugTextInfo);
+                    if (ImGui.MenuItem("Hide HUD", "F1", UIManager.instance.HUD.activeSelf))
+                        UIManager.instance.HUD.ToggleActive();
+                    ImGui.MenuItem("Debug Text Info", "F3", ref m_ShowDebugTextInfo);
+                    
                     ImGui.MenuItem("ImGui Demo Window", null, ref m_ShowDemoWindow);
                     ImGui.MenuItem("Game Controls", null, InputManager.IsPlayingInput);
                     
-                    if (ImGui.BeginMenu("MMD"))
+                    ImGui.SeparatorText("MMD");
+                    if (ImGui.BeginMenu("Dances"))
                     {
                         for (int i = 0; i < mmdAnimName.Length; i++) {
                             if (ImGui.MenuItem(mmdAnimName[i], null, i == mmdCurr)) {
@@ -175,6 +182,17 @@ namespace Aether
                                 PlayerController.instance._animator.StopPlayback();
                                 PlayerController.instance._animator.Play(mmdAnimName[i]);
                                 SoundManager.PlaySelf(transform, mmdAudio[i]);
+                            }
+                        }
+                        ImGui.EndMenu();
+                    }
+                    if (ImGui.BeginMenu("Avatars"))
+                    {
+                        var plc = PlayerController.instance;
+                        var avatars = plc.avatars;
+                        for (int i = 0; i < avatars.Length; i++) {
+                            if (ImGui.MenuItem(avatars[i].gameObject.name, null, i == plc.currentAvatar)) {
+                                plc.SwitchAvatar(i);
                             }
                         }
                         ImGui.EndMenu();
