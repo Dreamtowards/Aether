@@ -126,13 +126,15 @@ namespace Aether
                     ImGui.InputInt("Seed", ref wi.Seed);
                     
                     var cs = ChunkSystem.instance;
-                    ImGui.SeparatorText("Voxel");
-                    ImGui.SliderInt3("Chunks Load Range", ref cs.m_ChunkLoadMarker.m_ChunksLoadDistance.x, -1, 20);
-                    if (ImGui.MenuItem("Regenerate All Chunks")) { }
-                    if (ImGui.MenuItem("Remesh All Chunks")) {
-                        ChunkSystem.instance.m_Chunks.Keys.ForEach(e => {
-                            ChunkSystem.instance.MarkChunkMeshDirty(e);
-                        });
+                    if (cs) {
+                        ImGui.SeparatorText("Voxel");
+                        ImGui.SliderInt3("Chunks Load Range", ref cs.m_ChunkLoadMarker.m_ChunksLoadDistance.x, -1, 20);
+                        if (ImGui.MenuItem("Regenerate All Chunks")) { }
+                        if (ImGui.MenuItem("Remesh All Chunks")) {
+                            ChunkSystem.instance.m_Chunks.Keys.ForEach(e => {
+                                ChunkSystem.instance.MarkChunkMeshDirty(e);
+                            });
+                        }
                     }
 
                     var rc = CursorRaycaster.instance;
@@ -140,7 +142,7 @@ namespace Aether
                     ImGui.SliderFloat("Radius", ref rc.m_ModifyRadius, 0, 32.0f);
                     ImGui.SliderFloat("Intensity", ref rc.m_Intensity, 0, 1.6f);
                     ImGui.SliderFloat("Time Interval", ref rc.m_Interval, 0, 1.0f);
-                    ImGui.SliderInt("Tex Id", ref rc.m_TexId, 0, VoxTex.registry.Voxels.Count-1);
+                    ImGui.SliderInt("Tex Id", ref rc.m_TexId, 0, (VoxTex.registry?.Voxels.Count ?? 0) -1);
                     
                     
                     ImGui.EndMenu();
@@ -164,6 +166,19 @@ namespace Aether
                     ImGui.MenuItem("Debug Text Info", null, ref m_ShowDebugTextInfo);
                     ImGui.MenuItem("ImGui Demo Window", null, ref m_ShowDemoWindow);
                     ImGui.MenuItem("Game Controls", null, InputManager.IsPlayingInput);
+                    
+                    if (ImGui.BeginMenu("MMD"))
+                    {
+                        for (int i = 0; i < mmdAnimName.Length; i++) {
+                            if (ImGui.MenuItem(mmdAnimName[i], null, i == mmdCurr)) {
+                                mmdCurr = i;
+                                PlayerController.instance._animator.StopPlayback();
+                                PlayerController.instance._animator.Play(mmdAnimName[i]);
+                                SoundManager.PlaySelf(transform, mmdAudio[i]);
+                            }
+                        }
+                        ImGui.EndMenu();
+                    }
                     ImGui.EndMenu();
                 }
                 
@@ -171,6 +186,11 @@ namespace Aether
             }
         }
 
+        [Header("MMD")]
+        public int mmdCurr;
+        public string[] mmdAnimName;
+        public AudioClip[] mmdAudio;
+        
 
 
         private static string _DbgTx_SysInfo;

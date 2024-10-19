@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Pool;
 
@@ -56,6 +57,13 @@ namespace Aether
                 }
                 return false;
             });
+        }
+
+        public static AudioSource PlaySelf(Transform trans, AudioClip clip) {
+            var aud = trans.GetOrAddComponent<AudioSource>();
+            aud.clip = clip;
+            aud.Play();
+            return aud;
         }
     }
 }

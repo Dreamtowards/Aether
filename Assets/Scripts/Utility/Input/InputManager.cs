@@ -72,8 +72,8 @@ namespace Aether
 
 		private float m_LastTimeMoveForward;
 
-		public AudioClip danceAudio;
-
+		private float m_LastTimeJump;
+		
 		void Update()
 		{
 			// // Pause Game Control, Release Cursor
@@ -84,16 +84,10 @@ namespace Aether
 			if (!IsPlayingInput)
 				return;
 
-			if (Input.GetKeyDown(KeyCode.V))
-			{
-				PlayerController.instance._animator.CrossFade("DanceHiasobi", 0.4f);
-				SoundManager.instance.Play(danceAudio);
-			}
-
 			// Jump
 			if (actionJump.WasPressedThisFrame()) {
 				if (Time.time - m_LastTimeJump < 0.3f) {  // Double Click Jump
-					isFlying = !isFlying;
+					PlayerController.instance.IsFlying = !PlayerController.instance.IsFlying;
 				}
 				m_LastTimeJump = Time.time;
 			}
@@ -221,9 +215,6 @@ namespace Aether
 			look = value.Get<Vector2>();
 		}
 
-		private float m_LastTimeJump;
-
-		public bool isFlying;
 
 		
 

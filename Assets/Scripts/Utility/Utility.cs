@@ -110,6 +110,9 @@ namespace Aether
                 c = obj.AddComponent<T>();
             return c;
         }
+        public static T GetOrAddComponent<T>(this Transform obj) where T : Component {
+            return GetOrAddComponent<T>(obj.gameObject);
+        }
         
         public static void LockCursor(bool lockCursor)
         {

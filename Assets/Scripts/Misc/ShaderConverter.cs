@@ -9,7 +9,7 @@ public class ShaderConverter : EditorWindow
     float metallic = 0f;
     float smoothness = 0.5f;
 
-    [MenuItem("Tools/ShaderConverter")]
+    [MenuItem("Tools/Shader Converter")]
     public static void ShowWindow()
     {
         GetWindow<ShaderConverter>("Shader Converter");
