@@ -13,6 +13,8 @@ Video: [YouTube](https://www.youtube.com/watch?v=ZHfLAT47AXk), [Bilibili]()
 
 ![](https://github.com/Dreamtowards/Aether/releases/download/aether-0.1.1-2024.09d/screenshot-20241001-1915227.png)
 ![](https://github.com/Dreamtowards/Aether/releases/download/aether-0.1.1-2024.09d/screenshot-20240928-114913.png)
+![](https://github.com/Dreamtowards/Aether/releases/download/aether-0.1.4-2024.10c/screenshot-20241019-200821.png)
+![](https://github.com/Dreamtowards/Aether/releases/download/aether-0.1.4-2024.10c/screenshot-20241019-201833.png)
 
 ## Play
 
