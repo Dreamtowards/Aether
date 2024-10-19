@@ -1,0 +1,27 @@
+
+Hey! Thank for downloading this motion!
+
+Please Read the Rest of the ReadMe for Some Important Information!
+
+Please Credit These People:
+Dover (aka me) - Converting the motion to MMD
+Ikirui/mikumikuiki-p - facials
+Sega - They are the ones that made the motion, so everything ultimately belongs to them
+Minmode - Scripts
+
+MOTION IS A-POSED BY PJD STANDARDS, if you want it to fit TDA A-posed models, just raise the arms up by 2 in PMX editor
+
+Bone requirements and Instructions:
+腰/waist bone
+上半身 1/ upperbody bone 1 (this can be added via PMX editor and it should be parented to 上半身 2 and the normal 上半身 should be parented to 上半身 1)
+
+Make sure the センター, グルーブ, 腰, and 上半身 is in the same spot as 下半身 
+
+MORE SUPER IMPORTANT NOTES:
+Do not use this for commercial use
+Do not use this for R-18 works
+Do not use this motion to slander other people and or companies
+
+Goodluck and have fun!
+
+https://www.youtube.com/watch?v=Nq0uSE-hN9E
