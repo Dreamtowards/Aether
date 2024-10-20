@@ -23,8 +23,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Grass
-  m_Shader: {fileID: -6465566751694194690, guid: dfa3b96612ed4df4a97b7fd06217ba23,
-    type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: dfa3b96612ed4df4a97b7fd06217ba23, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords:
@@ -87,6 +86,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _SampleTexture2DLOD_4ce76fe7821749c5a93282810d6e42f2_Texture_1:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _SampleTexture2DLOD_4ce76fe7821749c5a93282810d6e42f2_Texture_1_Texture2D:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
@@ -163,13 +166,16 @@ Material:
     - _DoubleSidedGIMode: 0
     - _DoubleSidedNormalMode: 1
     - _DstBlend: 0
+    - _DstBlend2: 0
     - _EnableBlendModePreserveSpecularLighting: 1
     - _EnableFogOnTransparent: 1
+    - _ExcludeFromTUAndAA: 0
     - _FadeBias: 1
     - _ForceForwardEmissive: 0
     - _MaterialID: 5
     - _MaterialTypeMask: 32
     - _OpaqueCullMode: 2
+    - _PerPixelSorting: 0
     - _QueueControl: 1
     - _QueueOffset: 0
     - _RayTracing: 0
@@ -218,10 +224,10 @@ Material:
     - Terrain_Origin: {r: 0, g: 0, b: 0, a: 0}
     - Terrain_Scale: {r: 0, g: 0, b: 0, a: 0}
     - _Color: {r: 1, g: 0.88665164, b: 0.504717, a: 1}
-    - _DiffusionProfileAsset: {r: 2.9396296e+22, g: 0.00000034749203, b: 0.00000017137188,
-        a: 5.5517925e+28}
+    - _DiffusionProfileAsset: {r: 2.9396296e+22, g: 0.00000034749203, b: 0.00000017137188, a: 5.5517925e+28}
     - _DoubleSidedConstants: {r: 1, g: 1, b: -1, a: 0}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _SSSColor: {r: 0.6295641, g: 0.9622642, b: 0.28595585, a: 0}
     - _Thickness_Remap: {r: 0, g: 0.22, b: 0, a: 0}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1

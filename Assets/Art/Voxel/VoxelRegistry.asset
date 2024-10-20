@@ -16,66 +16,96 @@ MonoBehaviour:
   - Id: brick_roof
     Hardness: 1
     NumId: 1
+    IsFoliage: 0
   - Id: concrete
     Hardness: 1
     NumId: 2
+    IsFoliage: 0
   - Id: dirt
     Hardness: 1
     NumId: 3
+    IsFoliage: 0
   - Id: dirt_black
     Hardness: 1
     NumId: 4
+    IsFoliage: 0
   - Id: dirt_farmland
     Hardness: 1
     NumId: 5
+    IsFoliage: 0
   - Id: grass
     Hardness: 1
     NumId: 6
+    IsFoliage: 0
   - Id: grass_meadow
     Hardness: 1
     NumId: 7
+    IsFoliage: 0
   - Id: grass_moss
     Hardness: 1
     NumId: 8
+    IsFoliage: 0
   - Id: iron
     Hardness: 1
     NumId: 9
+    IsFoliage: 0
   - Id: iron_treadplate
     Hardness: 1
     NumId: 10
+    IsFoliage: 0
   - Id: log_oak
     Hardness: 1
     NumId: 11
+    IsFoliage: 0
   - Id: plank
     Hardness: 1
     NumId: 12
+    IsFoliage: 0
   - Id: rock
     Hardness: 1
     NumId: 13
+    IsFoliage: 0
   - Id: rock_cliff
     Hardness: 1
     NumId: 14
+    IsFoliage: 0
   - Id: rock_deepslate
     Hardness: 1
     NumId: 15
+    IsFoliage: 0
   - Id: rock_jungle
     Hardness: 1
     NumId: 16
+    IsFoliage: 0
   - Id: rock_mossy
     Hardness: 1
     NumId: 17
+    IsFoliage: 0
   - Id: rock_smooth
     Hardness: 1
     NumId: 18
+    IsFoliage: 0
   - Id: rock_volcanic
     Hardness: 1
     NumId: 19
+    IsFoliage: 0
   - Id: sand
     Hardness: 1
     NumId: 20
+    IsFoliage: 0
   - Id: stone
     Hardness: 1
     NumId: 21
+    IsFoliage: 0
   - Id: stone_brick
     Hardness: 1
     NumId: 22
+    IsFoliage: 0
+  - Id: tall_fern
+    Hardness: 1
+    NumId: 23
+    IsFoliage: 1
+  - Id: tall_grass
+    Hardness: 1
+    NumId: 24
+    IsFoliage: 1
