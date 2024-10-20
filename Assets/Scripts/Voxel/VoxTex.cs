@@ -27,9 +27,8 @@ namespace Aether
         }
 
         public static VoxelRegistry.VoxelProto 
-            brick_roof, concrete, dirt, dirt_black, dirt_farmland, grass, grass_meadow, grass_moss, iron, iron_treadplate,
-            log_oak, plank, rock, rock_cliff, rock_deepslate, rock_jungle, rock_mossy, rock_smooth, rock_volcanic, sand,
-            stone, stone_brick;
+            brick_roof, concrete, dirt, dirt_black, dirt_farmland, grass, grass_meadow, grass_moss, iron, iron_treadplate, log_oak, plank, rock, rock_cliff, rock_deepslate, rock_jungle, rock_mossy, rock_smooth, rock_volcanic, sand, stone, stone_brick, tall_fern, tall_grass; 
+
 
         static void Refresh(VoxelRegistry reg)
         {
@@ -55,6 +54,8 @@ namespace Aether
             sand = reg.Get("sand");
             stone = reg.Get("stone");
             stone_brick = reg.Get("stone_brick");
+            tall_fern = reg.Get("tall_fern");
+            tall_grass = reg.Get("tall_grass");
             
         }
 

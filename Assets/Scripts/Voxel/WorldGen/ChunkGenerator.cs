@@ -101,7 +101,7 @@ namespace Aether
                             if (distToAir <= 2 && p.y < 2) {// && m_Noise.Sample(p.x / 32f, p.z / 32f) > 0.1f) {
                                 replace = VoxTex.sand.NumId;
                             } else if (distToAir <= 1) {
-                                replace = VoxTex.grass.NumId;
+                                replace = m_Noise.Sample(p.x / 32f, p.z / 32f) > 0.3f ? VoxTex.grass_moss.NumId : VoxTex.grass.NumId;
                             } else if (distToAir < 3) {
                                 replace = VoxTex.dirt.NumId;
                             } else if (distToAir > 5) {
@@ -137,8 +137,8 @@ namespace Aether
                                     spawn = m_TreePalmSteep;
                             }
 
-                            if (spawn)
-                                PutPrefabAt(chunk, spawn, lp);
+                            // if (spawn)
+                            //     PutPrefabAt(chunk, spawn, lp);
                         }
                     }
                 }

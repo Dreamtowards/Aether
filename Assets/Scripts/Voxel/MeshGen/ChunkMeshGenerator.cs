@@ -43,9 +43,9 @@ public static class ChunkMeshGenerator
             
             var texId = vox.texId;
             if (texId == VoxTex.grass.NumId)
-                PutGrass(vbuf, VoxTex.grass.NumId, lp);
+                PutGrass(vbuf, VoxTex.tall_grass.NumId, lp);
             else if (texId == VoxTex.grass_moss.NumId)
-                PutLeaves(vbuf, VoxTex.grass_moss.NumId, lp);
+                PutLeaves(vbuf, VoxTex.tall_fern.NumId, lp);
         });
     }
 
