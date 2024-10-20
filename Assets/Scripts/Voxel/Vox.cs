@@ -4,9 +4,12 @@ using Unity.Mathematics;
 
 namespace Aether
 {
+    // global 
+    using VoxTexId = System.UInt16;
+    
     public struct Vox
     {
-        public UInt16 texId;
+        public VoxTexId texId;
 
         public UInt16 shapeId;
 

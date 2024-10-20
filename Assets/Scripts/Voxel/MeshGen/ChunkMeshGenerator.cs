@@ -1,7 +1,10 @@
 
+using System;
 using Unity.Mathematics;
 using Unity.Profiling;
+using UnityEngine;
 using UnityEngine.Assertions;
+using Vector3 = UnityEngine.Vector3;
 
 namespace Aether
 {
@@ -9,6 +12,7 @@ public static class ChunkMeshGenerator
 {
     static readonly ProfilerMarker s_Pm = new("Aether.JobChunkMeshGen");
 
+    // For Solid Blocks
     public static void GenerateMesh(VertexBuffer vbuf, Chunk chunk)
     {
         using var _p = s_Pm.Auto();
@@ -24,6 +28,24 @@ public static class ChunkMeshGenerator
 
             PutCube(vbuf, localpos, vox, chunk);
 
+        });
+    }
+
+    public static void GenerateMeshFoliage(VertexBuffer vbuf, Chunk chunk)
+    {
+        chunk.ForVoxels((int3 lp, ref Vox vox) =>
+        {
+            // 陷入悖论了
+            // TexId 本该是 only for Solid Tex 的，因为 Solid Tex 是一个单独的 Atlas, 单独的 DrawCall
+
+            if (vox.IsIsoNil() || vox.IsTexNil())
+                return;
+            
+            var texId = vox.texId;
+            if (texId == VoxTex.grass.NumId)
+                PutGrass(vbuf, VoxTex.grass.NumId, lp);
+            else if (texId == VoxTex.grass_moss.NumId)
+                PutLeaves(vbuf, VoxTex.grass_moss.NumId, lp);
         });
     }
 
@@ -91,15 +113,50 @@ public static class ChunkMeshGenerator
 
     #region Misc, Foliages
 
-    public static void PutFace(VertexBuffer vbuf, int3 p)
-    {
+    public static void PutLeaves(VertexBuffer vbuf, UInt16 texId, float3 pos) {
+        var deg45 = 180 / 4.0f;
+        var siz = 1.4f;
 
+        PutFace(vbuf, texId, pos + 0.5f, Quaternion.AngleAxis(deg45, Vector3.up), new Vector2(1.4f, 1.0f) * siz);
+        PutFace(vbuf, texId, pos + 0.5f, Quaternion.AngleAxis(deg45*3.0f, Vector3.up), new Vector2(1.4f, 1.0f) * siz);
+        PutFace(vbuf, texId, pos + 0.5f, Quaternion.AngleAxis(-deg45, Vector3.up), new Vector2(1.0f, 1.4f) * siz);
+        PutFace(vbuf, texId, pos + 0.5f, Quaternion.AngleAxis(-deg45*3.0f, Vector3.up), new Vector2(1.0f, 1.4f) * siz);
+    }
+    
+    public static void PutGrass(VertexBuffer vbuf, UInt16 texId, float3 pos) {
+        var ang = 180 / 3.0f;
+        var siz = 1.4f;
+
+        PutFace(vbuf, texId, pos + 0.5f, Quaternion.AngleAxis(ang, Vector3.up), Vector2.one * siz);
+        PutFace(vbuf, texId, pos + 0.5f, Quaternion.AngleAxis(ang*2, Vector3.up), Vector2.one * siz);
+        PutFace(vbuf, texId, pos + 0.5f, Quaternion.AngleAxis(ang*3, Vector3.up), Vector2.one * siz);
+    }
+    
+    // put a -X face in middle of pos. for foliages.
+    public static void PutFace(VertexBuffer vbuf, UInt16 texId, Vector3 pos, Quaternion rot, Vector2 scale)
+    {
+        // -X Face
+        for (int i = 0;i < 6;i++) {
+            // 6 verts
+            var p = Maths.Vec3(CUBE_POS, i*3) - new float3(0.0f, 0.5f, 0.5f); // -0.5: centerized for proper rotation
+            p = (rot * (p * new float3(1.0f, scale.y, scale.x))) + pos;
+
+            var n = new float3(Maths.IVec3(CUBE_NORM, i * 3));
+            n = rot * n;
+
+            var uv = Maths.Vec2(CUBE_UV, i * 2);
+            uv = VoxTex.MapUV(uv, texId);
+            // uv.x += tex_id;
+            // uv.y += light;
+
+            vbuf.PushVertex(p, uv, n);
+        }
     }
 
     #endregion
 
 
-    #region The Gread SurfaceNets, Isosurface
+    #region SurfaceNets, Isosurface
 
 
     public static int3[] SN_VERT = {

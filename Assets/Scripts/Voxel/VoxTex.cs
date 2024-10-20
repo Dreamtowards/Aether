@@ -58,5 +58,11 @@ namespace Aether
             
         }
 
+        public static Vector2 MapUV(Vector2 uv, UInt16 texId) {
+            var TEX_CAP = (float)registry.Voxels.Count;
+            var tex = texId - 1; // -1: offset the 0 Nil
+            return new(uv.x / TEX_CAP + tex / TEX_CAP, uv.y);
+        }
+
     }
 }
