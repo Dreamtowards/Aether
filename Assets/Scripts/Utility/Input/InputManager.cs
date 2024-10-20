@@ -102,8 +102,7 @@ namespace Aether
 				}
 				m_LastTimeMoveForward = Time.time;
 			} 
-			bool isPressedMoveForward = move.y > 0;
-			if (!isPressedMoveForward) {
+			if (move.sqrMagnitude == 0) {
 				player.isSprinting = false;
 			}
 			
