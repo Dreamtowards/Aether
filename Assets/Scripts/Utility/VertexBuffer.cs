@@ -192,7 +192,7 @@ public class VertexBuffer
         }
 
         mesh.RecalculateBounds();
-        // mesh.RecalculateTangents(); // Optional
+        // mesh.RecalculateTangents(); // WARNING: Dont use. this will cause normal dirty ring artifacts.
 
         return mesh;
     }

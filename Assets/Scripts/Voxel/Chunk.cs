@@ -94,11 +94,15 @@ namespace Aether
 
         }
 
+        public MeshFilter 
+            m_MeshTerrain,
+            m_MeshFoliage;
 
-        public void UploadMesh(Mesh mesh)
+        public void UploadMesh(Mesh meshTerrain, Mesh meshFoliage)
         {
-            GetComponent<MeshFilter>().mesh = mesh;
-            GetComponent<MeshCollider>().sharedMesh = mesh;
+            m_MeshTerrain.mesh = meshTerrain;
+            m_MeshFoliage.mesh = meshFoliage;
+            GetComponent<MeshCollider>().sharedMesh = meshTerrain;
         }
 
         // Directly Access.

@@ -136,7 +136,7 @@ namespace Aether
         
         [BoxGroup("MeshGen")]
         [ShowInInspector]
-        public Dictionary<int3, Task<VertexBuffer>> m_ChunksMeshing = new();
+        public Dictionary<int3, Task<TR_MeshGen>> m_ChunksMeshing = new();
         
         [BoxGroup("MeshGen")]
         public int m_ChunksMeshingMaxConcurrency = 10;
@@ -157,14 +157,15 @@ namespace Aether
             {
                 if (!task.IsCompleted)
                     continue;
-                var vbuf = task.Result;
+                var result = task.Result;
 
                 if (GetChunk(chunkpos, out var chunk))
                 {
                     // vbuf.ComputeNormalsSmooth();
-                    chunk.UploadMesh(vbuf.ToMesh());
+                    chunk.UploadMesh(result.vbufTerrain.ToMesh(), result.vbufFoliage.ToMesh());
                 }
-                s_VertexBufferPool.Release(vbuf);
+                s_VertexBufferPool.Release(result.vbufTerrain);
+                s_VertexBufferPool.Release(result.vbufFoliage);
                 chunksMeshed.Add(chunkpos);
             }
             m_ChunksMeshing.RemoveAll(chunksMeshed);
@@ -180,15 +181,22 @@ namespace Aether
                 if (!GetChunk(chunkpos, out var chunk))
                     continue;
 
-                VertexBuffer vbuf = s_VertexBufferPool.Get();
+                VertexBuffer vbufTerrain = s_VertexBufferPool.Get();
+                VertexBuffer vbufFoliage = s_VertexBufferPool.Get();
 
-                var task = new Task<VertexBuffer>(() =>
+                var task = new Task<TR_MeshGen>(() =>
                 {
-                    vbuf.Clear();
+                    vbufTerrain.Clear();
+                    vbufFoliage.Clear();
                     
-                    ChunkMeshGenerator.GenerateMesh(vbuf, chunk);
+                    ChunkMeshGenerator.GenerateMesh(vbufTerrain, chunk);
                     
-                    return vbuf;
+                    ChunkMeshGenerator.GenerateMeshFoliage(vbufFoliage, chunk);
+                    
+                    return new TR_MeshGen{
+                        vbufTerrain = vbufTerrain,
+                        vbufFoliage = vbufFoliage
+                    };
                 });
                 task.Start();
                 
@@ -200,6 +208,12 @@ namespace Aether
 
         #endregion
 
+        public struct TR_MeshGen
+        {
+            public VertexBuffer 
+                vbufTerrain,
+                vbufFoliage;
+        }
 
 
 
